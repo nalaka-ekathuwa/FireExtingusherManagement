@@ -13,7 +13,7 @@ if ($action == 'add') {
   $email = $conn->real_escape_string($_POST['email']);
   // $password = $conn->real_escape_string($_POST['password']);
   $hashed_password = password_hash('123456', PASSWORD_DEFAULT);
-  $nic = $conn->real_escape_string($_POST['nic']);
+  // $nic = $conn->real_escape_string($_POST['nic']);
   $role = $conn->real_escape_string($_POST['role']);
   $created = date('Y-m-d h:i:sa');
 
@@ -31,8 +31,8 @@ if ($action == 'add') {
     move_uploaded_file($img_name_tmp, $path); // To move the image to user_images folder
   }
 
-  $sql = "INSERT INTO `users`(`name`, `email`, `password`, `img`, `role_id`, `nic`, `created`, `updated`)
-          VALUES ('$name','$email','$hashed_password','$path_db','$role','$nic','$created','')";
+  $sql = "INSERT INTO `users`(`name`, `email`, `password`, `img`, `role_id`)
+          VALUES ('$name','$email','$hashed_password','$path_db','$role')";
   $result = mysqli_query($conn, $sql);
   if ($result) {
     header("location: ../users.php?msg=2");
@@ -48,7 +48,7 @@ if ($action == 'edit') {
   // $img = $conn->real_escape_string($_POST['img']);
   $email = $conn->real_escape_string($_POST['email']);
   // $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-  $nic = $conn->real_escape_string($_POST['nic']);
+  // $nic = $conn->real_escape_string($_POST['nic']);
   // $role = $conn->real_escape_string($_POST['role']);
   $updated = date('Y-m-d h:i:sa');
 
@@ -63,15 +63,13 @@ if ($action == 'edit') {
     $path_db = "assets/images/users/" . $img_new.".".$ext;
     move_uploaded_file($img_name_tmp, $path); // To move the image to user_images folder
 
-    $sql = "UPDATE `users` SET `name`='$name',`email`='$email',`nic`='$nic',
-    `img`='$path_db',`updated`='$updated' WHERE `id` = '$key'";
+    $sql = "UPDATE `users` SET `name`='$name',`email`='$email', `img`='$path_db' WHERE `id` = '$key'";
     // var_dump($sql);exit;
     $result = mysqli_query($conn, $sql);
 
   } else {
 
-    $sql = "UPDATE `users` SET `name`='$name',`email`='$email',`nic`='$nic',
-    `updated`='$updated' WHERE `id` = '$key'";
+    $sql = "UPDATE `users` SET `name`='$name',`email`='$email' WHERE `id` = '$key'";
     $result = mysqli_query($conn, $sql);
 
   }

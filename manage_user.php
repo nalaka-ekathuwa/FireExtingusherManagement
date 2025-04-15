@@ -11,7 +11,7 @@
             <?php include 'header.php'; ?>
             <?php include 'sidebar.php';
             $key = isset($_GET['key']) ? $_GET['key'] : '';
-            $sql = "SELECT `name`,`img`,`nic`, `email`, `role_name`, `role_id` FROM `users` u JOIN `user_role` r WHERE u.id=$key";
+            $sql = "SELECT `name`,`img`, `email`, `role`, `role_id` FROM `users` u  WHERE u.id=$key";
             //echo $sql;
             $conn = $GLOBALS['con'];
             $result = mysqli_query($conn, $sql);
@@ -56,23 +56,24 @@
                                                 <label for="inputEmail4">Email</label>
                                                 <input name="email" type="email" class="form-control" id="inputEmail4"
                                                     placeholder="Email" value="<?php echo $row['email']; ?>" required>
-                                                <div class="form-group">
+                                                <!-- <div class="form-group">
                                                     <label for="nic">ID Number</label>
                                                     <input name="nic" type="text" class="form-control" id="nic"
-                                                        placeholder="Identification Number" value="<?php echo $row['nic']; ?>" required>
-                                                </div>
+                                                        placeholder="Identification Number" value="<?php // echo $row['nic']; ?>" required>
+                                                </div> -->
+                                                
                                                 <label for="inputState">User Role</label>
                                                 <select name="role" id="inputState" class="form-control" disabled >
                                                     <option >Choose...</option>
                                                     <?php
                                                     //get User Roles
-                                                    $sql1 = "SELECT * FROM `user_role`";
+                                                    $sql1 = "SELECT * FROM `alsanmeldung`";
                                                     //echo $sql;
                                                     $conn = $GLOBALS['con'];
                                                     $result1 = mysqli_query($conn, $sql1);
                                                     while ($row1 = mysqli_fetch_assoc($result1)) {
                                                         ?>
-                                                        <option value="<?php echo $row1['id']; ?>" <?php echo ($row['role_id'] ==$row1['id']) ? 'selected': ''; ?> ><?php echo $row1['role_name']; ?></option> <?php } ?>
+                                                        <option value="<?php echo $row1['IDAlsanmeldung']; ?>" <?php echo ($row['role_id'] ==$row1['IDAlsanmeldung']) ? 'selected': ''; ?> ><?php echo $row1['Anmeldenals']; ?></option> <?php } ?>
                                                 </select>
                                                 <input type="hidden" name="key" value="<?php echo $key; ?>" >
                                                 <!-- <br>

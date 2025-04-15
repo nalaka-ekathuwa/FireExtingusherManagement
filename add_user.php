@@ -44,23 +44,23 @@
                                                 <label for="inputEmail4">Email</label>
                                                 <input name="email" type="email" class="form-control" id="inputEmail4"
                                                     placeholder="Email" required>
-                                                <div class="form-group">
+                                                <!-- <div class="form-group">
                                                     <label for="nic">ID Number</label>
                                                     <input name="nic" type="text" class="form-control" id="nic"
                                                         placeholder="Identification Number" required>
-                                                </div>
+                                                </div> -->
                                                 <label for="inputState">User Role</label>
                                                 <select name="role" id="inputState" class="form-control" required>
                                                     <option value="" selected disabled  >Choose...</option>
                                                     <?php
                                                     //get User Roles
-                                                    $sql1 = "SELECT * FROM `user_role`";
+                                                    $sql1 = "SELECT * FROM `alsanmeldung`";
                                                     //echo $sql;
                                                     $conn = $GLOBALS['con'];
                                                     $result1 = mysqli_query($conn, $sql1);
                                                     while ($row1 = mysqli_fetch_assoc($result1)) {
                                                         ?>
-                                                        <option value="<?php echo $row1['id']; ?>" ><?php echo $row1['role_name']; ?></option> <?php } ?>
+                                                        <option value="<?php echo $row1['IDAlsanmeldung']; ?>" ><?php echo $row1['Anmeldenals']; ?></option> <?php } ?>
                                                 </select>
                                             </div>
                                         </div>
