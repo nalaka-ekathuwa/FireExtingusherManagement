@@ -26,13 +26,8 @@ $log_pass = 'a26366e36575312a1f9790d49a393ac9';
 
 $master_token = str_rot13($log_name) . str_rot13($log_pass);
 
-// define("C_MYSQL_HOST", "127.0.0.1");
-// define("C_MYSQL_DB", "nacwc");
-// define("C_MYSQL_USER",	"nacusr");
-// define("C_MYSQL_PWD", "Nc#@N6@pPL3#D!r");
-
 define("C_MYSQL_HOST", "127.0.0.1");
-define("C_MYSQL_DB", "feuerschutz_new");
+define("C_MYSQL_DB", "feuerschutz");
 define("C_MYSQL_USER",	"root");
 define("C_MYSQL_PWD", "");
 
