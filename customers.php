@@ -100,45 +100,62 @@
                                 <table class="table table-hover e-commerce-table">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
-                                            <th>Cus Number</th>
+                                            <th>IDKunde</th>
+                                            <!-- <th>IDWartungspersonal</th>
+                                            <th>IDFirma</th> -->
                                             <th>Name</th>
-                                            <th>Postal Code</th>
-                                            <th>Contact Person</th>
-                                            <th>Safety Officer</th>
+                                            <th>Nr</th>
+                                            <th>Plz</th>
+                                            <th>Ort</th>
+                                            <th>Ortauswahl</th>
+                                            <th>HandyFirma</th>
+                                            <th>HandyPrivat</th>
+                                            <th>TelefonFirma</th>
+                                            <th>TelefonPrivat</th>
+                                            <th>Fax</th>
+                                            <th>Next Test</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                         //get Instrument Rating detials
-                                        $sql = "SELECT * FROM `customers`";
+                                        $sql = "SELECT * FROM `kundenadressen`";
                                         //echo $sql;
                                         $conn = $GLOBALS['con'];
                                         $result = mysqli_query($conn, $sql);
                                         $no = 1;
                                         while ($row = mysqli_fetch_assoc($result)) {
-                                           $badge = ($row['safe_off_availability'] =='10')?'info':'danger';
-                                           $availability = ($row['safe_off_availability'] =='10')?'Available':'Not Available';
+                                        //    $badge = ($row['safe_off_availability'] =='10')?'info':'danger';
+                                        //    $availability = ($row['safe_off_availability'] =='10')?'Available':'Not Available';
                                             ?>
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
-                                                <td><?php echo $row['cus_number']; ?></td>
-                                                <td><?php echo $row['salutation'].'. '.$row['first_name'].' '.$row['last_name']; ?></td>
-                                                <td><?php echo $row['postal_code']; ?></td>
-                                                <td><?php echo $row['contact_person']; ?></td>
-                                                <td>
+                                                <!-- <td><?php echo $row['IDWartungspersonal']; ?></td>
+                                                <td><?php echo $row['IDFirma']; ?></td> -->
+                                                <td><?php echo $row['Anrede'].'. '.$row['Vorname'].' '.$row['Nachname']; ?></td>
+                                                <td><?php echo $row['Nr']; ?></td>
+                                                <td><?php echo $row['Plz']; ?></td>
+                                                <td><?php echo $row['Ort']; ?></td>
+                                                <td><?php echo $row['Ortauswahl']; ?></td>
+                                                <td><?php echo $row['HandyFirma']; ?></td>
+                                                <td><?php echo $row['HandyPrivat']; ?></td>
+                                                <td><?php echo $row['TelefonFirma']; ?></td>
+                                                <td><?php echo $row['TelefonPrivat']; ?></td>
+                                                <td><?php echo $row['Fax']; ?></td>
+                                                <td><?php echo $row['NächstePrüfung']; ?></td>
+                                                <!-- <td>
                                                     <div class="d-flex align-items-center">
-                                                        <div class="badge badge-<?php echo $badge; ?> badge-dot m-r-10"></div>
-                                                        <div><?php echo $availability; ?></div>
+                                                        <div class="badge badge-<?php // echo $badge; ?> badge-dot m-r-10"></div>
+                                                        <div><?php // echo $availability; ?></div>
                                                     </div>
-                                                </td>
+                                                </td> -->
                                                 <td class="text-right">
-                                                    <a href="manage_customer.php?key=<?php echo $row['id']; ?>"
+                                                    <a href="manage_customer.php?key=<?php echo $row['IDKunde']; ?>"
                                                         class="btn btn-icon btn-hover btn-sm btn-rounded pull-right"><i
                                                             class="anticon anticon-edit"></i></a>
                                                     <a onclick="return confirm('Are you sure you want to delete this item?');"
-                                                        href="control/customer_process.php?key=<?php echo $row['id']; ?>&action=delete"
+                                                        href="control/customer_process.php?key=<?php echo $row['IDKunde']; ?>&action=delete"
                                                         class="btn btn-icon btn-hover btn-sm btn-rounded"><i
                                                             class="anticon anticon-delete"></i></a>
                                                 </td>
