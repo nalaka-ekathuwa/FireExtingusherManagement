@@ -110,13 +110,13 @@
                                     <tbody>
                                         <?php
                                         //get Instrument Rating detials
-                                        $sql = "SELECT * FROM `extinguisher`";
+                                        $sql = "SELECT * FROM `kundenbestand`";
                                         //echo $sql;
                                         $conn = $GLOBALS['con'];
                                         $result = mysqli_query($conn, $sql);
                                         $no = 1;
                                         while ($row = mysqli_fetch_assoc($result)) {
-                                            $image = !empty($row['image']) ? $row['image'] : 'assets/images/extinguisher/dummy_ext.jpg';
+                                            $image = !empty($row['FotoFeuerlöscher']) ? $row['FotoFeuerlöscher'] : 'assets/images/extinguisher/dummy_ext.jpg';
                                             ?>
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
