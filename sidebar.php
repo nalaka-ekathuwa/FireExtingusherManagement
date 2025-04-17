@@ -124,7 +124,7 @@
             <li class="nav-item dropdown">
                 <a class="dropdown-toggle" href="javascript:void(0);">
                     <span class="icon-holder">
-                        <i class="anticon anticon-fire"></i>
+                        <i class="fab fa-gripfire"></i>
                     </span>
                     <span class="title">Extinguishers</span>
                     <span class="arrow">
@@ -140,25 +140,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item dropdown">
-                <a class="dropdown-toggle" href="javascript:void(0);">
-                    <span class="icon-holder">
-                        <i class="fab fa-gripfire"></i>
-                    </span>
-                    <span class="title">Planted Exting.</span>
-                    <span class="arrow">
-                        <i class="arrow-icon"></i>
-                    </span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a href="cus_ext.php">Manage</a>
-                    </li>
-                    <li>
-                        <a href="manage_cus_ext.php">Add</a>
-                    </li>
-                </ul>
-            </li>
+           
             <?php } ?>
             <li class="nav-item dropdown">
                 <a class="dropdown-toggle" href="logout.php">
