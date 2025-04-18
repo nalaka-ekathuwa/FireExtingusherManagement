@@ -6,6 +6,8 @@ if (isset($_GET['action'])) {
   $action = $_GET['action'];
 }
 
+$session_urole = $_SESSION['role_id'];
+
 if ($action == 'add') { 
 
   $name = $conn->real_escape_string($_POST['name']);
@@ -34,18 +36,14 @@ if ($action == 'add') {
   $sql = "INSERT INTO `users`(`name`, `email`, `password`, `img`, `role_id`)
           VALUES ('$name','$email','$hashed_password','$path_db','$role')";
   $result = mysqli_query($conn, $sql);
-  if ($result) {
-    header("location: ../users.php?msg=2");
-  } else {
-    header("location: ../users.php?msg=1");
-  }
+
+  header("location: ../users.php?msg=" . ($result ? "2" : "1"));
 }
 
 if ($action == 'edit') {
 
   $key = $conn->real_escape_string($_POST['key']);
   $name = $conn->real_escape_string($_POST['name']);
-  // $img = $conn->real_escape_string($_POST['img']);
   $email = $conn->real_escape_string($_POST['email']);
   // $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
   // $nic = $conn->real_escape_string($_POST['nic']);
@@ -74,11 +72,7 @@ if ($action == 'edit') {
 
   }
 
-  if ($result) {
-    header("location: ../users.php?msg=4");
-  } else {
-    header("location: ../users.php?msg=3");
-  }
+  header("location: ../". (($session_urole==1) ? "dashboard" : "extinguishers").".php?msg=" . ($result ? "4" : "3"));
 }
 
 if ($action == 'delete') {
@@ -89,10 +83,33 @@ if ($action == 'delete') {
   $sql = "DELETE FROM `users` WHERE `id` = '$key'";
   $result = mysqli_query($conn, $sql);
 
-  if ($result) {
-    header("location: ../users.php?msg=5");
-  } else {
-    header("location: ../users.php?msg=6");
+  header("location: ../users.php?msg=" . ($result ? "5" : "6"));
+
+}
+
+if ($action == 'assign') {
+
+  // echo '<pre>';
+  // var_dump($_POST);
+  // echo '<pre>';exit;
+  $user = $conn->real_escape_string($_POST['user']);
+  $company = $conn->real_escape_string($_POST['company']);
+  $created = date('Y-m-d h:i:sa');
+
+  $sql = "INSERT INTO `user_logins`( `user_id`, `company_id`, `created_at`) 
+                    VALUES ('$user','$company','$created')";
+  $result = mysqli_query($conn, $sql);
+
+  header("location: ../assign_company.php?msg=" . ($result ? "2" : "1"));
+
+}
+if ($action == 'remove') {
+  if (isset($_GET['key'])) {
+    $key = $_GET['key'];
   }
+  $sql = "DELETE FROM `user_logins` WHERE `id` = '$key'";
+  $result = mysqli_query($conn, $sql);
+
+  header("location: ../assign_company.php?msg=" . ($result ? "5" : "6"));
 
 }
