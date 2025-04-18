@@ -58,18 +58,10 @@
                     <li>
                         <a href="locations.php">Manage</a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="manage_location.php">View</a>
-                    </li>
+                    </li> -->
                 </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="dropdown-toggle" href="#">
-                    <span class="icon-holder">
-                        <i class="anticon anticon-setting"></i>
-                    </span>
-                    <span class="title">Maintenance</span>
-                </a>
             </li>
             <?php } ?>
             <?php if ($session_urole == 1) { ?>
@@ -92,10 +84,7 @@
                         <a href="manage_customer.php">Add</a>
                     </li>
                     <li>
-                        <a href="user_assign.php">Owners</a>
-                    </li>
-                    <li>
-                        <a href="user_assign.php">Safe. Off.</a>
+                        <a href="user_assign.php">Zuordnen</a>
                     </li>
                 </ul>
             </li>
@@ -142,6 +131,14 @@
             </li>
            
             <?php } ?>
+            <li class="nav-item dropdown">
+                <a class="dropdown-toggle" href="manage_user.php?key=<?php echo $sesssion_uid; ?>">
+                    <span class="icon-holder">
+                        <i class="anticon anticon-setting"></i>
+                    </span>
+                    <span class="title">Settings</span>
+                </a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="dropdown-toggle" href="logout.php">
                     <span class="icon-holder">

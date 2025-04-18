@@ -2,6 +2,8 @@
 <html lang="en">
 
 <?php include 'head.php'; ?>
+<!-- page css -->
+<link href="assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
 
 <body>
     <div class="app">
@@ -13,12 +15,12 @@
             if (isset($_GET['key'])) {
                 $key = $_GET['key'];
                 $action = 'edit';
-                $sql = "SELECT k.*, l.foto as img, l.Koordinaten , c.Anrede, c.Vorname, c.Nachname, c.Kontaktperson, c.NächstePrüfung, c.HandyFirma, c.TelefonFirma, c.Ortauswahl,c.EMail FROM `kundenbestand` k JOIN kundenadressen c ON k.IDKunde=c.IDKunde  LEFT JOIN `locations` l ON k.IDKundenbestand=l.IDKundenbestand  WHERE k.IDKundenbestand =$key";
+                $sql = "SELECT k.*, l.foto as img, l.Koordinaten , c.Anrede, c.Vorname, c.Nachname, c.Kontaktperson, c.NächstePrüfung, c.HandyFirma, c.TelefonFirma, c.Ortauswahl,c.EMail,c.Geprüftam FROM `kundenbestand` k JOIN kundenadressen c ON k.IDKunde=c.IDKunde  LEFT JOIN `locations` l ON k.IDKundenbestand=l.IDKundenbestand  WHERE k.IDKundenbestand =$key";
                 //echo $sql;
                 $conn = $GLOBALS['con'];
                 $result = mysqli_query($conn, $sql);
                 $row = mysqli_fetch_assoc($result);
-                $image = !empty($row['FotoFeuerlöscher']) ? $row['FotoFeuerlöscher'] : 'assets/images/extinguisher/dummy_ext.jpg';
+                $image = !is_null($row['img']) ? $row['img'] : 'assets/images/extinguisher/dummy_ext.jpg';
             } else {
                 $action = 'add';
                 $key = '';
@@ -113,8 +115,9 @@
                                         <div class="form-row">
                                             <div class="form-group col-md-3">
                                                 <label for="Interneseriennummer">Interneseriennummer</label>
-                                                <input name="Interneseriennummer" type="text" class="form-control" id="Interneseriennummer"
-                                                    value="<?php echo isset($_GET['key']) ? $row['Interneseriennummer'] : ''; ?>" >
+                                                <input name="Interneseriennummer" type="text" class="form-control"
+                                                    id="Interneseriennummer"
+                                                    value="<?php echo isset($_GET['key']) ? $row['Interneseriennummer'] : ''; ?>">
                                             </div>
                                             <div class="form-group col-md-3">
                                                 <label for="Datumangelegt">Datumangelegt</label>
@@ -352,39 +355,32 @@
                                                     value="<?php echo isset($_GET['key']) ? $row['FotoFeuerlöscher'] : ''; ?>">
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="Prüfungsintervall">Prüfungsintervall</label>
-                                                <input name="Prüfungsintervall" type="text" class="form-control"
-                                                    id="Prüfungsintervall"
-                                                    value="<?php echo isset($_GET['key']) ? $row['Prüfungsintervall'] : ''; ?>"
-                                                    disabled>
+                                                <label for="Geprüftam">Geprüft am</label>
+                                                <input name="Geprüftam" type="text"
+                                                    class="form-control datepicker-input" id="Geprüftam" value="<?php $dt = new DateTime($row['Geprüftam']);
+                                                    echo isset($_GET['key']) ? $dt->format('m/d/Y') : ''; ?>">
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="LöschmittelGewicht">LöschmittelGewicht</label>
-                                                <input name="LöschmittelGewicht" type="text" class="form-control"
-                                                    id="LöschmittelGewicht"
-                                                    value="<?php echo isset($_GET['key']) ? $row['LöschmittelGewicht'] : ''; ?>"
-                                                    disabled>
+                                                <label for="LöschmittelGewicht">NächstePrüfung</label>
+                                                <input name="LöschmittelGewicht" type="text"
+                                                    class="form-control datepicker-input" id="LöschmittelGewicht" value="<?php $ds = new DateTime($row['NächstePrüfung']);
+                                                    echo isset($_GET['key']) ? $ds->format('m/d/Y') : ''; ?>">
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="CO2PatroneGewicht">CO2PatroneGewicht</label>
-                                                <input name="CO2PatroneGewicht" type="text" class="form-control"
-                                                    id="CO2PatroneGewicht"
-                                                    value="<?php echo isset($_GET['key']) ? $row['CO2PatroneGewicht'] : ''; ?>"
-                                                    disabled>
+                                                <label for="BeschreibungStandort1">Kurz Beschreibung </label>
+                                                <input name="BeschreibungStandort1" type="text" class="form-control"
+                                                    id="BeschreibungStandort1"
+                                                    value="<?php echo isset($_GET['key']) ? $row['BeschreibungStandort1'] : ''; ?>">
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
-                                                <label for="Beschädigung1">Beschädigung1</label>
-                                                <input name="Beschädigung1" type="text" class="form-control"
-                                                    id="Beschädigung1"
-                                                    value="<?php echo isset($_GET['key']) ? $row['Beschädigung1'] : ''; ?>">
+                                                <label for="Beschädigung1">Beschädigung</label>
+                                                <textarea name="Beschädigung1" class="form-control" ><?php echo isset($_GET['key']) ? $row['Beschädigung1'] : ''; ?></textarea>
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label for="BeschreibungStandort2">BeschreibungStandort2</label>
-                                                <input name="BeschreibungStandort2" type="text" class="form-control"
-                                                    id="BeschreibungStandort2"
-                                                    value="<?php echo isset($_GET['key']) ? $row['BeschreibungStandort2'] : ''; ?>">
+                                                <label for="BeschreibungStandort2">Standortquelle</label>
+                                                <textarea name="BeschreibungStandort2" class="form-control"><?php echo isset($_GET['key']) ? $row['BeschreibungStandort2'] : ''; ?></textarea>
                                             </div>
                                         </div>
 
@@ -392,15 +388,14 @@
                                         <p class="card-title">Standortdetails</p>
                                         <div class="map rounded overflow-hidden">
                                             <div style="width: 100%">
-                                                <?php $map_src = !is_null($row['BeschreibungStandort2'])?$row['BeschreibungStandort2']:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d336579.39401982195!2d9.760397307209544!3d48.77183768336409!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4799af50b1556c91%3A0xc12c3d86f8e797ee!2s73547%20Lorch%2C%20Germany!5e0!3m2!1sen!2sfi!4v1744974868972!5m2!1sen!2sfi"; ?>
-                                                <iframe
-                                                    src="<?php echo $map_src; ?>"
-                                                    width="100%" height="400" style="border:0;" allowfullscreen=""
-                                                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                                                  
+                                                <?php $map_src = !is_null($row['BeschreibungStandort2']) ? $row['BeschreibungStandort2'] : "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d336579.39401982195!2d9.760397307209544!3d48.77183768336409!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4799af50b1556c91%3A0xc12c3d86f8e797ee!2s73547%20Lorch%2C%20Germany!5e0!3m2!1sen!2sfi!4v1744974868972!5m2!1sen!2sfi"; ?>
+                                                <iframe src="<?php echo $map_src; ?>" width="100%" height="400"
+                                                    style="border:0;" allowfullscreen="" loading="lazy"
+                                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+
                                             </div>
                                         </div>
-                                        <br>       
+                                        <br>
 
                                         <button type="submit"
                                             class="btn btn-primary"><?php echo ($action == 'add') ? 'Create' : 'Update'; ?></button>
@@ -415,12 +410,19 @@
 
                 <!-- Footer START -->
                 <?php include 'footer.php'; ?>
+
+                <!-- page js -->
+
                 <!-- Footer END -->
             </div>
             <!-- Page Container END -->
         </div>
     </div>
     <?php include 'foot.php'; ?>
+    <script src="assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script>
+        $('.datepicker-input').datepicker();
+    </script>
 </body>
 
 </html>

@@ -111,7 +111,7 @@
                                     <tbody>
                                         <?php
                                         //get Instrument Rating detials
-                                        $sql = "SELECT u.`id`, `name`,`img`, `email`, `role` FROM `users` u ";
+                                        $sql = "SELECT u.`id`, `name`,`img`, `email`, `role`,a.Anmeldenals FROM `users` u JOIN `alsanmeldung` a ON u.role_id=a.IDAlsanmeldung";
                                         //echo $sql;
                                         $conn = $GLOBALS['con'];
                                         $result = mysqli_query($conn, $sql);
@@ -130,7 +130,7 @@
                                                     </div>
                                                 </td>
                                                 <td><?php echo $row['email']; ?></td>
-                                                <td><?php echo $row['role']; ?></td>
+                                                <td><?php echo $row['Anmeldenals']; ?></td>
                                                 <td>
                                                     <div class="d-flex align-items-center">
                                                         <div class="badge badge-success badge-dot m-r-10"></div>
