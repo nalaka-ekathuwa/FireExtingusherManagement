@@ -101,9 +101,14 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Equipment</th>
-                                            <th>Brand</th>
-                                            <th>Manufacturer</th>
+                                            <th>Löschmittel</th>
+                                            <th>Datumangelegt</th>
+                                            <th>Anzahl</th>
+                                            <th>Artikel</th>
+                                            <th>Typ</th>
+                                            <th>Inhalt</th>
+                                            <th>BJ</th>
+                                            <th>Befund</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -124,10 +129,15 @@
                                                         <div class="avatar avatar-image avatar-sm m-r-10">
                                                             <img src="<?php echo $image; ?>" alt="">
                                                         </div>
-                                                        <h6 class="m-b-0"><?php echo '('. $row['color']. ')'; ?></h6>
+                                                        <h6 class="m-b-0"><?php echo '('. $row['Löschmittel']. ')'; ?></h6>
                                                     </div></td>
-                                                <td><?php echo $row['brand'].' - '. $row['size']; ?></td>
-                                                <td><?php echo $row['hersteller']; ?></td>
+                                                <td><?php echo $row['Datumangelegt']; ?></td>
+                                                <td><?php echo $row['Anzahl']; ?></td>
+                                                <td><?php echo $row['Artikel']; ?></td>
+                                                <td><?php echo $row['Typ']; ?></td>
+                                                <td><?php echo $row['Inhalt']; ?></td>
+                                                <td><?php echo $row['BJ']; ?></td>
+                                                <td><?php echo $row['Befund']; ?></td>                                             
                                                 <!-- <td>
                                                     <div class="d-flex align-items-center">
                                                         <div class="badge badge-success badge-dot m-r-10"></div>
@@ -135,11 +145,11 @@
                                                     </div>
                                                 </td> -->
                                                 <td class="text-right">
-                                                    <a href="manage_extinguisher.php?key=<?php echo $row['id']; ?>"
+                                                    <a href="manage_extinguisher.php?key=<?php echo $row['IDKundenbestand']; ?>"
                                                         class="btn btn-icon btn-hover btn-sm btn-rounded pull-right"><i
                                                             class="anticon anticon-edit"></i></a>
                                                     <a onclick="return confirm('Are you sure you want to delete this item?');"
-                                                        href="control/extinguishers_process.php?key=<?php echo $row['id']; ?>&action=delete"
+                                                        href="control/extinguishers_process.php?key=<?php echo $row['IDKundenbestand']; ?>&action=delete"
                                                         class="btn btn-icon btn-hover btn-sm btn-rounded"><i
                                                             class="anticon anticon-delete"></i></a>
                                                 </td>
@@ -156,15 +166,11 @@
                 <!-- Footer START -->
                 <?php include 'footer.php'; ?>
                 <!-- Footer END -->
-
             </div>
             <!-- Page Container END -->
-
         </div>
     </div>
-
     <?php include 'foot.php'; ?>
-
 </body>
 
 </html>
