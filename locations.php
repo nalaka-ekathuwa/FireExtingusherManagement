@@ -73,11 +73,12 @@
                 <!-- Content Wrapper START -->
                 <div class="main-content">
                     <div class="page-header">
-                        <h2 class="header-title">Locations List</h2>
+                        <h2 class="header-title">Standortliste</h2>
                         <div class="header-sub-title">
                             <nav class="breadcrumb breadcrumb-dash">
-                                <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
-                                <span class="breadcrumb-item active">Locations List</span>
+                                <a href="#" class="breadcrumb-item"><i
+                                        class="anticon anticon-home m-r-5"></i>Startseite</a>
+                                <span class="breadcrumb-item active">Standortliste</span>
                             </nav>
                         </div>
                     </div>
@@ -86,14 +87,12 @@
                         <div class="card-body">
                             <div class="row m-b-30">
                                 <div class="col-lg-8">
-
                                     <?php isset($_GET['msg']) ? displayAlert() : ''; ?>
-
                                 </div>
-                                <div class="col-lg-4 text-right">
+                                <!-- <div class="col-lg-4 text-right">
                                     <a href="manage_Location.php" class="btn btn-primary"><i
                                             class="anticon anticon-plus-square m-r-5"></i>Add Location</a>
-                                </div>
+                                </div> -->
                             </div>
 
                             <div class="table-responsive">
@@ -101,35 +100,52 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Cus Number</th>
-                                            <th>Name</th>
-                                            <th>Postal Code</th>
-                                            <th>Contact Person</th>
+                                            <th>Kundenname</th>
+                                            <th>Ortauswahl</th>
+                                            <th>Löschmittel</th>
+                                            <!-- <th>Datumangelegt</th> -->
+                                            <th>Geprüft am</th>
+                                            <th>Nächste Prüfung</th>
+                                            <th>Artikel</th>
+                                            <th>Typ</th>
+                                            <!-- <th>Inhalt</th> -->
+                                            <th>BJ</th>
+                                            <th>Kurz Beschreibung</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                         //get Instrument Rating detials
-                                        $sql = "SELECT * FROM `customers` WHERE safety_officer = '$sesssion_uid' ";
-                                        //echo $sql;
+                                        $sql = "SELECT k.* , e.* FROM `user_logins` u JOIN kundenadressen k ON u.company_id=k.IDKunde JOIN `kundenbestand` e ON e.IDKunde=u.company_id WHERE u.user_id = '$sesssion_uid' ";
+                                        // echo $sql;
                                         $conn = $GLOBALS['con'];
                                         $result = mysqli_query($conn, $sql);
                                         $no = 1;
                                         while ($row = mysqli_fetch_assoc($result)) {
-                                             ?>
-                                             <tr>
-                                                 <td><?php echo $no++; ?></td>
-                                                 <td><?php echo $row['cus_number']; ?></td>
-                                                 <td><?php echo $row['salutation'].'. '.$row['first_name'].' '.$row['last_name']; ?></td>
-                                                 <td><?php echo $row['postal_code']; ?></td>
-                                                 <td><?php echo $row['contact_person']; ?></td>
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $no++; ?></td>
+                                                <td><?php echo $row['Anrede'] . '. ' . $row['Vorname'] . ' ' . $row['Nachname']; ?>
+                                                </td>
+                                                <td><?php echo $row['Ortauswahl']; ?></td>
+                                                <td><?php echo $row['Löschmittel']; ?></td>
+                                                <!-- <td><?php echo (new DateTime($row['Datumangelegt']))->format('m/y'); ?></td> -->
+                                                <td><?php echo (new DateTime($row['Geprüftam']))->format('m/y'); ?></td>
+                                                <td><?php echo (new DateTime($row['NächstePrüfung']))->format('m/y'); ?>
+                                                </td>
+                                                <td><?php echo $row['Artikel']; ?></td>
+                                                <td><?php echo $row['Typ']; ?></td>
+                                                <!-- <td><?php echo $row['Inhalt']; ?></td> -->
+                                                <td><?php echo (new DateTime($row['BJ']))->format('Y-m-d'); ?></td>
+                                                <td><?php echo $row['BeschreibungStandort1']; ?></td>
                                                 <td class="text-right">
-                                                    <a href="#" id="view_customer"
-                                                        onclick="loadEquipmentTable(<?php echo $row['owner']; ?>)"
+                                                    <!-- <a href="#" id="view_customer"   onclick="loadEquipmentTable(<?php echo $row['IDKundenbestand']; ?>)"
                                                         class="btn btn-icon btn-hover btn-sm btn-secondary btn-rounded pull-right"><i
-                                                            class="fas fa-eye"></i></a>
-                                                    <a href="#" id="view_equipments"
+                                                            class="fas fa-eye"></i></a> -->
+                                                    <a data-toggle="tooltip" data-placement="top" title="Standort anzeigen"
+                                                        href="manage_extinguisher.php?key=<?php echo $row['IDKundenbestand']; ?>"
+                                                        id="view_equipments"
                                                         class="btn btn-icon btn-hover btn-sm btn-secondary btn-rounded pull-right"><i
                                                             class="fas fa-fire-extinguisher"></i></a>
                                                 </td>
@@ -141,9 +157,8 @@
                         </div>
                     </div>
 
-                    <div id="equipment_section">
-
-                    </div>
+                    <!-- <div id="equipment_section">
+                    </div> -->
 
                 </div>
                 <!-- Content Wrapper END -->
@@ -159,8 +174,8 @@
     </div>
 
     <?php include 'foot.php'; ?>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
+    <!-- <script>
         function loadEquipmentTable(clicked_id) {
             $.ajax({
                 url: 'load_equipment.php', // This is the URL to your PHP script
@@ -174,7 +189,7 @@
                 }
             });
         }
-    </script>
+    </script> -->
 
 </body>
 

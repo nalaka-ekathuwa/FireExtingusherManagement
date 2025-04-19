@@ -17,11 +17,11 @@
                 <!-- Content Wrapper START -->
                 <div class="main-content">
                     <div class="page-header">
-                        <h2 class="header-title">Users List</h2>
+                        <h2 class="header-title">Customer Details</h2>
                         <div class="header-sub-title">
                             <nav class="breadcrumb breadcrumb-dash">
                                 <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
-                                <span class="breadcrumb-item active">users List</span>
+                                <span class="breadcrumb-item active">Manage customer</span>
                             </nav>
                         </div>
                     </div>

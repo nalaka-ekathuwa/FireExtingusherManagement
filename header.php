@@ -125,29 +125,21 @@ if (empty($_SESSION["user_id"])) {
                                 <img src="<?php echo $session_uimg; ?>" alt="">
                             </div>
                             <div class="m-l-10">
-                                <p class="m-b-0 text-dark font-weight-semibold"><?php echo $session_uimg; ?></p>
-                                <p class="m-b-0 opacity-07">Active</p>
+                                <p class="m-b-0 text-dark font-weight-semibold"><?php echo $session_uname; ?></p>
+                                <p class="m-b-0 opacity-07">Aktiv</p>
                             </div>
                         </div>
                     </div>
-                    <a href="javascript:void(0);" class="dropdown-item d-block p-h-15 p-v-10">
+                    <a href="manage_user.php?key=<?php echo $sesssion_uid; ?>;" class="dropdown-item d-block p-h-15 p-v-10">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
                                 <i class="anticon opacity-04 font-size-16 anticon-user"></i>
-                                <span class="m-l-10">Edit Profile</span>
+                                <span class="m-l-10">Profil bearbeiten</span>
                             </div>
                             <i class="anticon font-size-10 anticon-right"></i>
                         </div>
                     </a>
-                    <a href="javascript:void(0);" class="dropdown-item d-block p-h-15 p-v-10">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <div>
-                                <i class="anticon opacity-04 font-size-16 anticon-lock"></i>
-                                <span class="m-l-10">Account Setting</span>
-                            </div>
-                            <i class="anticon font-size-10 anticon-right"></i>
-                        </div>
-                    </a>
+                    
                     <!-- <a href="javascript:void(0);" class="dropdown-item d-block p-h-15 p-v-10">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
@@ -161,7 +153,7 @@ if (empty($_SESSION["user_id"])) {
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
                                 <i class="anticon opacity-04 font-size-16 anticon-logout"></i>
-                                <span class="m-l-10">Logout</span>
+                                <span class="m-l-10">Abmelden</span>
                             </div>
                             <i class="anticon font-size-10 anticon-right"></i>
                         </div>
