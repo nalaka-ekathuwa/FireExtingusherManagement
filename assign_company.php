@@ -19,22 +19,22 @@
                                         case '5':
                                             $alertType = 'alert-success';
                                             $icon = 'anticon-check-o';
-                                            $message = 'User was removed';
+                                            $message = 'Benutzer wurde entfernt';
                                             break;
                                         case '6':
                                             $alertType = 'alert-danger';
                                             $icon = 'anticon-close-o';
-                                            $message = 'User was not removed';
+                                            $message = 'Benutzer wurde nicht entfernt';
                                             break;
                                         case '2':
                                             $alertType = 'alert-success';
                                             $icon = 'anticon-check-o';
-                                            $message = 'User was Assigned';
+                                            $message = 'Benutzer wurde zugewiesen';
                                             break;
                                         case '1':
                                             $alertType = 'alert-danger';
                                             $icon = 'anticon-close-o';
-                                            $message = 'User was not Assigned';
+                                            $message = 'Benutzer wurde nicht zugewiesen';                                        
                                             ;
                                             break;
                                        // default:

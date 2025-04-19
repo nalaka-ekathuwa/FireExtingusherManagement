@@ -18,34 +18,32 @@
                     case '5':
                         $alertType = 'alert-success';
                         $icon = 'anticon-check-o';
-                        $message = 'Customer was deleted';
+                        $message = 'Kunde wurde gelöscht';
                         break;
                     case '6':
                         $alertType = 'alert-danger';
                         $icon = 'anticon-close-o';
-                        $message = 'Customer was not deleted';
+                        $message = 'Kunde wurde nicht gelöscht';
                         break;
                     case '2':
                         $alertType = 'alert-success';
                         $icon = 'anticon-check-o';
-                        $message = 'Customer was Created';
+                        $message = 'Kunde wurde erstellt';
                         break;
                     case '1':
                         $alertType = 'alert-danger';
                         $icon = 'anticon-close-o';
-                        $message = 'Customer was not created';
-                        ;
+                        $message = 'Kunde wurde nicht erstellt';
                         break;
                     case '4':
                         $alertType = 'alert-success';
                         $icon = 'anticon-check-o';
-                        $message = 'Customer was Updated';
+                        $message = 'Kunde wurde aktualisiert';
                         break;
                     case '3':
                         $alertType = 'alert-danger';
                         $icon = 'anticon-close-o';
-                        $message = 'Customer was not Updated';
-                        ;
+                        $message = 'Kunde wurde nicht aktualisiert';
                         break;
                     // default:
                     //     $alertType = 'alert-secondary';
@@ -73,15 +71,15 @@
                 <!-- Content Wrapper START -->
                 <div class="main-content">
                     <div class="page-header">
-                        <h2 class="header-title">Customers List</h2>
+                        <h2 class="header-title">Kundenliste</h2>
                         <div class="header-sub-title">
                             <nav class="breadcrumb breadcrumb-dash">
-                                <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
-                                <span class="breadcrumb-item active">Customers List</span>
+                                <a href="#" class="breadcrumb-item"><i
+                                        class="anticon anticon-home m-r-5"></i>Startseite</a>
+                                <span class="breadcrumb-item active">Kundenliste</span>
                             </nav>
                         </div>
                     </div>
-
                     <div class="card">
                         <div class="card-body">
                             <div class="row m-b-30">
@@ -91,8 +89,9 @@
 
                                 </div>
                                 <div class="col-lg-4 text-right">
-                                    <a href="manage_customer.php" class="btn btn-primary"><i
-                                            class="anticon anticon-plus-square m-r-5"></i>Add Customer</a>
+                                    <a href="manage_customer.php" class="btn btn-primary">
+                                        <i class="anticon anticon-plus-square m-r-5"></i>Kunde hinzufügen
+                                    </a>
                                 </div>
                             </div>
 
@@ -126,14 +125,15 @@
                                         $result = mysqli_query($conn, $sql);
                                         $no = 1;
                                         while ($row = mysqli_fetch_assoc($result)) {
-                                        //    $badge = ($row['safe_off_availability'] =='10')?'info':'danger';
-                                        //    $availability = ($row['safe_off_availability'] =='10')?'Available':'Not Available';
+                                            //    $badge = ($row['safe_off_availability'] =='10')?'info':'danger';
+                                            //    $availability = ($row['safe_off_availability'] =='10')?'Available':'Not Available';
                                             ?>
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
                                                 <!-- <td><?php echo $row['IDWartungspersonal']; ?></td>
                                                 <td><?php echo $row['IDFirma']; ?></td> -->
-                                                <td><?php echo $row['Anrede'].'. '.$row['Vorname'].' '.$row['Nachname']; ?></td>
+                                                <td><?php echo $row['Anrede'] . '. ' . $row['Vorname'] . ' ' . $row['Nachname']; ?>
+                                                </td>
                                                 <td><?php echo $row['Nr']; ?></td>
                                                 <td><?php echo $row['Plz']; ?></td>
                                                 <td><?php echo $row['Ort']; ?></td>
@@ -151,10 +151,13 @@
                                                     </div>
                                                 </td> -->
                                                 <td class="text-right">
-                                                    <a href="manage_customer.php?key=<?php echo $row['IDKunde']; ?>"
+                                                    <a data-toggle="tooltip" data-placement="top" title="Kunden bearbeiten"
+                                                        href="manage_customer.php?key=<?php echo $row['IDKunde']; ?>"
                                                         class="btn btn-icon btn-hover btn-sm btn-rounded pull-right"><i
                                                             class="anticon anticon-edit"></i></a>
-                                                    <a onclick="return confirm('Are you sure you want to delete this item?');"
+
+                                                    <a data-toggle="tooltip" data-placement="top" title="Kunden löschen"
+                                                        onclick="return confirm('Bist du sicher, dass du dieses Element löschen möchtest?');"
                                                         href="control/customer_process.php?key=<?php echo $row['IDKunde']; ?>&action=delete"
                                                         class="btn btn-icon btn-hover btn-sm btn-rounded"><i
                                                             class="anticon anticon-delete"></i></a>
@@ -178,9 +181,7 @@
 
         </div>
     </div>
-
     <?php include 'foot.php'; ?>
-
 </body>
 
 </html>

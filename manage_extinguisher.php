@@ -35,13 +35,15 @@
                 <!-- Content Wrapper START -->
                 <div class="main-content">
                     <div class="page-header">
-                        <h2 class="header-title">Extinguisher List </h2>
+                        <h2 class="header-title">Feuerlöscher Liste</h2>
                         <div class="header-sub-title">
                             <nav class="breadcrumb breadcrumb-dash">
-                                <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
-                                <span class="breadcrumb-item active"><?php echo ucfirst($action); ?> Extinguisher</span>
+                                <a href="#" class="breadcrumb-item"><i
+                                        class="anticon anticon-home m-r-5"></i>Startseite</a>
+                                <span class="breadcrumb-item active"><?php echo ucfirst($action); ?> Feuerlöscher</span>
                             </nav>
                         </div>
+
                     </div>
                     <div class="card">
                         <div class="card-body">
@@ -357,14 +359,19 @@
                                             <div class="form-group col-md-3">
                                                 <label for="Geprüftam">Geprüft am</label>
                                                 <input name="Geprüftam" type="text"
-                                                    class="form-control datepicker-input" id="Geprüftam" value="<?php $dt = new DateTime($row['Geprüftam']);
-                                                    echo isset($_GET['key']) ? $dt->format('m/d/Y') : ''; ?>">
+                                                    class="form-control datepicker-input" id="Geprüftam" value="<?php
+                                                    if (isset($_GET['key'])) {
+                                                        $dt = new DateTime($row['Geprüftam']);
+                                                        echo $dt->format('m/d/Y');
+                                                    } ?>">
                                             </div>
                                             <div class="form-group col-md-3">
                                                 <label for="LöschmittelGewicht">NächstePrüfung</label>
                                                 <input name="LöschmittelGewicht" type="text"
-                                                    class="form-control datepicker-input" id="LöschmittelGewicht" value="<?php $ds = new DateTime($row['NächstePrüfung']);
-                                                    echo isset($_GET['key']) ? $ds->format('m/d/Y') : ''; ?>">
+                                                    class="form-control datepicker-input" id="LöschmittelGewicht" value="<?php if (isset($_GET['key'])) {
+                                                        $ds = new DateTime($row['NächstePrüfung']);
+                                                        echo $ds->format('m/d/Y');
+                                                    } ?>">
                                             </div>
                                             <div class="form-group col-md-3">
                                                 <label for="BeschreibungStandort1">Kurz Beschreibung </label>
@@ -376,25 +383,29 @@
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label for="Beschädigung1">Beschädigung</label>
-                                                <textarea name="Beschädigung1" class="form-control" ><?php echo isset($_GET['key']) ? $row['Beschädigung1'] : ''; ?></textarea>
+                                                <textarea name="Beschädigung1"
+                                                    class="form-control"><?php echo isset($_GET['key']) ? $row['Beschädigung1'] : ''; ?></textarea>
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="BeschreibungStandort2">Standortquelle</label>
-                                                <textarea name="BeschreibungStandort2" class="form-control"><?php echo isset($_GET['key']) ? $row['BeschreibungStandort2'] : ''; ?></textarea>
+                                                <textarea name="BeschreibungStandort2"
+                                                    class="form-control"><?php echo isset($_GET['key']) ? $row['BeschreibungStandort2'] : ''; ?></textarea>
                                             </div>
                                         </div>
 
-                                        <hr>
-                                        <p class="card-title">Standortdetails</p>
-                                        <div class="map rounded overflow-hidden">
-                                            <div style="width: 100%">
-                                                <?php $map_src = !is_null($row['BeschreibungStandort2']) ? $row['BeschreibungStandort2'] : "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d336579.39401982195!2d9.760397307209544!3d48.77183768336409!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4799af50b1556c91%3A0xc12c3d86f8e797ee!2s73547%20Lorch%2C%20Germany!5e0!3m2!1sen!2sfi!4v1744974868972!5m2!1sen!2sfi"; ?>
-                                                <iframe src="<?php echo $map_src; ?>" width="100%" height="400"
-                                                    style="border:0;" allowfullscreen="" loading="lazy"
-                                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                        <?php if (isset($_GET['key'])) { ?>
+                                            <hr>
+                                            <p class="card-title">Standortdetails</p>
+                                            <div class="map rounded overflow-hidden">
+                                                <div style="width: 100%">
+                                                    <?php $map_src = !is_null($row['BeschreibungStandort2']) ? $row['BeschreibungStandort2'] : "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d336579.39401982195!2d9.760397307209544!3d48.77183768336409!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4799af50b1556c91%3A0xc12c3d86f8e797ee!2s73547%20Lorch%2C%20Germany!5e0!3m2!1sen!2sfi!4v1744974868972!5m2!1sen!2sfi"; ?>
+                                                    <iframe src="<?php echo $map_src; ?>" width="100%" height="400"
+                                                        style="border:0;" allowfullscreen="" loading="lazy"
+                                                        referrerpolicy="no-referrer-when-downgrade"></iframe>
 
+                                                </div>
                                             </div>
-                                        </div>
+                                        <?php } ?>
                                         <br>
 
                                         <button type="submit"

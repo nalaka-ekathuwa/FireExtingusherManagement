@@ -32,11 +32,12 @@
                 <!-- Content Wrapper START -->
                 <div class="main-content">
                     <div class="page-header">
-                        <h2 class="header-title">Customers List </h2>
+                        <h2 class="header-title">Kundenliste</h2>
                         <div class="header-sub-title">
                             <nav class="breadcrumb breadcrumb-dash">
-                                <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
-                                <span class="breadcrumb-item active"><?php echo ucfirst($action); ?> Customer</span>
+                                <a href="#" class="breadcrumb-item"><i
+                                        class="anticon anticon-home m-r-5"></i>Startseite</a>
+                                <span class="breadcrumb-item active"><?php echo ucfirst($action); ?> Kunde</span>
                             </nav>
                         </div>
                     </div>
@@ -173,15 +174,16 @@
                                         <div class="form-row">
                                             <div class="form-group col-md-5">
                                                 <label for="Geprüftam">Geprüftam</label>
-                                                <input name="Geprüftam" type="date" class="form-control"
-                                                    id="Geprüftam"
-                                                    value="<?php $dt = new DateTime($row['Geprüftam']); echo isset($_GET['key']) ? $dt->format('Y-m-d') : ''; ?>">
+                                                <input name="Geprüftam" type="date" class="form-control" id="Geprüftam"
+                                                    value="<?php $dt = new DateTime($row['Geprüftam']);
+                                                    echo isset($_GET['key']) ? $dt->format('Y-m-d') : ''; ?>">
                                             </div>
                                             <div class="form-group col-md-7">
                                                 <label for="NächstePrüfung">NächstePrüfung</label>
                                                 <input name="NächstePrüfung" type="date" class="form-control"
                                                     id="NächstePrüfung" placeholder="NächstePrüfung"
-                                                    value="<?php $ds = new DateTime($row['NächstePrüfung']); echo isset($_GET['key']) ? $ds->format('Y-m-d') : ''; ?>">
+                                                    value="<?php $ds = new DateTime($row['NächstePrüfung']);
+                                                    echo isset($_GET['key']) ? $ds->format('Y-m-d') : ''; ?>">
                                             </div>
                                         </div>
 

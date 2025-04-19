@@ -18,34 +18,32 @@
                     case '5':
                         $alertType = 'alert-success';
                         $icon = 'anticon-check-o';
-                        $message = 'Extinguisher was deleted';
+                        $message = 'Feuerlöscher wurde gelöscht';
                         break;
                     case '6':
                         $alertType = 'alert-danger';
                         $icon = 'anticon-close-o';
-                        $message = 'Extinguisher was not deleted';
+                        $message = 'Feuerlöscher wurde nicht gelöscht';
                         break;
                     case '2':
                         $alertType = 'alert-success';
                         $icon = 'anticon-check-o';
-                        $message = 'Extinguisher was Created';
+                        $message = 'Feuerlöscher wurde erstellt';
                         break;
                     case '1':
                         $alertType = 'alert-danger';
                         $icon = 'anticon-close-o';
-                        $message = 'Extinguisher was not created';
-                        ;
+                        $message = 'Feuerlöscher wurde nicht erstellt';
                         break;
                     case '4':
                         $alertType = 'alert-success';
                         $icon = 'anticon-check-o';
-                        $message = 'Extinguisher was Updated';
+                        $message = 'Feuerlöscher wurde aktualisiert';
                         break;
                     case '3':
                         $alertType = 'alert-danger';
                         $icon = 'anticon-close-o';
-                        $message = 'Extinguisher was not Updated';
-                        ;
+                        $message = 'Feuerlöscher wurde nicht aktualisiert';
                         break;
                     // default:
                     //     $alertType = 'alert-secondary';
@@ -73,11 +71,12 @@
                 <!-- Content Wrapper START -->
                 <div class="main-content">
                     <div class="page-header">
-                        <h2 class="header-title">Extinguishers List</h2>
+                        <h2 class="header-title">Feuerlöscher Liste</h2>
                         <div class="header-sub-title">
                             <nav class="breadcrumb breadcrumb-dash">
-                                <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
-                                <span class="breadcrumb-item active">Extinguishers List</span>
+                                <a href="#" class="breadcrumb-item"><i
+                                        class="anticon anticon-home m-r-5"></i>Startseite</a>
+                                <span class="breadcrumb-item active">Feuerlöscher Liste</span>
                             </nav>
                         </div>
                     </div>
@@ -91,8 +90,9 @@
 
                                 </div>
                                 <div class="col-lg-4 text-right">
-                                    <a href="manage_extinguisher.php" class="btn btn-primary"><i
-                                            class="anticon anticon-plus-square m-r-5"></i>Add Extinguisher</a>
+                                    <a href="manage_extinguisher.php" class="btn btn-primary">
+                                        <i class="anticon anticon-plus-square m-r-5"></i>Feuerlöscher hinzufügen
+                                    </a>
                                 </div>
                             </div>
 
@@ -125,19 +125,22 @@
                                             ?>
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
-                                                <td><div class="d-flex align-items-center">
+                                                <td>
+                                                    <div class="d-flex align-items-center">
                                                         <div class="avatar avatar-image avatar-sm m-r-10">
                                                             <img src="<?php echo $image; ?>" alt="">
                                                         </div>
-                                                        <h6 class="m-b-0"><?php echo '('. $row['Löschmittel']. ')'; ?></h6>
-                                                    </div></td>
+                                                        <h6 class="m-b-0"><?php echo '(' . $row['Löschmittel'] . ')'; ?>
+                                                        </h6>
+                                                    </div>
+                                                </td>
                                                 <td><?php echo $row['Datumangelegt']; ?></td>
                                                 <td><?php echo $row['Anzahl']; ?></td>
                                                 <td><?php echo $row['Artikel']; ?></td>
                                                 <td><?php echo $row['Typ']; ?></td>
                                                 <td><?php echo $row['Inhalt']; ?></td>
                                                 <td><?php echo $row['BJ']; ?></td>
-                                                <td><?php echo $row['Befund']; ?></td>                                             
+                                                <td><?php echo $row['Befund']; ?></td>
                                                 <!-- <td>
                                                     <div class="d-flex align-items-center">
                                                         <div class="badge badge-success badge-dot m-r-10"></div>
@@ -145,10 +148,14 @@
                                                     </div>
                                                 </td> -->
                                                 <td class="text-right">
-                                                    <a href="manage_extinguisher.php?key=<?php echo $row['IDKundenbestand']; ?>"
+                                                    <a data-toggle="tooltip" data-placement="top"
+                                                        title="Feuerlöscher bearbeiten"
+                                                        href="manage_extinguisher.php?key=<?php echo $row['IDKundenbestand']; ?>"
                                                         class="btn btn-icon btn-hover btn-sm btn-rounded pull-right"><i
                                                             class="anticon anticon-edit"></i></a>
-                                                    <a onclick="return confirm('Are you sure you want to delete this item?');"
+                                                    <a data-toggle="tooltip" data-placement="top"
+                                                        title="Feuerlöscher löschen"
+                                                        onclick="return confirm('Bist du sicher, dass du dieses Element löschen möchtest?');"
                                                         href="control/extinguishers_process.php?key=<?php echo $row['IDKundenbestand']; ?>&action=delete"
                                                         class="btn btn-icon btn-hover btn-sm btn-rounded"><i
                                                             class="anticon anticon-delete"></i></a>

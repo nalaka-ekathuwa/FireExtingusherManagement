@@ -26,10 +26,15 @@ $log_pass = 'a26366e36575312a1f9790d49a393ac9';
 
 $master_token = str_rot13($log_name) . str_rot13($log_pass);
 
-define("C_MYSQL_HOST", "127.0.0.1");
-define("C_MYSQL_DB", "feuerschutz");
-define("C_MYSQL_USER",	"root");
-define("C_MYSQL_PWD", "");
+// define("C_MYSQL_HOST", "127.0.0.1");
+// define("C_MYSQL_DB", "feuerschutz");
+// define("C_MYSQL_USER",	"root");
+// define("C_MYSQL_PWD", "");
+
+define("C_MYSQL_HOST", "onkel-hady.de");
+define("C_MYSQL_DB", "test_db");
+define("C_MYSQL_USER",	"Techniker");
+define("C_MYSQL_PWD", "Brombacher29");
 
 $conn = mysqli_connect(C_MYSQL_HOST, C_MYSQL_USER, C_MYSQL_PWD);
 $GLOBALS['con'] = $conn;
@@ -39,6 +44,7 @@ if (!$db_select) {
 	error_log("Database selection failed: " . mysqli_error($conn));
 	die('Internal server error');
 } else {
+	mysqli_set_charset($conn,'utf8');
 	// die('success');
 }
 

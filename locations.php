@@ -73,11 +73,12 @@
                 <!-- Content Wrapper START -->
                 <div class="main-content">
                     <div class="page-header">
-                        <h2 class="header-title">Locations List</h2>
+                        <h2 class="header-title">Standortliste</h2>
                         <div class="header-sub-title">
                             <nav class="breadcrumb breadcrumb-dash">
-                                <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
-                                <span class="breadcrumb-item active">Locations List</span>
+                                <a href="#" class="breadcrumb-item"><i
+                                        class="anticon anticon-home m-r-5"></i>Startseite</a>
+                                <span class="breadcrumb-item active">Standortliste</span>
                             </nav>
                         </div>
                     </div>
@@ -122,25 +123,29 @@
                                         $result = mysqli_query($conn, $sql);
                                         $no = 1;
                                         while ($row = mysqli_fetch_assoc($result)) {
-                                             ?>
-                                             <tr>
-                                                 <td><?php echo $no++; ?></td>
-                                                 <td><?php echo $row['Anrede'].'. '.$row['Vorname'].' '.$row['Nachname']; ?></td>
-                                                 <td><?php echo $row['Ortauswahl']; ?></td>
-                                                 <td><?php echo $row['Löschmittel']; ?></td>
-                                                 <!-- <td><?php echo (new DateTime($row['Datumangelegt']))->format('m/y'); ?></td> -->
-                                                 <td><?php echo (new DateTime($row['Geprüftam']))->format('m/y'); ?></td>
-                                                 <td><?php echo (new DateTime($row['NächstePrüfung']))->format('m/y'); ?></td>
-                                                 <td><?php echo $row['Artikel']; ?></td>
-                                                 <td><?php echo $row['Typ']; ?></td>
-                                                 <!-- <td><?php echo $row['Inhalt']; ?></td> -->
-                                                 <td><?php echo (new DateTime($row['BJ']))->format('Y-m-d'); ?></td>
-                                                 <td><?php echo $row['BeschreibungStandort1']; ?></td>
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $no++; ?></td>
+                                                <td><?php echo $row['Anrede'] . '. ' . $row['Vorname'] . ' ' . $row['Nachname']; ?>
+                                                </td>
+                                                <td><?php echo $row['Ortauswahl']; ?></td>
+                                                <td><?php echo $row['Löschmittel']; ?></td>
+                                                <!-- <td><?php echo (new DateTime($row['Datumangelegt']))->format('m/y'); ?></td> -->
+                                                <td><?php echo (new DateTime($row['Geprüftam']))->format('m/y'); ?></td>
+                                                <td><?php echo (new DateTime($row['NächstePrüfung']))->format('m/y'); ?>
+                                                </td>
+                                                <td><?php echo $row['Artikel']; ?></td>
+                                                <td><?php echo $row['Typ']; ?></td>
+                                                <!-- <td><?php echo $row['Inhalt']; ?></td> -->
+                                                <td><?php echo (new DateTime($row['BJ']))->format('Y-m-d'); ?></td>
+                                                <td><?php echo $row['BeschreibungStandort1']; ?></td>
                                                 <td class="text-right">
                                                     <!-- <a href="#" id="view_customer"   onclick="loadEquipmentTable(<?php echo $row['IDKundenbestand']; ?>)"
                                                         class="btn btn-icon btn-hover btn-sm btn-secondary btn-rounded pull-right"><i
                                                             class="fas fa-eye"></i></a> -->
-                                                    <a href="manage_extinguisher.php?key=<?php echo $row['IDKundenbestand']; ?>" id="view_equipments"
+                                                    <a data-toggle="tooltip" data-placement="top" title="Standort anzeigen"
+                                                        href="manage_extinguisher.php?key=<?php echo $row['IDKundenbestand']; ?>"
+                                                        id="view_equipments"
                                                         class="btn btn-icon btn-hover btn-sm btn-secondary btn-rounded pull-right"><i
                                                             class="fas fa-fire-extinguisher"></i></a>
                                                 </td>

@@ -18,34 +18,32 @@
                     case '5':
                         $alertType = 'alert-success';
                         $icon = 'anticon-check-o';
-                        $message = 'User was deleted';
+                        $message = 'Benutzer wurde gelöscht';
                         break;
                     case '6':
                         $alertType = 'alert-danger';
                         $icon = 'anticon-close-o';
-                        $message = 'User was not deleted';
+                        $message = 'Benutzer wurde nicht gelöscht';
                         break;
                     case '2':
                         $alertType = 'alert-success';
                         $icon = 'anticon-check-o';
-                        $message = 'User was Created';
+                        $message = 'Benutzer wurde erstellt';
                         break;
                     case '1':
                         $alertType = 'alert-danger';
                         $icon = 'anticon-close-o';
-                        $message = 'User was not created';
-                        ;
+                        $message = 'Benutzer wurde nicht erstellt';
                         break;
                     case '4':
                         $alertType = 'alert-success';
                         $icon = 'anticon-check-o';
-                        $message = 'User was Updated';
+                        $message = 'Benutzer wurde aktualisiert';
                         break;
                     case '3':
                         $alertType = 'alert-danger';
                         $icon = 'anticon-close-o';
-                        $message = 'User was not Updated';
-                        ;
+                        $message = 'Benutzer wurde nicht aktualisiert';
                         break;
                     // default:
                     //     $alertType = 'alert-secondary';
@@ -73,15 +71,15 @@
                 <!-- Content Wrapper START -->
                 <div class="main-content">
                     <div class="page-header">
-                        <h2 class="header-title">Users List</h2>
+                        <h2 class="header-title">Benutzerliste</h2>
                         <div class="header-sub-title">
                             <nav class="breadcrumb breadcrumb-dash">
-                                <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
-                                <span class="breadcrumb-item active">users List</span>
+                                <a href="#" class="breadcrumb-item"><i
+                                        class="anticon anticon-home m-r-5"></i>Startseite</a>
+                                <span class="breadcrumb-item active">Benutzerliste</span>
                             </nav>
                         </div>
                     </div>
-
                     <div class="card">
                         <div class="card-body">
                             <div class="row m-b-30">
@@ -92,7 +90,7 @@
                                 </div>
                                 <div class="col-lg-4 text-right">
                                     <a href="add_user.php" class="btn btn-primary"><i
-                                            class="anticon anticon-plus-square m-r-5"></i>Add User</a>
+                                            class="anticon anticon-plus-square m-r-5"></i>Benutzer hinzufügen</a>
                                 </div>
                             </div>
 
@@ -120,7 +118,7 @@
                                             $image = !empty($row['img']) ? $row['img'] : 'assets/images/users/default.jpg';
                                             ?>
                                             <tr>
-                                            <td><?php echo $number++; ?></td>
+                                                <td><?php echo $number++; ?></td>
                                                 <td>
                                                     <div class="d-flex align-items-center">
                                                         <div class="avatar avatar-image avatar-sm m-r-10">
@@ -134,14 +132,17 @@
                                                 <td>
                                                     <div class="d-flex align-items-center">
                                                         <div class="badge badge-success badge-dot m-r-10"></div>
-                                                        <div>Approved</div>
+                                                        <div>Genehmigt</div>
                                                     </div>
                                                 </td>
                                                 <td class="text-right">
-                                                    <a href="manage_user.php?key=<?php echo $row['id']; ?>"
+                                                    <a data-toggle="tooltip" data-placement="top"
+                                                        title="Benutzer bearbeiten"
+                                                        href="manage_user.php?key=<?php echo $row['id']; ?>"
                                                         class="btn btn-icon btn-hover btn-sm btn-rounded pull-right"><i
                                                             class="anticon anticon-edit"></i></a>
-                                                    <a onclick="return confirm('Are you sure you want to delete this item?');"
+                                                    <a data-toggle="tooltip" data-placement="top" title="Benutzer löschen"
+                                                        onclick="return confirm('Sind Sie sicher, dass Sie dieses Element löschen möchten?');"
                                                         href="control/users_process.php?key=<?php echo $row['id']; ?>&action=delete"
                                                         class="btn btn-icon btn-hover btn-sm btn-rounded"><i
                                                             class="anticon anticon-delete"></i></a>
