@@ -1,3 +1,4 @@
+<?php include 'init.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -137,7 +138,9 @@
                                                 <td><?php echo $row['Artikel']; ?></td>
                                                 <td><?php echo $row['Typ']; ?></td>
                                                 <!-- <td><?php echo $row['Inhalt']; ?></td> -->
-                                                <td><?php echo (new DateTime($row['BJ']))->format('Y-m-d'); ?></td>
+                                                <td><?php if(!is_null($row['BJ'])){
+                                                        echo (new DateTime($row['BJ']))->format('Y-m-d');
+                                                }  ?></td>
                                                 <td><?php echo $row['BeschreibungStandort1']; ?></td>
                                                 <td class="text-right">
                                                     <!-- <a href="#" id="view_customer"   onclick="loadEquipmentTable(<?php echo $row['IDKundenbestand']; ?>)"

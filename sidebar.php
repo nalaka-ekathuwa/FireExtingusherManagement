@@ -81,7 +81,7 @@
                             <a href="manage_customer.php">Hinzufügen</a>
                         </li>
                         <li>
-                            <a href="user_assign.php">Zuordnen</a>
+                            <a href="assign_company.php">Zuordnen</a>
                         </li>
                     </ul>
                 </li>

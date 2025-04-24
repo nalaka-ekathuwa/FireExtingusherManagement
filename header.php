@@ -1,18 +1,20 @@
-<?php session_start();
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 if (empty($_SESSION["user_id"])) {
     header('Location:index.php');
-    $session_urole=$_SESSION['role_id'];
-    $session_uname=$_SESSION['user_name'];
-    $session_uimg=$_SESSION['user_img'];
-    $sesssion_uid=$_SESSION['user_id'];
-}else{
-    $session_urole=$_SESSION['role_id'];
-    $session_uname=$_SESSION['user_name'];
-    $session_uimg=$_SESSION['user_img'];
-    $sesssion_uid=$_SESSION['user_id'];
+    $session_urole = $_SESSION['role_id'];
+    $session_uname = $_SESSION['user_name'];
+    $session_uimg = $_SESSION['user_img'];
+    $sesssion_uid = $_SESSION['user_id'];
+} else {
+    $session_urole = $_SESSION['role_id'];
+    $session_uname = $_SESSION['user_name'];
+    $session_uimg = $_SESSION['user_img'];
+    $sesssion_uid = $_SESSION['user_id'];
 }
-
 
 ?>
 <!-- Header START -->
@@ -130,7 +132,8 @@ if (empty($_SESSION["user_id"])) {
                             </div>
                         </div>
                     </div>
-                    <a href="manage_user.php?key=<?php echo $sesssion_uid; ?>;" class="dropdown-item d-block p-h-15 p-v-10">
+                    <a href="manage_user.php?key=<?php echo $sesssion_uid; ?>;"
+                        class="dropdown-item d-block p-h-15 p-v-10">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
                                 <i class="anticon opacity-04 font-size-16 anticon-user"></i>
@@ -139,7 +142,7 @@ if (empty($_SESSION["user_id"])) {
                             <i class="anticon font-size-10 anticon-right"></i>
                         </div>
                     </a>
-                    
+
                     <!-- <a href="javascript:void(0);" class="dropdown-item d-block p-h-15 p-v-10">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
