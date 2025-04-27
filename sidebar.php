@@ -135,7 +135,7 @@
             <li class="nav-item dropdown">
                 <a class="dropdown-toggle" href="logout.php">
                     <span class="icon-holder">
-                        <i class="anticon anticon-lock"></i>
+                        <i class="anticon anticon-logout"></i>
                     </span>
                     <span class="title">Abmelden</span>
                 </a>

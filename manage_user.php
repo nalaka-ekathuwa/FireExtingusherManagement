@@ -71,14 +71,14 @@
                                                     <option>Wählen...</option>
                                                     <?php
                                                     //get User Roles
-                                                    $sql1 = "SELECT * FROM `alsanmeldung`";
+                                                    $sql1 = "SELECT * FROM `anmeldenals`";
                                                     //echo $sql;
                                                     $conn = $GLOBALS['con'];
                                                     $result1 = mysqli_query($conn, $sql1);
                                                     while ($row1 = mysqli_fetch_assoc($result1)) {
                                                         ?>
-                                                        <option value="<?php echo $row1['IDAlsanmeldung']; ?>" <?php echo ($row['role_id'] == $row1['IDAlsanmeldung']) ? 'selected' : ''; ?>>
-                                                            <?php echo $row1['Anmeldenals']; ?>
+                                                        <option value="<?php echo $row1['idanmeldenals']; ?>" <?php echo ($row['role_id'] == $row1['idanmeldenals']) ? 'selected' : ''; ?>>
+                                                            <?php echo $row1['anmeldenals']; ?>
                                                         </option> <?php } ?>
                                                 </select>
                                                 <input type="hidden" name="key" value="<?php echo $key; ?>">

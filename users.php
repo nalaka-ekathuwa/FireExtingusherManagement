@@ -16,6 +16,16 @@
                 $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
 
                 switch ($msg) {
+                    case '8':
+                        $alertType = 'alert-danger';
+                        $icon = 'anticon-check-o';
+                        $message = 'Passwort war nicht rest';
+                        break;
+                    case '7':
+                        $alertType = 'alert-success';
+                        $icon = 'anticon-check-o';
+                        $message = 'Passwort war rest';
+                        break;
                     case '5':
                         $alertType = 'alert-success';
                         $icon = 'anticon-check-o';
@@ -110,7 +120,7 @@
                                     <tbody>
                                         <?php
                                         //get Instrument Rating detials
-                                        $sql = "SELECT u.`id`, `name`,`img`, `email`, `role`,a.Anmeldenals FROM `users` u JOIN `alsanmeldung` a ON u.role_id=a.IDAlsanmeldung";
+                                        $sql = "SELECT u.`id`, `name`,`img`, `email`, `role`,a.anmeldenals FROM `users` u JOIN `anmeldenals` a ON u.role_id=a.idanmeldenals";
                                         //echo $sql;
                                         $conn = $GLOBALS['con'];
                                         $result = mysqli_query($conn, $sql);
@@ -129,7 +139,7 @@
                                                     </div>
                                                 </td>
                                                 <td><?php echo $row['email']; ?></td>
-                                                <td><?php echo $row['Anmeldenals']; ?></td>
+                                                <td><?php echo $row['anmeldenals']; ?></td>
                                                 <td>
                                                     <div class="d-flex align-items-center">
                                                         <div class="badge badge-success badge-dot m-r-10"></div>
@@ -142,6 +152,11 @@
                                                         href="manage_user.php?key=<?php echo $row['id']; ?>"
                                                         class="btn btn-icon btn-hover btn-sm btn-rounded pull-right"><i
                                                             class="anticon anticon-edit"></i></a>
+                                                    <a data-toggle="tooltip" data-placement="top" title="Passwort zurücksetzen"
+                                                        onclick="return confirm('Sind Sie sicher, dass Sie dieses Element löschen möchten?');"
+                                                        href="control/users_process.php?key=<?php echo $row['id']; ?>&action=reset"
+                                                        class="btn btn-icon btn-hover btn-sm btn-rounded"><i
+                                                            class="anticon anticon-reload"></i></a>
                                                     <a data-toggle="tooltip" data-placement="top" title="Benutzer löschen"
                                                         onclick="return confirm('Sind Sie sicher, dass Sie dieses Element löschen möchten?');"
                                                         href="control/users_process.php?key=<?php echo $row['id']; ?>&action=delete"
