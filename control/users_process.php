@@ -69,7 +69,7 @@ if ($action == 'edit') {
 
   }
 
-  header("location: ../users.php?msg=" . ($result ? "4" : "3"));
+  header("location: ../". (($session_urole==1) ? "users" : "extinguishers").".php?msg=" . ($result ? "4" : "3"));
 }
 
 if ($action == 'delete') {
