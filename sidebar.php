@@ -2,14 +2,14 @@
 <div class="side-nav">
     <div class="side-nav-inner">
         <ul class="side-nav-menu scrollable">
-            <li class="nav-item dropdown">
+            <!-- <li class="nav-item dropdown">
                 <a class="dropdown-toggle" href="dashboard.php">
                     <span class="icon-holder">
                         <i class="anticon anticon-dashboard"></i>
                     </span>
                     <span class="title">Instrumententafel</span>
                 </a>
-            </li>
+            </li> -->
 
             <?php if ($session_urole == 2) { ?>
 
@@ -118,9 +118,9 @@
                         <li>
                             <a href="extinguishers.php">Verwalten</a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="manage_extinguisher.php">Hinzufügen</a>
-                        </li>
+                        </li> -->
                     </ul>
                 </li>
             <?php } ?>
@@ -135,7 +135,7 @@
             <li class="nav-item dropdown">
                 <a class="dropdown-toggle" href="logout.php">
                     <span class="icon-holder">
-                        <i class="anticon anticon-lock"></i>
+                        <i class="anticon anticon-logout"></i>
                     </span>
                     <span class="title">Abmelden</span>
                 </a>

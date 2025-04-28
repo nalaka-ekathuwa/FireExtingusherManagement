@@ -108,11 +108,6 @@
                                             <th>Plz</th>
                                             <th>Ort</th>
                                             <th>Ortauswahl</th>
-                                            <th>HandyFirma</th>
-                                            <th>HandyPrivat</th>
-                                            <th>TelefonFirma</th>
-                                            <th>TelefonPrivat</th>
-                                            <th>Fax</th>
                                             <th>Next Test</th>
                                             <th></th>
                                         </tr>
@@ -120,7 +115,7 @@
                                     <tbody>
                                         <?php
                                         //get Instrument Rating detials
-                                        $sql = "SELECT * FROM `kundenadressen`";
+                                        $sql = "SELECT idkunde,Anrede,Vorname,Nachname,Nr,Plz,Ort,Ortauswahl,naechstepruefung FROM `kundenadressen`";
                                         //echo $sql;
                                         $conn = $GLOBALS['con'];
                                         $result = mysqli_query($conn, $sql);
@@ -130,21 +125,19 @@
                                             //    $availability = ($row['safe_off_availability'] =='10')?'Available':'Not Available';
                                             ?>
                                             <tr>
-                                                <td><?php echo $no++; ?></td>
-                                                <!-- <td><?php echo $row['IDWartungspersonal']; ?></td>
-                                                <td><?php echo $row['IDFirma']; ?></td> -->
+                                                <!-- <td><?php echo $no++; ?></td> -->
+                                                <!-- <td><?php echo $row['IDWartungspersonal']; ?></td> -->
+                                                <td><?php echo $row['idkunde']; ?></td>
                                                 <td><?php echo $row['Anrede'] . '. ' . $row['Vorname'] . ' ' . $row['Nachname']; ?>
                                                 </td>
                                                 <td><?php echo $row['Nr']; ?></td>
                                                 <td><?php echo $row['Plz']; ?></td>
                                                 <td><?php echo $row['Ort']; ?></td>
                                                 <td><?php echo $row['Ortauswahl']; ?></td>
-                                                <td><?php echo $row['HandyFirma']; ?></td>
-                                                <td><?php echo $row['HandyPrivat']; ?></td>
-                                                <td><?php echo $row['TelefonFirma']; ?></td>
-                                                <td><?php echo $row['TelefonPrivat']; ?></td>
-                                                <td><?php echo $row['Fax']; ?></td>
-                                                <td><?php echo $row['NächstePrüfung']; ?></td>
+                                                <td><?php if (!empty($row['naechstepruefung'])) {
+                                                        $dt = new DateTime($row['naechstepruefung']);
+                                                        echo $dt->format('m/d/Y');
+                                                    } ?></td>
                                                 <!-- <td>
                                                     <div class="d-flex align-items-center">
                                                         <div class="badge badge-<?php // echo $badge; ?> badge-dot m-r-10"></div>
@@ -153,13 +146,13 @@
                                                 </td> -->
                                                 <td class="text-right">
                                                     <a data-toggle="tooltip" data-placement="top" title="Kunden bearbeiten"
-                                                        href="manage_customer.php?key=<?php echo $row['IDKunde']; ?>"
+                                                        href="manage_customer.php?key=<?php echo $row['idkunde']; ?>"
                                                         class="btn btn-icon btn-hover btn-sm btn-rounded pull-right"><i
                                                             class="anticon anticon-edit"></i></a>
 
                                                     <a data-toggle="tooltip" data-placement="top" title="Kunden löschen"
                                                         onclick="return confirm('Bist du sicher, dass du dieses Element löschen möchtest?');"
-                                                        href="control/customer_process.php?key=<?php echo $row['IDKunde']; ?>&action=delete"
+                                                        href="control/customer_process.php?key=<?php echo $row['idkunde']; ?>&action=delete"
                                                         class="btn btn-icon btn-hover btn-sm btn-rounded"><i
                                                             class="anticon anticon-delete"></i></a>
                                                 </td>

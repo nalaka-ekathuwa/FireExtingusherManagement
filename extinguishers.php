@@ -90,11 +90,11 @@
                                     <?php isset($_GET['msg']) ? displayAlert() : ''; ?>
 
                                 </div>
-                                <div class="col-lg-4 text-right">
+                                <!-- <div class="col-lg-4 text-right">
                                     <a href="manage_extinguisher.php" class="btn btn-primary">
                                         <i class="anticon anticon-plus-square m-r-5"></i>Feuerlöscher hinzufügen
                                     </a>
-                                </div>
+                                </div> -->
                             </div>
 
                             <div class="table-responsive">
@@ -102,10 +102,10 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Löschmittel</th>
+                                            <th>Loeschmittel</th>
                                             <th>Datumangelegt</th>
                                             <th>Anzahl</th>
-                                            <th>Artikel</th>
+                                            <th>Hersteller</th>
                                             <th>Typ</th>
                                             <th>Inhalt</th>
                                             <th>BJ</th>
@@ -116,13 +116,13 @@
                                     <tbody>
                                         <?php
                                         //get Instrument Rating detials
-                                        $sql = "SELECT * FROM `kundenbestand`";
+                                        $sql = "SELECT idkundenbestand,fotofeuerloescher,loeschmittel,datumangelegt,anzahl,hersteller,typ,inhalt,bj,befund FROM `kundenbestand`";
                                         //echo $sql;
                                         $conn = $GLOBALS['con'];
                                         $result = mysqli_query($conn, $sql);
                                         $no = 1;
                                         while ($row = mysqli_fetch_assoc($result)) {
-                                            $image = !empty($row['FotoFeuerlöscher']) ? $row['FotoFeuerlöscher'] : 'assets/images/extinguisher/dummy_ext.jpg';
+                                            $image = !empty($row['fotofeuerloescher']) ? $row['fotofeuerloescher'] : 'assets/images/extinguisher/dummy_ext.jpg';
                                             ?>
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
@@ -131,17 +131,17 @@
                                                         <div class="avatar avatar-image avatar-sm m-r-10">
                                                             <img src="<?php echo $image; ?>" alt="">
                                                         </div>
-                                                        <h6 class="m-b-0"><?php echo '(' . $row['Löschmittel'] . ')'; ?>
+                                                        <h6 class="m-b-0"><?php echo '(' . $row['loeschmittel'] . ')'; ?>
                                                         </h6>
                                                     </div>
                                                 </td>
-                                                <td><?php echo $row['Datumangelegt']; ?></td>
-                                                <td><?php echo $row['Anzahl']; ?></td>
-                                                <td><?php echo $row['Artikel']; ?></td>
-                                                <td><?php echo $row['Typ']; ?></td>
-                                                <td><?php echo $row['Inhalt']; ?></td>
-                                                <td><?php echo $row['BJ']; ?></td>
-                                                <td><?php echo $row['Befund']; ?></td>
+                                                <td><?php echo $row['datumangelegt']; ?></td>
+                                                <td><?php echo $row['anzahl']; ?></td>
+                                                <td><?php echo $row['hersteller']; ?></td>
+                                                <td><?php echo $row['typ']; ?></td>
+                                                <td><?php echo $row['inhalt']; ?></td>
+                                                <td><?php echo $row['bj']; ?></td>
+                                                <td><?php echo $row['befund']; ?></td>
                                                 <!-- <td>
                                                     <div class="d-flex align-items-center">
                                                         <div class="badge badge-success badge-dot m-r-10"></div>
@@ -151,13 +151,13 @@
                                                 <td class="text-right">
                                                     <a data-toggle="tooltip" data-placement="top"
                                                         title="Feuerlöscher bearbeiten"
-                                                        href="manage_extinguisher.php?key=<?php echo $row['IDKundenbestand']; ?>"
+                                                        href="manage_extinguisher.php?key=<?php echo $row['idkundenbestand']; ?>"
                                                         class="btn btn-icon btn-hover btn-sm btn-rounded pull-right"><i
                                                             class="anticon anticon-edit"></i></a>
                                                     <a data-toggle="tooltip" data-placement="top"
                                                         title="Feuerlöscher löschen"
                                                         onclick="return confirm('Bist du sicher, dass du dieses Element löschen möchtest?');"
-                                                        href="control/extinguishers_process.php?key=<?php echo $row['IDKundenbestand']; ?>&action=delete"
+                                                        href="control/extinguishers_process.php?key=<?php echo $row['idkundenbestand']; ?>&action=delete"
                                                         class="btn btn-icon btn-hover btn-sm btn-rounded"><i
                                                             class="anticon anticon-delete"></i></a>
                                                 </td>

@@ -58,14 +58,14 @@
                                                     <option value="" selected disabled>Choose...</option>
                                                     <?php
                                                     //get User Roles
-                                                    $sql1 = "SELECT * FROM `alsanmeldung`";
+                                                    $sql1 = "SELECT * FROM `anmeldenals`";
                                                     //echo $sql;
                                                     $conn = $GLOBALS['con'];
                                                     $result1 = mysqli_query($conn, $sql1);
                                                     while ($row1 = mysqli_fetch_assoc($result1)) {
                                                         ?>
-                                                        <option value="<?php echo $row1['IDAlsanmeldung']; ?>">
-                                                            <?php echo $row1['Anmeldenals']; ?>
+                                                        <option value="<?php echo $row1['idanmeldenals']; ?>">
+                                                            <?php echo $row1['anmeldenals']; ?>
                                                         </option> <?php } ?>
                                                 </select>
                                             </div>
