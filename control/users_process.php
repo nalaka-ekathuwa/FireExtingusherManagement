@@ -69,7 +69,7 @@ if ($action == 'edit') {
 
   }
 
-  header("location: ../". (($session_urole==1) ? "dashboard" : "extinguishers").".php?msg=" . ($result ? "4" : "3"));
+  header("location: ../users.php?msg=" . ($result ? "4" : "3"));
 }
 
 if ($action == 'delete') {
@@ -118,5 +118,33 @@ if ($action == 'reset') {
   $result = mysqli_query($conn, $sql);
 
   header("location: ../users.php?msg=" . ($result ? "7" : "8"));
+
+}
+
+
+if ($action == 'change') {
+
+  // echo '<pre>';
+  // var_dump($_POST);
+  // echo '<pre>';
+  //   exit;
+  $key = $conn->real_escape_string($_POST['key']);
+  $old = $conn->real_escape_string($_POST['old']);
+  $inputPassword = $conn->real_escape_string($_POST['inputPassword']);
+  $confirm = $conn->real_escape_string($_POST['confirm']);
+  $old_hash = $conn->real_escape_string($_POST['old_hash']);
+
+  $hashed_new = password_hash($inputPassword, PASSWORD_DEFAULT);
+
+  if (password_verify($old, $old_hash)) {
+
+  $sql = "UPDATE `users` SET `password`='$hashed_new' WHERE `id` = $key";
+  // echo $sql; exit;
+  $result = mysqli_query($conn, $sql);
+  header("location: ../manage_password.php?key=".$key."&msg=9");
+  }else{
+
+    header("location: ../manage_password.php?key=".$key."&msg=10");
+  }
 
 }

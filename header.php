@@ -20,13 +20,13 @@ if (empty($_SESSION["user_id"])) {
 <!-- Header START -->
 <div class="header">
     <div class="logo logo-dark">
-        <a href="index.html">
+        <a href="#">
             <img src="assets/images/logo/logo.png" alt="Logo">
             <img class="logo-fold" src="assets/images/logo/logo-fold.png" alt="Logo">
         </a>
     </div>
     <div class="logo logo-white">
-        <a href="index.html">
+        <a href="#">
             <img src="assets/images/logo/logo-white.png" alt="Logo">
             <img class="logo-fold" src="assets/images/logo/logo-fold-white.png" alt="Logo">
         </a>
@@ -143,15 +143,15 @@ if (empty($_SESSION["user_id"])) {
                         </div>
                     </a>
 
-                    <!-- <a href="javascript:void(0);" class="dropdown-item d-block p-h-15 p-v-10">
+                    <a href="manage_password.php?key=<?php echo $sesssion_uid; ?>;" class="dropdown-item d-block p-h-15 p-v-10">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
-                                <i class="anticon opacity-04 font-size-16 anticon-project"></i>
-                                <span class="m-l-10">Projects</span>
+                                <i class="anticon opacity-04 font-size-16 anticon-lock"></i>
+                                <span class="m-l-10">Change Password</span>
                             </div>
                             <i class="anticon font-size-10 anticon-right"></i>
                         </div>
-                    </a> -->
+                    </a>
                     <a href="logout.php" class="dropdown-item d-block p-h-15 p-v-10">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>

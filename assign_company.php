@@ -81,14 +81,14 @@
                                                     <option value="" selected disabled>Choose...</option>
                                                     <?php
                                                     //get User Roles
-                                                    $sql1 = "SELECT u.*, a.Anmeldenals FROM `users` u  JOIN `alsanmeldung` a ON u.role_id=a.IDAlsanmeldung";
+                                                    $sql1 = "SELECT u.*, a.anmeldenals FROM `users` u  JOIN `anmeldenals` a ON u.role_id=a.idanmeldenals";
                                                     //echo $sql;
                                                     $conn = $GLOBALS['con'];
                                                     $result1 = mysqli_query($conn, $sql1);
                                                     while ($row1 = mysqli_fetch_assoc($result1)) {
                                                         ?>
                                                         <option value="<?php echo $row1['id']; ?>">
-                                                            <?php echo $row1['name']. ' | '.$row1['Anmeldenals']; ?></option> <?php } ?>
+                                                            <?php echo $row1['name']. ' | '.$row1['anmeldenals']; ?></option> <?php } ?>
                                                 </select>
 
                                                 <!-- <label for="in_name">Benutzerrolle</label>
@@ -101,14 +101,14 @@
                                                     <option value="" selected disabled>Choose...</option>
                                                     <?php
                                                     //get User Roles
-                                                    $sql2 = "SELECT IDKunde,Anrede,Nachname,Vorname FROM `kundenadressen`";
+                                                    $sql2 = "SELECT idkunde,anrede,nachname,vorname FROM `kundenadressen`";
                                                     //echo $sql;
                                                     $conn = $GLOBALS['con'];
                                                     $result2 = mysqli_query($conn, $sql2);
                                                     while ($row2 = mysqli_fetch_assoc($result2)) {
                                                         ?>
-                                                        <option value="<?php echo $row2['IDKunde']; ?>">
-                                                            <?php echo $row2['Anrede'].' '.$row2['Vorname'].' '.$row2['Nachname']; ?></option> <?php } ?>
+                                                        <option value="<?php echo $row2['idkunde']; ?>">
+                                                            <?php echo $row2['anrede'].' '.$row2['vorname'].' '.$row2['nachname']; ?></option> <?php } ?>
                                                 </select>
                                                 
                                             </div>
@@ -138,7 +138,7 @@
                                     <tbody>
                                         <?php
                                         //get Instrument Rating detials
-                                        $sql = "SELECT l.id, u.name,u.role_id,u.img,k.IDKunde,k.Anrede,k.Nachname,k.Vorname,k.Ortauswahl,k.Kundennummer FROM `user_logins` l JOIN users u ON l.user_id=u.id JOIN kundenadressen k ON k.IDKunde=l.company_id";
+                                        $sql = "SELECT l.id, u.name,u.role_id,u.img,k.idkunde,k.anrede,k.nachname,k.vorname,k.ortauswahl,k.kundennummer FROM `user_logins` l JOIN users u ON l.user_id=u.id JOIN kundenadressen k ON k.IDKunde=l.company_id";
                                         //echo $sql;
                                         $conn = $GLOBALS['con'];
                                         $result = mysqli_query($conn, $sql);
@@ -157,17 +157,17 @@
                                                     </div>
                                                 </td>
                                                 <!-- <td><?php echo $row['role_id']; ?></td> -->
-                                                <td><?php echo $row['IDKunde']; ?></td>
-                                                <td><?php echo $row['Kundennummer']; ?></td>
-                                                <td><?php echo $row['Anrede'].' '.$row['Vorname'].' '.$row['Nachname']; ?></td>
+                                                <td><?php echo $row['idkunde']; ?></td>
+                                                <td><?php echo $row['kundennummer']; ?></td>
+                                                <td><?php echo $row['anrede'].' '.$row['vorname'].' '.$row['nachname']; ?></td>
                                                 <td>
                                                     <div class="d-flex align-items-center">
                                                         <div class="badge badge-success badge-dot m-r-10"></div>
-                                                        <div><?php echo $row['Ortauswahl']; ?></div>
+                                                        <div><?php echo $row['ortauswahl']; ?></div>
                                                     </div>
                                                 </td>
                                                 <td class="text-right">
-                                                    <a onclick="return confirm('Are you sure you want to delete this item?');"
+                                                    <a onclick="return confirm('Bist du sicher, dass du dieses Element löschen möchtest?');"
                                                         href="control/users_process.php?key=<?php echo $row['id']; ?>&action=remove"
                                                         class="btn btn-icon btn-hover btn-sm btn-rounded"><i
                                                             class="anticon anticon-delete"></i></a>
