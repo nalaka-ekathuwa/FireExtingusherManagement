@@ -71,7 +71,7 @@
                                             </div>
                                             <div class="form-group col-md-7">
                                                 <label for="kundennummer">Kundennummer</label>
-                                                <input name="kundennummer" type="text" class="form-control"
+                                                <input name="kundennummer" type="number" class="form-control"
                                                     id="kundennummer" placeholder="Kundennummer"
                                                     value="<?php echo isset($_GET['key']) ? $row['kundennummer'] : ''; ?>"
                                                     required>
@@ -86,7 +86,7 @@
                                             </div>
                                             <div class="form-group col-md-7">
                                                 <label for="nr">Nr </label>
-                                                <input name="nr" type="text" class="form-control" id="nr"
+                                                <input name="nr" type="number" class="form-control" id="nr"
                                                     placeholder="Nr"
                                                     value="<?php echo isset($_GET['key']) ? $row['nr'] : ''; ?>">
                                             </div>
@@ -94,7 +94,7 @@
                                         <div class="form-row">
                                             <div class="form-group col-md-5">
                                                 <label for="plz">Plz</label>
-                                                <input name="plz" type="text" class="form-control" id="plz"
+                                                <input name="plz" type="number" class="form-control" id="plz"
                                                     value="<?php echo isset($_GET['key']) ? $row['plz'] : ''; ?>">
                                             </div>
                                             <div class="form-group col-md-7">
@@ -156,20 +156,6 @@
                                                 <input name="emailp" type="email" class="form-control" id="emailp"
                                                     placeholder="E-Mail"
                                                     value="<?php echo isset($_GET['key']) ? $row['emailp'] : ''; ?>">
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-5">
-                                                <label for="ortauswahl">Ortauswahl</label>
-                                                <input name="ortauswahl" type="text" class="form-control"
-                                                    id="ortauswahl"
-                                                    value="<?php echo isset($_GET['key']) ? $row['ortauswahl'] : ''; ?>">
-                                            </div>
-                                            <div class="form-group col-md-7">
-                                                <label for="kontaktperson">Kontaktperson</label>
-                                                <input name="kontaktperson" type="text" class="form-control"
-                                                    id="kontaktperson" placeholder="Kontaktperson"
-                                                    value="<?php echo isset($_GET['key']) ? $row['kontaktperson'] : ''; ?>">
                                             </div>
                                         </div>
                                         <div class="form-row">

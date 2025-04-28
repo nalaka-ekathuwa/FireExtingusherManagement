@@ -97,8 +97,21 @@
                                 </div> -->
                             </div>
 
+                            <div class="form-row">
+                                <!-- <div class="col">
+                                    <input type="text" class="form-control" placeholder="First name">
+                                </div> -->
+                                <div class="col">
+                                    <input type="text" id="customSearchInput" class="form-control"
+                                        placeholder="Search Feuerlöscher..." />
+                                </div>
+                                <div class="col">
+                                    <button id="searchButton" class="btn btn-primary m-l-10">Search</button>
+                                </div>
+                            </div><br><br>
+
                             <div class="table-responsive">
-                                <table class="table table-hover e-commerce-table">
+                                <table id="extinguisherTable" class="table table-hover ">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -113,57 +126,7 @@
                                             <th></th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <?php
-                                        //get Instrument Rating detials
-                                        $sql = "SELECT idkundenbestand,fotofeuerloescher,loeschmittel,datumangelegt,anzahl,hersteller,typ,inhalt,bj,befund FROM `kundenbestand`";
-                                        //echo $sql;
-                                        $conn = $GLOBALS['con'];
-                                        $result = mysqli_query($conn, $sql);
-                                        $no = 1;
-                                        while ($row = mysqli_fetch_assoc($result)) {
-                                            $image = !empty($row['fotofeuerloescher']) ? $row['fotofeuerloescher'] : 'assets/images/extinguisher/dummy_ext.jpg';
-                                            ?>
-                                            <tr>
-                                                <td><?php echo $no++; ?></td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar avatar-image avatar-sm m-r-10">
-                                                            <img src="<?php echo $image; ?>" alt="">
-                                                        </div>
-                                                        <h6 class="m-b-0"><?php echo '(' . $row['loeschmittel'] . ')'; ?>
-                                                        </h6>
-                                                    </div>
-                                                </td>
-                                                <td><?php echo $row['datumangelegt']; ?></td>
-                                                <td><?php echo $row['anzahl']; ?></td>
-                                                <td><?php echo $row['hersteller']; ?></td>
-                                                <td><?php echo $row['typ']; ?></td>
-                                                <td><?php echo $row['inhalt']; ?></td>
-                                                <td><?php echo $row['bj']; ?></td>
-                                                <td><?php echo $row['befund']; ?></td>
-                                                <!-- <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="badge badge-success badge-dot m-r-10"></div>
-                                                        <div>Approved</div>
-                                                    </div>
-                                                </td> -->
-                                                <td class="text-right">
-                                                    <a data-toggle="tooltip" data-placement="top"
-                                                        title="Feuerlöscher bearbeiten"
-                                                        href="manage_extinguisher.php?key=<?php echo $row['idkundenbestand']; ?>"
-                                                        class="btn btn-icon btn-hover btn-sm btn-rounded pull-right"><i
-                                                            class="anticon anticon-edit"></i></a>
-                                                    <a data-toggle="tooltip" data-placement="top"
-                                                        title="Feuerlöscher löschen"
-                                                        onclick="return confirm('Bist du sicher, dass du dieses Element löschen möchtest?');"
-                                                        href="control/extinguishers_process.php?key=<?php echo $row['idkundenbestand']; ?>&action=delete"
-                                                        class="btn btn-icon btn-hover btn-sm btn-rounded"><i
-                                                            class="anticon anticon-delete"></i></a>
-                                                </td>
-                                            </tr>
-                                        <?php } ?>
-                                    </tbody>
+
                                 </table>
                             </div>
                         </div>
@@ -179,6 +142,35 @@
         </div>
     </div>
     <?php include 'foot.php'; ?>
+    <script>
+        $('#extinguisherTable').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "url": "fetch_extinguisher.php",
+                "data": function (d) {
+                    d.customSearch = $('#customSearchInput').val();
+                }
+            },
+            "searching": false, // disable default search box
+            "columns": [
+                { "data": "no" },
+                { "data": "loeschmittel" },
+                { "data": "datumangelegt" },
+                { "data": "anzahl" },
+                { "data": "hersteller" },
+                { "data": "typ" },
+                { "data": "inhalt" },
+                { "data": "bj" },
+                { "data": "befund" },
+                { "data": "action" }
+            ]
+        });
+
+        $('#searchButton').click(function () {
+            $('#extinguisherTable').DataTable().ajax.reload();
+        });
+    </script>
 </body>
 
 </html>

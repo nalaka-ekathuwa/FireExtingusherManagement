@@ -103,11 +103,11 @@
                                             <th>No</th>
                                             <th>Kundenname</th>
                                             <th>Ortauswahl</th>
-                                            <th>Löschmittel</th>
+                                            <th>Loeschmittel</th>
                                             <!-- <th>Datumangelegt</th> -->
-                                            <th>Geprüft am</th>
+                                            <th>Geprue ftam</th>
                                             <th>Nächste Prüfung</th>
-                                            <th>Artikel</th>
+                                            <th>Hersteller</th>
                                             <th>Typ</th>
                                             <!-- <th>Inhalt</th> -->
                                             <th>BJ</th>
@@ -118,7 +118,8 @@
                                     <tbody>
                                         <?php
                                         //get Instrument Rating detials
-                                        $sql = "SELECT k.* , e.* FROM `user_logins` u JOIN kundenadressen k ON u.company_id=k.IDKunde JOIN `kundenbestand` e ON e.IDKunde=u.company_id WHERE u.user_id = '$sesssion_uid' ";
+                                        $sql = "SELECT k.idkunde,k.nachname ,k.anrede ,k.vorname ,k.ortauswahl ,k.geprueftam ,k.naechstepruefung,
+                                        e.idkundenbestand,e.loeschmittel,e.hersteller,e.typ,e.inhalt,e.bj,e.beschreibungstandort FROM `user_logins` u JOIN kundenadressen k ON u.company_id=k.idkunde JOIN `kundenbestand` e ON e.idkunde=u.company_id WHERE u.user_id = '$sesssion_uid' ";
                                         // echo $sql;
                                         $conn = $GLOBALS['con'];
                                         $result = mysqli_query($conn, $sql);
@@ -127,27 +128,24 @@
                                             ?>
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
-                                                <td><?php echo $row['Anrede'] . '. ' . $row['Vorname'] . ' ' . $row['Nachname']; ?>
+                                                <td><?php echo $row['anrede'] . '. ' . $row['vorname'] . ' ' . $row['nachname']; ?>
                                                 </td>
-                                                <td><?php echo $row['Ortauswahl']; ?></td>
-                                                <td><?php echo $row['Löschmittel']; ?></td>
-                                                <!-- <td><?php echo (new DateTime($row['Datumangelegt']))->format('m/y'); ?></td> -->
-                                                <td><?php echo (new DateTime($row['Geprüftam']))->format('m/y'); ?></td>
-                                                <td><?php echo (new DateTime($row['NächstePrüfung']))->format('m/y'); ?>
+                                                <td><?php echo $row['ortauswahl']; ?></td>
+                                                <td><?php echo $row['loeschmittel']; ?></td>
+                                                <!-- <td><?php echo (new DateTime($row['datumerinnerung']))->format('m/y'); ?></td> -->
+                                                <td><?php echo (new DateTime($row['geprueftam']))->format('m/y'); ?></td>
+                                                <td><?php echo (new DateTime($row['naechstepruefung']))->format('m/y'); ?>
                                                 </td>
-                                                <td><?php echo $row['Artikel']; ?></td>
-                                                <td><?php echo $row['Typ']; ?></td>
-                                                <!-- <td><?php echo $row['Inhalt']; ?></td> -->
-                                                <td><?php if(!is_null($row['BJ'])){
-                                                        echo (new DateTime($row['BJ']))->format('Y-m-d');
+                                                <td><?php echo $row['hersteller']; ?></td>
+                                                <td><?php echo $row['typ']; ?></td>
+                                                <!-- <td><?php echo $row['inhalt']; ?></td> -->
+                                                <td><?php if(!is_null($row['bj'])){
+                                                        echo (new DateTime($row['bj']))->format('m/y');
                                                 }  ?></td>
-                                                <td><?php echo $row['BeschreibungStandort1']; ?></td>
+                                                <td><?php echo $row['beschreibungstandort']; ?></td>
                                                 <td class="text-right">
-                                                    <!-- <a href="#" id="view_customer"   onclick="loadEquipmentTable(<?php echo $row['IDKundenbestand']; ?>)"
-                                                        class="btn btn-icon btn-hover btn-sm btn-secondary btn-rounded pull-right"><i
-                                                            class="fas fa-eye"></i></a> -->
                                                     <a data-toggle="tooltip" data-placement="top" title="Standort anzeigen"
-                                                        href="manage_extinguisher.php?key=<?php echo $row['IDKundenbestand']; ?>"
+                                                        href="manage_extinguisher.php?key=<?php echo $row['idkundenbestand']; ?>"
                                                         id="view_equipments"
                                                         class="btn btn-icon btn-hover btn-sm btn-secondary btn-rounded pull-right"><i
                                                             class="fas fa-fire-extinguisher"></i></a>
@@ -172,7 +170,6 @@
 
             </div>
             <!-- Page Container END -->
-
         </div>
     </div>
 
