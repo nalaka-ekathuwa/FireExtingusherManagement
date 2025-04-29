@@ -108,7 +108,7 @@
                                                     while ($row2 = mysqli_fetch_assoc($result2)) {
                                                         ?>
                                                         <option value="<?php echo $row2['idkunde']; ?>">
-                                                            <?php echo $row2['anrede'].' '.$row2['vorname'].' '.$row2['nachname']; ?></option> <?php } ?>
+                                                            <?php echo $row2['idkunde'].' | '.$row2['anrede'].' '.$row2['vorname'].' '.$row2['nachname']; ?></option> <?php } ?>
                                                 </select>
                                                 
                                             </div>

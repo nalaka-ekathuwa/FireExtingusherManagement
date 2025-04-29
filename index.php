@@ -90,8 +90,7 @@
                     </div>
                 </div>
                 <div class="d-none d-md-flex p-h-40 justify-content-between">
-                    <span class="">© <?php echo date("Y"); ?> <a href="https://promodesoftware.com/">Promode Software
-                            Solutions</a></span>
+                    <span class="">© <?php echo date("Y"); ?> All rights reserved</a></span>
                     <ul class="list-inline">
                         <li class="list-inline-item">
                             <a class="text-dark text-link" href="">Legal</a>

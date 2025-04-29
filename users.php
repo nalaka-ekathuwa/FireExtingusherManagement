@@ -16,9 +16,24 @@
                 $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
 
                 switch ($msg) {
+                    case '11':
+                        $alertType = 'alert-warning';
+                        $icon = 'anticon-check-o';
+                        $message = 'Duplicate email';
+                        break;
+                    case '10':
+                        $alertType = 'alert-danger';
+                        $icon = 'anticon-close-o';
+                        $message = 'Passwort war nicht changed';
+                        break;
+                    case '9':
+                        $alertType = 'alert-success';
+                        $icon = 'anticon-check-o';
+                        $message = 'Passwort changed';
+                        break;
                     case '8':
                         $alertType = 'alert-danger';
-                        $icon = 'anticon-check-o';
+                        $icon = 'anticon-close-o';
                         $message = 'Passwort war nicht rest';
                         break;
                     case '7':
@@ -152,7 +167,8 @@
                                                         href="manage_user.php?key=<?php echo $row['id']; ?>"
                                                         class="btn btn-icon btn-hover btn-sm btn-rounded pull-right"><i
                                                             class="anticon anticon-edit"></i></a>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Passwort zurücksetzen"
+                                                    <a data-toggle="tooltip" data-placement="top"
+                                                        title="Passwort zurücksetzen"
                                                         onclick="return confirm('Sind Sie sicher, dass Sie dieses Element löschen möchten?');"
                                                         href="control/users_process.php?key=<?php echo $row['id']; ?>&action=reset"
                                                         class="btn btn-icon btn-hover btn-sm btn-rounded"><i
