@@ -17,23 +17,23 @@
 
                 switch ($msg) {
                     case '11':
-                        $alertType = 'alert-danger';
+                        $alertType = 'alert-warning';
                         $icon = 'anticon-check-o';
                         $message = 'Duplicate email';
                         break;
                     case '10':
                         $alertType = 'alert-danger';
-                        $icon = 'anticon-check-o';
+                        $icon = 'anticon-close-o';
                         $message = 'Passwort war nicht changed';
                         break;
                     case '9':
-                        $alertType = 'alert-danger';
+                        $alertType = 'alert-success';
                         $icon = 'anticon-check-o';
                         $message = 'Passwort changed';
                         break;
                     case '8':
                         $alertType = 'alert-danger';
-                        $icon = 'anticon-check-o';
+                        $icon = 'anticon-close-o';
                         $message = 'Passwort war nicht rest';
                         break;
                     case '7':
