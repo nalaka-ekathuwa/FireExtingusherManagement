@@ -22,7 +22,7 @@ if ($action == 'add') {
   // Add email duplicate function
   $check = check_email($email);
 
-  if ($check) {
+  if ($check>0) {
     //duplicate email
     header("location: ../users.php?msg=11");
   } else {
@@ -54,35 +54,25 @@ if ($action == 'edit') {
   $email = $conn->real_escape_string($_POST['email']);
   $updated = date('Y-m-d h:i:sa');
 
-  // Add email duplicate function
-  $check = check_email($email);
-  if ($check) {
-    //duplicate email
-    header("location: ../users.php?msg=11");
+  $result = '';
+  if ($_FILES['img']['name'] != "") { // If a file has been uploaded
+    $img_name = $_FILES['img']['name']; // To get file name
+    $img_name_tmp = $_FILES['img']['tmp_name']; // To get file name temporary location
+    $ext = pathinfo($img_name, PATHINFO_EXTENSION);
+    $img_new = time(); //New image name
+    $path = "../assets/images/users/" . $img_new . "." . $ext; //New path to move
+    $path_db = "assets/images/users/" . $img_new . "." . $ext;
+    move_uploaded_file($img_name_tmp, $path); // To move the image to user_images folder
+
+    $sql = "UPDATE `users` SET `name`='$name',`email`='$email', `img`='$path_db' WHERE `id` = '$key'";
+    // var_dump($sql);exit;
+    
   } else {
-    //image function
-    $result = '';
-    if ($_FILES['img']['name'] != "") { // If a file has been uploaded
-      $img_name = $_FILES['img']['name']; // To get file name
-      $img_name_tmp = $_FILES['img']['tmp_name']; // To get file name temporary location
-      $ext = pathinfo($img_name, PATHINFO_EXTENSION);
-      $img_new = time(); //New image name
-      $path = "../assets/images/users/" . $img_new . "." . $ext; //New path to move
-      $path_db = "assets/images/users/" . $img_new . "." . $ext;
-      move_uploaded_file($img_name_tmp, $path); // To move the image to user_images folder
 
-      $sql = "UPDATE `users` SET `name`='$name',`email`='$email', `img`='$path_db' WHERE `id` = '$key'";
-      // var_dump($sql);exit;
-      $result = mysqli_query($conn, $sql);
-
-    } else {
-
-      $sql = "UPDATE `users` SET `name`='$name',`email`='$email' WHERE `id` = '$key'";
-      $result = mysqli_query($conn, $sql);
-
-    }
+    $sql = "UPDATE `users` SET `name`='$name',`email`='$email' WHERE `id` = '$key'";
   }
-  header("location: ../" . (($session_urole == 1) ? "users" : "extinguishers") . ".php?msg=" . ($result ? "4" : "3"));
+  $result = mysqli_query($conn, $sql);
+  header("location: ../" . (($session_urole == 1) ? "users" : "locations") . ".php?msg=" . ($result ? "4" : "3"));
 }
 
 if ($action == 'delete') {

@@ -100,12 +100,12 @@
                                 <table class="table table-hover e-commerce-table">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
-                                            <th>Kundenname</th>
-                                            <th>Ortauswahl</th>
+                                            <!-- <th>No</th> -->
+                                            <th>interne seriennummer</th>
+                                            <th>Werksende</th>
                                             <th>Loeschmittel</th>
                                             <!-- <th>Datumangelegt</th> -->
-                                            <th>Geprue ftam</th>
+                                            <th>Geprueft am</th>
                                             <th>Nächste Prüfung</th>
                                             <th>Hersteller</th>
                                             <th>Typ</th>
@@ -118,8 +118,8 @@
                                     <tbody>
                                         <?php
                                         //get Instrument Rating detials
-                                        $sql = "SELECT k.idkunde,k.nachname ,k.anrede ,k.vorname ,k.ortauswahl ,k.geprueftam ,k.naechstepruefung,
-                                        e.idkundenbestand,e.loeschmittel,e.hersteller,e.typ,e.inhalt,e.bj,e.beschreibungstandort FROM `user_logins` u JOIN kundenadressen k ON u.company_id=k.idkunde JOIN `kundenbestand` e ON e.idkunde=u.company_id WHERE u.user_id = '$sesssion_uid' ";
+                                        $sql = "SELECT k.idkunde,k.nachname ,k.anrede ,k.vorname ,e.werksende ,k.geprueftam ,k.naechstepruefung,
+                                        e.interneseriennummer,e.idkundenbestand,e.loeschmittel,e.hersteller,e.typ,e.inhalt,e.bj,e.beschreibungstandort FROM `user_logins` u JOIN kundenadressen k ON u.company_id=k.idkunde JOIN `kundenbestand` e ON e.idkunde=u.company_id WHERE u.user_id = '$sesssion_uid' ";
                                         // echo $sql;
                                         $conn = $GLOBALS['con'];
                                         $result = mysqli_query($conn, $sql);
@@ -127,25 +127,30 @@
                                         while ($row = mysqli_fetch_assoc($result)) {
                                             ?>
                                             <tr>
-                                                <td><?php echo $no++; ?></td>
-                                                <td><?php echo $row['anrede'] . '. ' . $row['vorname'] . ' ' . $row['nachname']; ?>
-                                                </td>
-                                                <td><?php echo $row['ortauswahl']; ?></td>
+                                                <!-- <td><?php echo $no++; ?></td> -->
+                                                <td><?php echo $row['interneseriennummer']; ?></td>
+                                                <!-- <td><?php echo $row['werksende']; ?></td> -->
+                                                <td><?php if(!is_null($row['werksende'])){
+                                                        echo (new DateTime($row['werksende']))->format('m/y');
+                                                }  ?></td>
                                                 <td><?php echo $row['loeschmittel']; ?></td>
-                                                <!-- <td><?php echo (new DateTime($row['datumerinnerung']))->format('m/y'); ?></td> -->
-                                                <td><?php echo (new DateTime($row['geprueftam']))->format('m/y'); ?></td>
-                                                <td><?php echo (new DateTime($row['naechstepruefung']))->format('m/y'); ?>
-                                                </td>
+                                                <td><?php if(!is_null($row['geprueftam'])){
+                                                        echo (new DateTime($row['geprueftam']))->format('m/y');
+                                                }  ?></td>
+                                                <td><?php if(!is_null($row['naechstepruefung'])){
+                                                        echo (new DateTime($row['naechstepruefung']))->format('m/y');
+                                                }  ?></td>
+                                                
                                                 <td><?php echo $row['hersteller']; ?></td>
                                                 <td><?php echo $row['typ']; ?></td>
                                                 <!-- <td><?php echo $row['inhalt']; ?></td> -->
                                                 <td><?php if(!is_null($row['bj'])){
-                                                        echo (new DateTime($row['bj']))->format('m/y');
+                                                        echo (new DateTime($row['bj']))->format('Y');
                                                 }  ?></td>
                                                 <td><?php echo $row['beschreibungstandort']; ?></td>
                                                 <td class="text-right">
                                                     <a data-toggle="tooltip" data-placement="top" title="Standort anzeigen"
-                                                        href="manage_extinguisher.php?key=<?php echo $row['idkundenbestand']; ?>"
+                                                        href="manage_locations.php?key=<?php echo $row['idkundenbestand']; ?>"
                                                         id="view_equipments"
                                                         class="btn btn-icon btn-hover btn-sm btn-secondary btn-rounded pull-right"><i
                                                             class="fas fa-fire-extinguisher"></i></a>

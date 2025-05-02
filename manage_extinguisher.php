@@ -24,7 +24,7 @@
             if (isset($_GET['key'])) {
                 $key = $_GET['key'];
                 $action = 'edit';
-                $sql = "SELECT k.*, l.img as img, l.gps , c.anrede, c.vorname, c.nachname, c.kontaktperson, c.naechstepruefung, c.handyfirma, c.telefonfirma, c.ortauswahl,c.emailp,c.geprueftam FROM `kundenbestand` k JOIN kundenadressen c ON k.idkunde=c.idkunde  LEFT JOIN `location` l ON k.idkundenbestand=l.ext_id  WHERE k.idkundenbestand =$key";
+                $sql = "SELECT k.*, l.img as img, l.gps , c.plz,  c.anrede, c.vorname, c.nachname, c.kontaktperson, c.naechstepruefung, c.handyfirma, c.telefonfirma, c.ortauswahl,c.emailp,c.geprueftam FROM `kundenbestand` k JOIN kundenadressen c ON k.idkunde=c.idkunde  LEFT JOIN `location` l ON k.idkundenbestand=l.ext_id  WHERE k.idkundenbestand =$key";
                 echo $sql;
                 $conn = $GLOBALS['con'];
                 $result = mysqli_query($conn, $sql);
@@ -82,8 +82,8 @@
                                             <p class="text-opacity font-size-13">Kontaktperson -
                                                 <?php echo isset($_GET['key']) ? $row['kontaktperson'] : ''; ?>
                                             </p>
-                                            <p class="text-dark m-b-20">NächstePrüfung -
-                                                <?php echo isset($_GET['key']) ? $row['naechstepruefung'] : ''; ?>
+                                            <p class="text-dark m-b-20">PLZ -
+                                                <?php echo isset($_GET['key']) ? $row['plz'] : ''; ?>
                                             </p>
                                         </div>
                                     </div>
@@ -385,17 +385,17 @@
                                                     } ?>">
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="beschreibungstandort1">Kurz Beschreibung </label>
-                                                <input name="beschreibungstandort1" type="text" class="form-control"
-                                                    id="beschreibungstandort1"
-                                                    value="<?php echo isset($_GET['key']) ? $row['beschreibungstandort1'] : ''; ?>">
+                                                <label for="beschreibungstandort">Kurz Beschreibung </label>
+                                                <input name="beschreibungstandort" type="text" class="form-control"
+                                                    id="beschreibungstandort"
+                                                    value="<?php echo isset($_GET['key']) ? $row['beschreibungstandort'] : ''; ?>">
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
-                                                <label for="beschreibungstandort">Beschreibungstandort</label>
-                                                <textarea name="beschreibungstandort"
-                                                    class="form-control"><?php echo isset($_GET['key']) ? $row['beschreibungstandort'] : ''; ?></textarea>
+                                                <label for="beschreibungstandort1">Beschreibungstandort</label>
+                                                <textarea name="beschreibungstandort1"
+                                                    class="form-control"><?php echo isset($_GET['key']) ? $row['beschreibungstandort1'] : ''; ?></textarea>
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label for="gps">gps</label>

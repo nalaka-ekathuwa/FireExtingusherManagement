@@ -44,6 +44,7 @@ if ($action == 'edit') {
 
   // echo '<pre>';
   // var_dump($_POST);
+  // var_dump($_FILES['fotofeuerloescher']['name']);
   // echo '<pre>';
   // exit;
   $key = $conn->real_escape_string($_POST['key']);
@@ -61,7 +62,6 @@ if ($action == 'edit') {
   //image function
 
   $hasImage = ($_FILES['fotofeuerloescher']['name'] != "");
-  $has_Interneseriennummer = ($session_urole==1);
   $path_db = null;
   // echo $hasImage; exit;
   if ($hasImage) {
@@ -76,12 +76,9 @@ if ($action == 'edit') {
 
   // Common kundenbestand SQL
   $kundenbestand_fields = "`beschreibungstandort1`='$beschreibungstandort1',
-   `beschreibungstandort`='$beschreibungstandort', `gps`='$gps'";
+   `beschreibungstandort`='$beschreibungstandort', `gps`='$gps', `interneseriennummer`='$interneseriennummer'";
   if ($hasImage) {
     $kundenbestand_fields .= ", `fotofeuerloescher`='$path_db'";
-  }
-  if ($has_Interneseriennummer) {
-    $kundenbestand_fields .= ", `interneseriennummer`='$interneseriennummer'";
   }
   $sql = "UPDATE `kundenbestand` SET $kundenbestand_fields WHERE `idkundenbestand` = '$key'";
   $result = mysqli_query($conn, $sql);
@@ -108,5 +105,46 @@ if ($action == 'delete') {
   $result = mysqli_query($conn, $sql);
 
   header("location: ../extinguishers.php?msg=" . ($result ? "5" : "6"));
+
+}
+
+
+if ($action == 'update') {
+
+  // echo '<pre>';
+  // var_dump($_POST);
+  // var_dump($_FILES['foto1']['name']);
+  // echo '<pre>';
+  // exit;
+
+  $key = $conn->real_escape_string($_POST['key']);
+  $interneseriennummer =  isset($_POST['interneseriennummer'])?$conn->real_escape_string($_POST['interneseriennummer']):'';
+  $beschreibungstandort = $conn->real_escape_string($_POST['beschreibungstandort']);
+  $beschreibungstandort1 = $conn->real_escape_string($_POST['beschreibungstandort1']);
+
+  $hasImage = ($_FILES['foto1']['name'] != "");
+  $path_db = null;
+
+  if ($hasImage) {
+    $img_name = $_FILES['foto1']['name'];
+    $img_name_tmp = $_FILES['foto1']['tmp_name'];
+    $ext = pathinfo($img_name, PATHINFO_EXTENSION);
+    $img_new = time();
+    $path = "../assets/images/damages/" . $img_new . "." . $ext;
+    $path_db = "assets/images/damages/" . $img_new . "." . $ext;
+    move_uploaded_file($img_name_tmp, $path);
+  }
+
+   // Common kundenbestand SQL
+   $kundenbestand_fields = "`beschreibungstandort1`='$beschreibungstandort1',
+   `beschreibungstandort`='$beschreibungstandort', `interneseriennummer`='$interneseriennummer'";
+
+  if ($hasImage) {
+    $kundenbestand_fields .= ", `foto1`='$path_db'";
+  }
+
+  $sql = "UPDATE `kundenbestand` SET $kundenbestand_fields WHERE `idkundenbestand` = '$key'";
+  $result = mysqli_query($conn, $sql);
+  header("location: ../locations.php?msg=" . ($result ? "4" : "3"));
 
 }
