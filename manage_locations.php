@@ -140,7 +140,7 @@
                                                     value="<?php echo isset($_GET['key']) ? $row['interneseriennummer'] : ''; ?>">
                                             </div>
                                             <?php if (isset($_GET['key'])) { ?><input type="hidden" name="key"
-                                                value="<?php echo $key; ?>"> <?php } ?>
+                                                    value="<?php echo $key; ?>"> <?php } ?>
                                             <div class="form-group col-md-3">
                                                 <label for="geprueftam">Geprueftam</label>
                                                 <input name="geprueftam" type="text"
@@ -195,15 +195,16 @@
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-3">
-                                                <label for="foto1">Fotofeuerloescher</label>
-                                                <input name="foto1" type="file" class="form-control"
-                                                    id="foto1">
+                                                <label for="foto1">Schadensfoto 1</label>
+                                                <input name="foto1" type="file" class="form-control" id="foto1">
                                             </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="gps">gps</label>
-                                                <input name="gps" type="text" class="form-control" disabled
-                                                    id="gps"
-                                                    value="<?php echo isset($_GET['key']) ? $row['gps'] : ''; ?>">
+                                            <div class="form-group col-md-3">
+                                                <label for="foto2">Schadensfoto 2</label>
+                                                <input name="foto2" type="file" class="form-control" id="foto2">
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                <label for="foto3">Schadensfoto 3</label>
+                                                <input name="foto3" type="file" class="form-control" id="foto3">
                                             </div>
                                             <div class="form-group col-md-3">
                                                 <label for="beschreibungstandort">Kurz Beschreibung </label>
@@ -213,12 +214,45 @@
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-12">
+                                            <div class="form-group col-md-7">
                                                 <label for="beschreibungstandort1">Beschreibungstandort</label>
                                                 <textarea name="beschreibungstandort1"
                                                     class="form-control"><?php echo isset($_GET['key']) ? $row['beschreibungstandort1'] : ''; ?></textarea>
                                             </div>
+                                            <div class="form-group col-md-5">
+                                                <label for="gps">gps</label>
+                                                <input name="gps" type="text" class="form-control" disabled id="gps"
+                                                    value="<?php echo isset($_GET['key']) ? $row['gps'] : ''; ?>">
+                                            </div>
                                         </div>
+
+                                        <?php if (!empty($row['foto1']) || !empty($row['foto2']) || !empty($row['foto3'])): ?>
+                                            <p class="card-title">Schadensfotos</p>
+                                            <hr>
+                                            <div class="row">
+                                                <?php if (!empty($row['foto1'])): ?>
+                                                    <div class="col-md-4">
+                                                        <img class="card-img-top" style="height: 200px; width: auto;"
+                                                            src="<?= htmlspecialchars($row['foto1']) ?>" alt="Damage Image 1">
+                                                    </div>
+                                                <?php endif; ?>
+
+                                                <?php if (!empty($row['foto2'])): ?>
+                                                    <div class="col-md-4">
+                                                        <img class="card-img-top" style="height: 200px; width: auto;" src="<?= htmlspecialchars($row['foto2']) ?>"
+                                                            alt="Damage Image 2">
+                                                    </div>
+                                                <?php endif; ?>
+
+                                                <?php if (!empty($row['foto3'])): ?>
+                                                    <div class="col-md-4">
+                                                        <img class="card-img-top" style="height: 200px; width: auto;" src="<?= htmlspecialchars($row['foto3']) ?>"
+                                                            alt="Damage Image 3">
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
+                                        <?php endif; ?>
+                                        <br>
 
                                         <?php if (isset($_GET['key'])) { ?>
                                             <hr>
@@ -234,8 +268,7 @@
                                         <?php } ?>
                                         <br>
 
-                                        <button type="submit"
-                                            class="btn btn-primary"><?php echo $action; ?></button>
+                                        <button type="submit" class="btn btn-primary"><?php echo $action; ?></button>
                                         &nbsp;
                                     </form>
                                 </div>
