@@ -17,7 +17,7 @@ $customSearch = isset($_GET['customSearch']) ? $_GET['customSearch'] : '';
 
 $searchQuery = "";
 if (!empty($customSearch)) {
-    $searchQuery = "WHERE inhalt LIKE '%" . $customSearch . "%' OR typ LIKE '%" . $customSearch . "%' OR  interneseriennummer LIKE '%" . $customSearch . "%' OR loeschmittel LIKE '%" . $customSearch . "%' OR hersteller LIKE '%" . $customSearch . "%'";
+    $searchQuery = "WHERE inhalt LIKE '%" . $customSearch . "%' OR typ LIKE '%" . $customSearch . "%' OR  nfcadresse LIKE '%" . $customSearch . "%' OR loeschmittel LIKE '%" . $customSearch . "%' OR hersteller LIKE '%" . $customSearch . "%'";
 }
 // Total records
 $totalRecordsQuery = "SELECT COUNT(*) AS total FROM kundenbestand";
@@ -31,7 +31,7 @@ $totalFiltered = mysqli_fetch_assoc($totalFilteredResult)['total'];
 
 $columns = array(
     'fotofeuerloescher',
-    'interneseriennummer',
+    'nfcadresse',
     'hersteller',
     'typ',
     'loeschmittel',
@@ -45,7 +45,7 @@ $columns = array(
 $columnName = isset($columns[$columnIndex]) ? $columns[$columnIndex] : 'id';
 
 // Fetch records
-$query = "SELECT t.idkunde,t.idkundenbestand, fotofeuerloescher, loeschmittel, datumangelegt, hersteller, typ, inhalt, bj, interneseriennummer,beschreibungstandort 
+$query = "SELECT t.idkunde,t.idkundenbestand, fotofeuerloescher, loeschmittel, datumangelegt, hersteller, typ, inhalt, bj, nfcadresse,beschreibungstandort 
           FROM kundenbestand t JOIN kundenadressen k ON t.idkunde= k.idkunde
           $searchQuery 
           ORDER BY $columnName $columnSortOrder
@@ -64,13 +64,13 @@ while ($row = mysqli_fetch_assoc($result)) {
             <img src='" . $image . "' alt=''>
         </div>
         </div>",
-        "interneseriennummer" => $row['interneseriennummer'],
+        "nfcadresse" => $row['nfcadresse'],
         "hersteller" => $row['hersteller'],
         "typ" => $row['typ'],
         "loeschmittel" => $row['loeschmittel'],
         "inhalt" => $row['inhalt'],
         "bj" => !is_null($row['bj'])?(new DateTime($row['bj']))->format('Y'):'',
-        "naechstepruefung" => !is_null($row['datumangelegt'])?(new DateTime($row['datumangelegt']))->format('Y'):'',
+        "naechstepruefung" => !is_null($row['datumangelegt'])?(new DateTime($row['datumangelegt']))->format('m/Y'):'',
         "beschreibungstandort" => $row['beschreibungstandort'],
         "action" => "<a href='manage_extinguisher.php?key=" . $row['idkundenbestand'] . "' class='btn btn-icon btn-hover btn-sm btn-rounded'>
                         <i class='anticon anticon-edit'></i>

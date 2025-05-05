@@ -100,22 +100,22 @@
                                 <table class="table table-hover e-commerce-table">
                                     <thead>
                                         <tr>
-                                            <th>IDKunde</th>
-                                            <!-- <th>IDWartungspersonal</th>
-                                            <th>IDFirma</th> -->
-                                            <th>Name</th>
+                                            <th>Kundennummer</th>
+                                            <!-- <th>IDWartungspersonal</th>-->
+                                            <th>Name</th> 
+                                            <th>Strasse</th>
                                             <th>Nr</th>
                                             <th>Plz</th>
                                             <th>Ort</th>
                                             <th>Ortauswahl</th>
-                                            <th>Next Test</th>
+                                            <th>Nächste Wartung</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                         //get Instrument Rating detials
-                                        $sql = "SELECT idkunde,Anrede,Vorname,Nachname,Nr,Plz,Ort,Ortauswahl,naechstepruefung FROM `kundenadressen`";
+                                        $sql = "SELECT idkunde,kundennummer,strasse,Anrede,Vorname,Nachname,Nr,Plz,Ort,Ortauswahl,naechstepruefung FROM `kundenadressen`";
                                         //echo $sql;
                                         $conn = $GLOBALS['con'];
                                         $result = mysqli_query($conn, $sql);
@@ -126,17 +126,17 @@
                                             ?>
                                             <tr>
                                                 <!-- <td><?php echo $no++; ?></td> -->
-                                                <!-- <td><?php echo $row['IDWartungspersonal']; ?></td> -->
-                                                <td><?php echo $row['idkunde']; ?></td>
+                                                <td><?php echo $row['kundennummer']; ?></td>
                                                 <td><?php echo $row['Anrede'] . '. ' . $row['Vorname'] . ' ' . $row['Nachname']; ?>
                                                 </td>
+                                                <td><?php echo $row['strasse']; ?></td>
                                                 <td><?php echo $row['Nr']; ?></td>
                                                 <td><?php echo $row['Plz']; ?></td>
                                                 <td><?php echo $row['Ort']; ?></td>
                                                 <td><?php echo $row['Ortauswahl']; ?></td>
                                                 <td><?php if (!empty($row['naechstepruefung'])) {
                                                         $dt = new DateTime($row['naechstepruefung']);
-                                                        echo $dt->format('m/d/Y');
+                                                        echo $dt->format('m/Y');
                                                     } ?></td>
                                                 <!-- <td>
                                                     <div class="d-flex align-items-center">

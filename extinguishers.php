@@ -115,13 +115,13 @@
                                     <thead>
                                         <tr>
                                             <th></th>
-                                            <th>Interne seriennummer</th>
+                                            <th>NFC Seriennummer</th>
                                             <th>Hersteller</th>
                                             <th>Typ</th>
-                                            <th>Loeschmittel</th>
+                                            <th>Löschmittel</th>
                                             <th>Inhalt</th>
                                             <th>BJ</th>
-                                            <th>Naechste pruefung</th>
+                                            <th>Nächste Prüfung</th>
                                             <th>Standort</th>
                                             <th></th>
                                         </tr>
@@ -155,7 +155,7 @@
             "searching": false, // disable default search box
             "columns": [
                 { "data": "image" },
-                { "data": "interneseriennummer" },
+                { "data": "nfcadresse" },
                 { "data": "hersteller" },
                 { "data": "typ" },
                 { "data": "loeschmittel" },

@@ -75,10 +75,10 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="d-flex align-items-center justify-content-between">
-                                                <span class="font-size-13 text-muted">
+                                                <!-- <span class="font-size-13 text-muted">
                                                     Haben Sie kein Konto?
                                                     <a class="small" href="">Registrieren</a>
-                                                </span>
+                                                </span> -->
                                                 <button class="btn btn-danger">Anmelden</button>
                                             </div>
                                         </div>

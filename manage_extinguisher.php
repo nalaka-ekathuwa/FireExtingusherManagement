@@ -404,6 +404,34 @@
                                             </div>
                                         </div>
 
+                                        <?php if (!empty($row['foto1']) || !empty($row['foto2']) || !empty($row['foto3'])): ?>
+                                            <p class="card-title">Schadensfotos</p>
+                                            <hr>
+                                            <div class="row">
+                                                <?php if (!empty($row['foto1'])): ?>
+                                                    <div class="col-md-4">
+                                                        <img class="card-img-top" style="height: 200px; width: auto;"
+                                                            src="<?= htmlspecialchars($row['foto1']) ?>" alt="Damage Image 1">
+                                                    </div>
+                                                <?php endif; ?>
+
+                                                <?php if (!empty($row['foto2'])): ?>
+                                                    <div class="col-md-4">
+                                                        <img class="card-img-top" style="height: 200px; width: auto;" src="<?= htmlspecialchars($row['foto2']) ?>"
+                                                            alt="Damage Image 2">
+                                                    </div>
+                                                <?php endif; ?>
+
+                                                <?php if (!empty($row['foto3'])): ?>
+                                                    <div class="col-md-4">
+                                                        <img class="card-img-top" style="height: 200px; width: auto;" src="<?= htmlspecialchars($row['foto3']) ?>"
+                                                            alt="Damage Image 3">
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
+                                        <?php endif; ?>
+                                        <br>
+
                                         <?php if (isset($_GET['key'])) { ?>
                                             <hr>
                                             <p class="card-title">Standortdetails</p>

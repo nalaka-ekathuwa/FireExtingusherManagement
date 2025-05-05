@@ -102,15 +102,12 @@
                                         <tr>
                                             <!-- <th>No</th> -->
                                             <th>interne seriennummer</th>
-                                            <th>Werksende</th>
-                                            <th>Loeschmittel</th>
-                                            <!-- <th>Datumangelegt</th> -->
-                                            <th>Geprueft am</th>
-                                            <th>Nächste Prüfung</th>
                                             <th>Hersteller</th>
                                             <th>Typ</th>
-                                            <!-- <th>Inhalt</th> -->
                                             <th>BJ</th>
+                                            <th>Loeschmittel</th>
+                                            <th>Geprueft am</th>
+                                            <th>Nächste Prüfung</th>
                                             <th>Kurz Beschreibung</th>
                                             <th></th>
                                         </tr>
@@ -129,24 +126,18 @@
                                             <tr>
                                                 <!-- <td><?php echo $no++; ?></td> -->
                                                 <td><?php echo $row['interneseriennummer']; ?></td>
-                                                <!-- <td><?php echo $row['werksende']; ?></td> -->
-                                                <td><?php if(!is_null($row['werksende'])){
-                                                        echo (new DateTime($row['werksende']))->format('m/y');
-                                                }  ?></td>
-                                                <td><?php echo $row['loeschmittel']; ?></td>
-                                                <td><?php if(!is_null($row['geprueftam'])){
-                                                        echo (new DateTime($row['geprueftam']))->format('m/y');
-                                                }  ?></td>
-                                                <td><?php if(!is_null($row['naechstepruefung'])){
-                                                        echo (new DateTime($row['naechstepruefung']))->format('m/y');
-                                                }  ?></td>
-                                                
                                                 <td><?php echo $row['hersteller']; ?></td>
                                                 <td><?php echo $row['typ']; ?></td>
-                                                <!-- <td><?php echo $row['inhalt']; ?></td> -->
-                                                <td><?php if(!is_null($row['bj'])){
-                                                        echo (new DateTime($row['bj']))->format('Y');
-                                                }  ?></td>
+                                                <td><?php if (!is_null($row['bj'])) {
+                                                    echo (new DateTime($row['bj']))->format('Y');
+                                                } ?></td>
+                                                <td><?php echo $row['loeschmittel']; ?></td>
+                                                <td><?php if (!is_null($row['geprueftam'])) {
+                                                    echo (new DateTime($row['geprueftam']))->format('m/y');
+                                                } ?></td>
+                                                 <td><?php if (!is_null($row['naechstepruefung'])) {
+                                                    echo (new DateTime($row['naechstepruefung']))->format('m/y');
+                                                } ?></td>
                                                 <td><?php echo $row['beschreibungstandort']; ?></td>
                                                 <td class="text-right">
                                                     <a data-toggle="tooltip" data-placement="top" title="Standort anzeigen"
