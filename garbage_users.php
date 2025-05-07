@@ -34,7 +34,7 @@ foreach ($files as $file) {
 // 5. Output result
 echo "Deleted " . count($deleted) . " garbage files:\n";
 foreach ($deleted as $del) {
-    echo "- $del\n";
+    echo "- $del <br>";
 }
 
 $conn->close();

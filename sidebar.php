@@ -118,9 +118,9 @@
                         <li>
                             <a href="extinguishers.php">Verwalten</a>
                         </li>
-                        <!-- <li>
-                            <a href="manage_extinguisher.php">Hinzufügen</a>
-                        </li> -->
+                        <li>
+                            <a href="damage_extinguishers.php">Schäden</a>
+                        </li>
                     </ul>
                 </li>
             <?php } ?>
