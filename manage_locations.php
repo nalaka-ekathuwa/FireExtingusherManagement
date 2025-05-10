@@ -214,15 +214,15 @@
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-7">
+                                            <div class="form-group col-md-6">
                                                 <label for="beschreibungstandort1">Beschreibungstandort</label>
                                                 <textarea name="beschreibungstandort1"
                                                     class="form-control"><?php echo isset($_GET['key']) ? $row['beschreibungstandort1'] : ''; ?></textarea>
                                             </div>
-                                            <div class="form-group col-md-5">
-                                                <label for="gps">gps</label>
-                                                <input name="gps" type="text" class="form-control" disabled id="gps"
-                                                    value="<?php echo isset($_GET['key']) ? $row['gps'] : ''; ?>">
+                                            <div class="form-group col-md-6">
+                                                <label for="beschaedigung">beschaedigung</label>
+                                                <textarea name="beschaedigung"
+                                                    class="form-control"><?php echo isset($_GET['key']) ? $row['beschaedigung'] : ''; ?></textarea>
                                             </div>
                                         </div>
 

@@ -12,6 +12,12 @@
         /* or 500px, whatever you like */
         width: 100%;
     }
+    #geprueftam{
+        color: green;
+    }
+    #naechstepruefung{
+        color: #d9041a;
+    }
 </style>
 
 <body>
@@ -184,8 +190,13 @@
                                             </div>
                                             <div class="form-group col-md-3">
                                                 <label for="bj">BJ</label>
-                                                <input name="bj" type="text" class="form-control" id="bj"
-                                                    value="<?php echo isset($_GET['key']) ? $row['bj'] : ''; ?>"
+                                                <input name="bj" type="number" class="form-control" id="bj"
+                                                    value="<?php 
+                                                    if (isset($_GET['key']) && !empty($row['bj'])) {
+                                                        $bj = new DateTime($row['bj']);
+                                                        echo $bj->format('Y');
+                                                    }
+                                                    ?>"
                                                     disabled>
                                             </div>
                                         </div>
@@ -369,11 +380,11 @@
                                             </div>
                                             <div class="form-group col-md-3">
                                                 <label for="geprueftam">Geprueftam</label>
-                                                <input name="geprueftam" type="text"
+                                               <input name="geprueftam" type="text"
                                                     class="form-control datepicker-input" id="geprueftam" value="<?php
                                                     if (isset($_GET['key'])) {
                                                         $dt = new DateTime($row['geprueftam']);
-                                                        echo $dt->format('m/d/Y');
+                                                        echo  $dt->format('m/d/Y');
                                                     } ?>">
                                             </div>
                                             <div class="form-group col-md-3">
@@ -392,13 +403,18 @@
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-4">
                                                 <label for="beschreibungstandort1">Beschreibungstandort</label>
                                                 <textarea name="beschreibungstandort1"
                                                     class="form-control"><?php echo isset($_GET['key']) ? $row['beschreibungstandort1'] : ''; ?></textarea>
                                             </div>
-                                            <div class="form-group col-md-6">
-                                                <label for="gps">gps</label>
+                                            <div class="form-group col-md-4">
+                                                <label for="beschaedigung">Beschaedigung</label>
+                                                <textarea name="beschaedigung"
+                                                    class="form-control"><?php echo isset($_GET['key']) ? $row['beschaedigung'] : ''; ?></textarea>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="gps">GPS</label>
                                                 <textarea name="gps"
                                                     class="form-control"><?php echo isset($_GET['key']) ? $row['gps'] : ''; ?></textarea>
                                             </div>

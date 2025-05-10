@@ -53,6 +53,7 @@ if ($action == 'edit') {
   $naechstepruefung = $conn->real_escape_string($_POST['naechstepruefung']);
   $beschreibungstandort1 = $conn->real_escape_string($_POST['beschreibungstandort1']);
   $beschreibungstandort = $conn->real_escape_string($_POST['beschreibungstandort']);
+  $beschaedigung = $conn->real_escape_string($_POST['beschaedigung']);
   $gps = $conn->real_escape_string($_POST['gps']);
   $updated = date('Y-m-d h:i:sa');
 
@@ -75,7 +76,7 @@ if ($action == 'edit') {
   }
 
   // Common kundenbestand SQL
-  $kundenbestand_fields = "`beschreibungstandort1`='$beschreibungstandort1',
+  $kundenbestand_fields = "`beschreibungstandort1`='$beschreibungstandort1',`beschaedigung`='$beschaedigung',
    `beschreibungstandort`='$beschreibungstandort', `gps`='$gps', `interneseriennummer`='$interneseriennummer'";
   if ($hasImage) {
     $kundenbestand_fields .= ", `fotofeuerloescher`='$path_db'";
@@ -121,7 +122,7 @@ if ($action == 'update') {
   $interneseriennummer = isset($_POST['interneseriennummer']) ? $conn->real_escape_string($_POST['interneseriennummer']) : '';
   $beschreibungstandort = $conn->real_escape_string($_POST['beschreibungstandort']);
   $beschreibungstandort1 = $conn->real_escape_string($_POST['beschreibungstandort1']);
-
+  $beschaedigung = $conn->real_escape_string($_POST['beschaedigung']);
   // $hasImage = ($_FILES['foto1']['name'] != "");
   $path_db = null;
 
@@ -145,7 +146,7 @@ if ($action == 'update') {
   }
 
   // Start with common SQL fields
-  $kundenbestand_fields = "`beschreibungstandort1`='$beschreibungstandort1',
+  $kundenbestand_fields = "`beschreibungstandort1`='$beschreibungstandort1',`beschaedigung`='$beschaedigung',
   `beschreibungstandort`='$beschreibungstandort', `interneseriennummer`='$interneseriennummer'";
 
   // Append any uploaded image fields
@@ -169,7 +170,7 @@ if ($action == 'clear') {
 
   if ($result && mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_assoc($result);
-    $updateFields = ["`beschreibungstandort1` = NULL"]; // always set this to NULL
+    $updateFields = ["`beschreibungstandort1` = NULL,`beschaedigung` = NULL"]; // always set this to NULL
 
     for ($i = 1; $i <= 3; $i++) {
       $fotoKey = "foto$i";
