@@ -1,6 +1,6 @@
 <?php include 'init.php'; ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <?php include 'head.php'; ?>
 
@@ -66,7 +66,7 @@
                                                         placeholder="Identification Number" value="<?php // echo $row['nic']; ?>" required>
                                                 </div> -->
 
-                                                <label for="inputState">Benutzerrolle</label>
+                                                <label for="inputState">Benutze anmelden als</label>
                                                 <select name="role" id="inputState" class="form-control" disabled>
                                                     <option>Wählen...</option>
                                                     <?php

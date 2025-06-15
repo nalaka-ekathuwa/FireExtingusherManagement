@@ -1,6 +1,6 @@
 <?php include 'init.php'; ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <?php include 'head.php'; ?>
 
@@ -70,26 +70,21 @@
                                     <?php isset($_GET['msg']) ? displayAlert() : ''; ?>
 
                                 </div>
-                                <div class="col-lg-4 text-right">
-                                    <a href="manage_customer.php" class="btn btn-primary">
-                                        <i class="anticon anticon-plus-square m-r-5"></i>Kunde hinzufügen
-                                    </a>
-                                </div>
                             </div>
 
                             <div class="table-responsive">
                                 <table class="table table-hover e-commerce-table">
                                     <thead>
                                         <tr>
-                                            <th>image</th>
-                                            <th>nfcadresse</th>
-                                            <th>hersteller</th>
-                                            <th>typ</th>
-                                            <th>loeschmittel</th>
-                                            <th>inhalt</th>
-                                            <th>bj</th>
-                                            <th>Damage Text</th>
-                                            <th>Damage Images</th>
+                                            <th>Image</th>
+                                            <th>NFC Adresse</th>
+                                            <th>Hersteller</th>
+                                            <th>Typ</th>
+                                            <th>Löschmittel</th>
+                                            <th>Inhalt</th>
+                                            <th>BJ</th>
+                                            <th>Beschreibung der Beschädigung</th>
+                                            <th>Foto der Beschädigung</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -97,14 +92,14 @@
                                         <?php
                                         //get Instrument Rating detials
                                         $sql = "SELECT t.idkunde,t.idkundenbestand, fotofeuerloescher,Foto1,Foto2,Foto3, loeschmittel, datumangelegt, 
-                                        hersteller, typ, inhalt, bj, nfcadresse,BeschreibungStandort1 FROM kundenbestand t WHERE Foto1 IS NOT NULL 
-                                        OR Foto2 IS NOT NULL OR Foto3 IS NOT NULL OR BeschreibungStandort1 IS NOT NULL";
+                                        hersteller, typ, inhalt, bj, nfcadresse,BeschreibungStandort1,beschaedigung FROM kundenbestand t WHERE Foto1 IS NOT NULL 
+                                        OR Foto2 IS NOT NULL OR Foto3 IS NOT NULL OR beschreibungstandort1  <> '' OR beschaedigung <> ''";
                                         //echo $sql;
                                         $conn = $GLOBALS['con'];
                                         $result = mysqli_query($conn, $sql);
                                         $no = 1;
                                         while ($row = mysqli_fetch_assoc($result)) {
-                                               $danger_text = (!empty($row['BeschreibungStandort1']))?'checked':'';
+                                               $danger_text = (!empty($row['BeschreibungStandort1'])||!empty($row['beschaedigung']))?'checked':'';
                                                $danger_images = !((empty($row['Foto1'])) && (empty($row['Foto2'])) && (empty($row['Foto3'])))?'checked':'';
                                             $image = !empty($row['fotofeuerloescher']) ? $row['fotofeuerloescher'] : 'assets/images/extinguisher/dummy_ext.jpg';
                                             ?>

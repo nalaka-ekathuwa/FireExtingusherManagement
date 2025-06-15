@@ -16,36 +16,26 @@
                 $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
 
                 switch ($msg) {
-                    case '5':
-                        $alertType = 'alert-success';
-                        $icon = 'anticon-check-o';
-                        $message = 'Location was deleted';
-                        break;
-                    case '6':
-                        $alertType = 'alert-danger';
-                        $icon = 'anticon-close-o';
-                        $message = 'Location was not deleted';
-                        break;
                     case '2':
                         $alertType = 'alert-success';
                         $icon = 'anticon-check-o';
-                        $message = 'Location was Created';
+                        $message = 'Standort wurde erstellt';
                         break;
                     case '1':
                         $alertType = 'alert-danger';
                         $icon = 'anticon-close-o';
-                        $message = 'Location was not created';
+                        $message = 'Standort wurde nicht erstellt';
                         ;
                         break;
                     case '4':
                         $alertType = 'alert-success';
                         $icon = 'anticon-check-o';
-                        $message = 'Location was Updated';
+                        $message = 'Standort wurde aktualisiert';
                         break;
                     case '3':
                         $alertType = 'alert-danger';
                         $icon = 'anticon-close-o';
-                        $message = 'Location was not Updated';
+                        $message = 'Der Standort wurde nicht aktualisiert';
                         ;
                         break;
                     // default:
@@ -141,7 +131,7 @@
                                                 <td><?php echo $row['beschreibungstandort']; ?></td>
                                                 <td class="text-right">
                                                     <a data-toggle="tooltip" data-placement="top" title="Standort anzeigen"
-                                                        href="manage_locations.php?key=<?php echo $row['idkundenbestand']; ?>"
+                                                        href="manage_branches.php?key=<?php echo $row['idkundenbestand']; ?>"
                                                         id="view_equipments"
                                                         class="btn btn-icon btn-hover btn-sm btn-secondary btn-rounded pull-right"><i
                                                             class="fas fa-fire-extinguisher"></i></a>

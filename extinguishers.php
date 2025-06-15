@@ -1,6 +1,6 @@
 <?php include 'init.php'; ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <?php include 'head.php'; ?>
 
@@ -121,7 +121,7 @@
                                             <th>Löschmittel</th>
                                             <th>Inhalt</th>
                                             <th>BJ</th>
-                                            <th>Nächste Prüfung</th>
+                                            <th>Nächste Wartung</th>
                                             <th>Standort</th>
                                             <th></th>
                                         </tr>

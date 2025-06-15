@@ -1,6 +1,6 @@
 <?php include 'init.php'; ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <?php include 'head.php'; ?>
 
@@ -62,7 +62,7 @@
                         <h2 class="header-title">Benutzerliste</h2>
                         <div class="header-sub-title">
                             <nav class="breadcrumb breadcrumb-dash">
-                                <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Heim</a>
+                                <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Hauptseite</a>
                                 <span class="breadcrumb-item active">Firma zuordnen</span>
                             </nav>
                         </div>
@@ -98,7 +98,7 @@
                                                     
                                                     <label for="Kunde">Kunde</label>
                                                 <select name="company" id="Kunde" class="select2 form-control" required>
-                                                    <option value="" selected disabled>Choose...</option>
+                                                    <option value="" selected disabled>Auswählen...</option>
                                                     <?php
                                                     //get User Roles
                                                     $sql2 = "SELECT idkunde,kundennummer,anrede,nachname,vorname FROM `kundenadressen`";

@@ -1,6 +1,6 @@
 <?php include 'init.php'; ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <?php include 'head.php'; ?>
 
@@ -51,19 +51,19 @@
 
                                             </div>
                                             <div class="form-group col-md-7">
-                                                <label for="old">OLD password</label>
+                                                <label for="old">Altes Password</label>
                                                 <input name="old" type="password" class="form-control" id="old"
-                                                    placeholder="old password" > <br>
-                                                <label for="inputPassword">New Password</label>
+                                                    placeholder="Altes Password" > <br>
+                                                <label for="inputPassword">Neues Password</label>
                                                 
                                                 <input name="inputPassword" type="password" class="form-control"
-                                                    id="inputPassword" placeholder="new password" ><br>
+                                                    id="inputPassword" placeholder="Neues Password" ><br>
 
                                                 <input type="hidden" name="key" value="<?php echo $key; ?>">
                                                 <input type="hidden" name="old_hash" value="<?php echo $row['password'] ; ?>">
-                                                <label for="confirm">Confirm Password</label>
+                                                <label for="confirm">Wiederhole Password</label>
                                                 <input name="confirm" type="password" class="form-control" id="confirm"
-                                                    placeholder="confirm password" >
+                                                    placeholder="Wiederhole Password" >
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Aktualisieren</button> &nbsp;

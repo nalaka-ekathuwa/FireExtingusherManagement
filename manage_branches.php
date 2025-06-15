@@ -24,7 +24,8 @@
             if (isset($_GET['key'])) {
                 $key = $_GET['key'];
                 $action = 'update';
-                $sql = "SELECT k.*, k.fotofeuerloescher as img,  c.plz, c.anrede, c.vorname, c.nachname, c.kontaktperson, c.naechstepruefung, c.handyfirma, c.telefonfirma, c.ortauswahl, c.email, c.geprueftam FROM `kundenbestand` k JOIN kundenadressen c ON k.idkunde=c.idkunde  LEFT JOIN `location` l ON k.idkundenbestand=l.ext_id  WHERE k.idkundenbestand =$key";
+                $sql = "SELECT k.*, k.fotofeuerloescher as img,  c.plz, c.anrede, c.vorname, c.nachname, c.kontaktperson, c.naechstepruefung, c.handyfirma, c.telefonfirma, c.ortauswahl,c.email,c.geprueftam FROM `kundenbestand` k JOIN kundenadressen c ON k.idkunde=c.idkunde  LEFT JOIN `location` l ON k.idkundenbestand=l.ext_id  WHERE k.idkundenbestand =$key";
+                echo $sql;
                 $conn = $GLOBALS['con'];
                 $result = mysqli_query($conn, $sql);
                 $row = mysqli_fetch_assoc($result);
@@ -127,7 +128,7 @@
                             <div class="row m-b-30">
                                 <div class="col-lg-12">
                                     <hr>
-                                    <form action="control/extinguishers_process.php?action=<?php echo $action; ?>"
+                                    <form action="control/branches_process.php?action=<?php echo $action; ?>"
                                         method="post" enctype=multipart/form-data>
                                         <p class="card-title">Einzelheiten zum Feuerlöscher</p>
                                         <br>
@@ -135,7 +136,7 @@
                                             <div class="form-group col-md-3">
                                                 <label for="interneseriennummer">Interneseriennummer</label>
                                                 <input name="interneseriennummer" type="text" class="form-control"
-                                                    id="interneseriennummer"
+                                                    id="interneseriennummer" disabled
                                                     value="<?php echo isset($_GET['key']) ? $row['interneseriennummer'] : ''; ?>">
                                             </div>
                                             <?php if (isset($_GET['key'])) { ?><input type="hidden" name="key"
@@ -312,7 +313,7 @@
             }).addTo(map);
 
             var marker = L.marker([latitude, longitude]).addTo(map)
-                .bindPopup('Standort')
+                .bindPopup('Extinguisher Location')
                 .openPopup();
         <?php } ?>
     </script>

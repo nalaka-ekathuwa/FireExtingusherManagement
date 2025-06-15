@@ -1,6 +1,6 @@
 <?php include 'init.php'; ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <?php include 'head.php'; ?>
 
@@ -100,14 +100,14 @@
                                 <table class="table table-hover e-commerce-table">
                                     <thead>
                                         <tr>
-                                            <th>Kundennummer</th>
+                                            <th>Kn.-Nr</th>
                                             <!-- <th>IDWartungspersonal</th>-->
                                             <th>Name</th> 
                                             <th>Strasse</th>
                                             <th>Nr</th>
                                             <th>Plz</th>
                                             <th>Ort</th>
-                                            <th>Ortauswahl</th>
+                                            <!--<th>Ortauswahl</th>-->
                                             <th>Nächste Wartung</th>
                                             <th></th>
                                         </tr>
@@ -115,7 +115,7 @@
                                     <tbody>
                                         <?php
                                         //get Instrument Rating detials
-                                        $sql = "SELECT idkunde,kundennummer,strasse,Anrede,Vorname,Nachname,Nr,Plz,Ort,Ortauswahl,naechstepruefung FROM `kundenadressen`";
+                                        $sql = "SELECT idkunde,kundennummer,strasse,anrede,vorname,nachname,nr,plz,ort,ortauswahl,naechstepruefung FROM `kundenadressen`";
                                         //echo $sql;
                                         $conn = $GLOBALS['con'];
                                         $result = mysqli_query($conn, $sql);
@@ -127,13 +127,13 @@
                                             <tr>
                                                 <!-- <td><?php echo $no++; ?></td> -->
                                                 <td><?php echo $row['kundennummer']; ?></td>
-                                                <td><?php echo $row['Anrede'] . '. ' . $row['Vorname'] . ' ' . $row['Nachname']; ?>
+                                                <td><?php echo $row['anrede'] . '. ' . $row['vorname'] . ' ' . $row['nachname']; ?>
                                                 </td>
                                                 <td><?php echo $row['strasse']; ?></td>
-                                                <td><?php echo $row['Nr']; ?></td>
-                                                <td><?php echo $row['Plz']; ?></td>
-                                                <td><?php echo $row['Ort']; ?></td>
-                                                <td><?php echo $row['Ortauswahl']; ?></td>
+                                                <td><?php echo $row['nr']; ?></td>
+                                                <td><?php echo $row['plz']; ?></td>
+                                                <!--<td><?php echo $row['ort']; ?></td>-->
+                                                <td><?php echo $row['ortauswahl']; ?></td>
                                                 <td><?php if (!empty($row['naechstepruefung'])) {
                                                         $dt = new DateTime($row['naechstepruefung']);
                                                         echo $dt->format('m/Y');
