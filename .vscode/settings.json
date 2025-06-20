@@ -1,0 +1,18 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 100,
+            "server": "ftp.brandschutz-brombacher.de",
+            "port": 3306,
+            "driver": "MariaDB",
+            "name": "Feuerschutz",
+            "database": "db_feuerschutz",
+            "username": "GHNfcBenutzer",
+            "password": "Brombacher29"
+        }
+    ]
+}

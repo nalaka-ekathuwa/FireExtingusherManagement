@@ -1,6 +1,6 @@
 <?php include 'init.php'; ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <?php include 'head.php'; ?>
 
@@ -53,9 +53,9 @@
                                                     <input name="nic" type="text" class="form-control" id="nic"
                                                         placeholder="Identification Number" required>
                                                 </div> -->
-                                                <label for="inputState">Benutzerrolle</label>
+                                                <label for="inputState">Benutzer anmelden als</label>
                                                 <select name="role" id="inputState" class="form-control" required>
-                                                    <option value="" selected disabled>Choose...</option>
+                                                    <option value="" selected disabled>Auswählen...</option>
                                                     <?php
                                                     //get User Roles
                                                     $sql1 = "SELECT * FROM `anmeldenals`";

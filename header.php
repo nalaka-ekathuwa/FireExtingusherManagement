@@ -147,7 +147,7 @@ if (empty($_SESSION["user_id"])) {
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
                                 <i class="anticon opacity-04 font-size-16 anticon-lock"></i>
-                                <span class="m-l-10">Change Password</span>
+                                <span class="m-l-10">Password ändern</span>
                             </div>
                             <i class="anticon font-size-10 anticon-right"></i>
                         </div>

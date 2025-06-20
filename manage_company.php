@@ -46,7 +46,7 @@
                         <div class="card-body">
                             <div class="row m-b-30">
                                 <div class="col-lg-12">
-                                    <form action="control/customer_process.php?action=<?php echo $action; ?>"
+                                    <form action="control/branches_process.php?action=<?php echo $action; ?>"
                                         method="post">
                                         <div class="form-row">
                                             <div class="form-group col-md-5">

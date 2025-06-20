@@ -1,6 +1,6 @@
 <?php include 'init.php'; ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <?php include 'head.php'; ?>
 <!-- page css -->
@@ -24,8 +24,7 @@
             if (isset($_GET['key'])) {
                 $key = $_GET['key'];
                 $action = 'edit';
-                $sql = "SELECT k.*, l.img as img, l.gps , c.anrede, c.vorname, c.nachname, c.kontaktperson, c.naechstepruefung, c.handyfirma, c.telefonfirma, c.ortauswahl,c.emailp,c.geprueftam FROM `kundenbestand` k JOIN kundenadressen c ON k.idkunde=c.idkunde  LEFT JOIN `location` l ON k.idkundenbestand=l.ext_id  WHERE k.idkundenbestand =$key";
-                echo $sql;
+                $sql = "SELECT k.*, l.img as img, l.gps , c.plz, c.anrede, c.kundennummer, c.vorname, c.nachname, c.kontaktperson, c.naechstepruefung, c.handyfirma, c.telefonfirma, c.ortauswahl,c.email,c.geprueftam FROM `kundenbestand` k JOIN kundenadressen c ON k.idkunde=c.idkunde  LEFT JOIN `location` l ON k.idkundenbestand=l.ext_id  WHERE k.idkundenbestand =$key";
                 $conn = $GLOBALS['con'];
                 $result = mysqli_query($conn, $sql);
                 $row = mysqli_fetch_assoc($result);
@@ -58,7 +57,7 @@
                             <nav class="breadcrumb breadcrumb-dash">
                                 <a href="#" class="breadcrumb-item"><i
                                         class="anticon anticon-home m-r-5"></i>Startseite</a>
-                                <span class="breadcrumb-item active"><?php echo ucfirst($action); ?> Feuerlöscher</span>
+                                <span class="breadcrumb-item active"><?php echo ucfirst($action); ?>Feuerlöscher</span>
                             </nav>
                         </div>
 
@@ -82,8 +81,11 @@
                                             <p class="text-opacity font-size-13">Kontaktperson -
                                                 <?php echo isset($_GET['key']) ? $row['kontaktperson'] : ''; ?>
                                             </p>
-                                            <p class="text-dark m-b-20">NächstePrüfung -
-                                                <?php echo isset($_GET['key']) ? $row['naechstepruefung'] : ''; ?>
+                                            <p class="text-dark m-b-20">PLZ -
+                                                <?php echo isset($_GET['key']) ? $row['plz'] : ''; ?>
+                                            </p>
+                                            <p class="text-dark m-b-20">Kn. Nr. -
+                                                <?php echo isset($_GET['key']) ? $row['kundennummer'] : ''; ?>
                                             </p>
                                         </div>
                                     </div>
@@ -96,16 +98,16 @@
                                                 <li class="row">
                                                     <p class="col-sm-4 col-4 font-weight-semibold text-dark m-b-5">
                                                         <i class="m-r-10 text-primary anticon anticon-mail"></i>
-                                                        <span>Email: </span>
+                                                        <span>E-Mail: </span>
                                                     </p>
                                                     <p class="col font-weight-semibold">
-                                                        <?php echo isset($_GET['key']) ? $row['emailp'] : ''; ?>
+                                                        <?php echo isset($_GET['key']) ? $row['email'] : ''; ?>
                                                     </p>
                                                 </li>
                                                 <li class="row">
                                                     <p class="col-sm-4 col-4 font-weight-semibold text-dark m-b-5">
                                                         <i class="m-r-10 text-primary anticon anticon-phone"></i>
-                                                        <span>Phone: </span>
+                                                        <span>Telefon: </span>
                                                     </p>
                                                     <p class="col font-weight-semibold">
                                                         <?php echo isset($_GET['key']) ? $row['handyfirma'] . ' ' . $row['telefonfirma'] : ''; ?>
@@ -114,7 +116,7 @@
                                                 <li class="row">
                                                     <p class="col-sm-4 col-5 font-weight-semibold text-dark m-b-5">
                                                         <i class="m-r-10 text-primary anticon anticon-compass"></i>
-                                                        <span>Location: </span>
+                                                        <span>Ort: </span>
                                                     </p>
                                                     <p class="col font-weight-semibold">
                                                         <?php echo isset($_GET['key']) ? $row['ortauswahl'] : ''; ?>
@@ -140,10 +142,14 @@
                                                     value="<?php echo isset($_GET['key']) ? $row['interneseriennummer'] : ''; ?>">
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="datumangelegt">Datumangelegt</label>
-                                                <input name="datumangelegt" type="text" class="form-control"
-                                                    id="datumangelegt"
-                                                    value="<?php echo isset($_GET['key']) ? $row['datumangelegt'] : ''; ?>"
+                                                <label for="datumangelegt">Datum Angelegt</label>
+                                                <input name="datumangelegt" type="number" class="form-control" id="datumangelegt"
+                                                    value="<?php 
+                                                    if (isset($_GET['key']) && !empty($row['datumangelegt'])) {
+                                                        $da = new DateTime($row['datumangelegt']);
+                                                        echo $da->format('m/Y');
+                                                    }
+                                                    ?>"
                                                     disabled>
                                                 <?php if (isset($_GET['key'])) { ?><input type="hidden" name="key"
                                                         value="<?php echo $key; ?>"> <?php } ?>
@@ -151,7 +157,7 @@
                                             <div class="form-group col-md-3">
                                                 <label for="anzahl">Anzahl</label>
                                                 <input name="anzahl" type="text" class="form-control" id="anzahl"
-                                                    value="<?php echo isset($_GET['key']) ? $row['anzahl'] : ''; ?>"
+                                                    value="<?php echo isset($_GET['key']) ? $row['flanzahl'] : ''; ?>"
                                                     disabled>
                                             </div>
                                             <div class="form-group col-md-3">
@@ -177,42 +183,47 @@
                                                     disabled>
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="inhalt">Inhalt</label>
+                                                <label for="inhalt">Inhalt kg/l</label>
                                                 <input name="inhalt" type="text" class="form-control" id="inhalt"
                                                     value="<?php echo isset($_GET['key']) ? $row['inhalt'] : ''; ?>"
                                                     disabled>
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="bj">BJ</label>
-                                                <input name="bj" type="text" class="form-control" id="bj"
-                                                    value="<?php echo isset($_GET['key']) ? $row['bj'] : ''; ?>"
+                                                <label for="bj">Hersteller Jahr</label>
+                                                <input name="bj" type="number" class="form-control" id="bj"
+                                                    value="<?php 
+                                                    if (isset($_GET['key']) && !empty($row['bj'])) {
+                                                        $bj = new DateTime($row['bj']);
+                                                        echo $bj->format('Y');
+                                                    }
+                                                    ?>"
                                                     disabled>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-3">
-                                                <label for="pruefungeinzelp">PrüfungEinzelP</label>
+                                                <label for="pruefungeinzelp">Prüfungs Preis</label>
                                                 <input name="pruefungeinzelp" type="text" class="form-control"
                                                     id="pruefungeinzelp"
                                                     value="<?php echo isset($_GET['key']) ? $row['pruefungeinzelp'] : ''; ?>"
                                                     disabled>
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="pruefung15p">Prüfung§15P</label>
+                                                <label for="pruefung15p">Prüfung gmß. §15</label>
                                                 <input name="pruefung15p" type="text" class="form-control"
                                                     id="pruefung15p"
                                                     value="<?php echo isset($_GET['key']) ? $row['pruefung15p'] : ''; ?>"
                                                     disabled>
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="innenkontrop">InnenkontroP</label>
+                                                <label for="innenkontrop">Innenkontrolle Preis je kg/l </label>
                                                 <input name="innenkontrop" type="number" class="form-control"
                                                     id="innenkontrop"
                                                     value="<?php echo isset($_GET['key']) ? $row['innenkontrop'] : ''; ?>"
                                                     disabled>
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="ruestkostenp">Ruestkostenp</label>
+                                                <label for="ruestkostenp">Rüstkosten Preis</label>
                                                 <input name="ruestkostenp" type="text" class="form-control"
                                                     id="ruestkostenp"
                                                     value="<?php echo isset($_GET['key']) ? $row['ruestkostenp'] : ''; ?>"
@@ -221,20 +232,20 @@
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-3">
-                                                <label for="oringp">Oringp</label>
+                                                <label for="oringp">O-Ring Preis</label>
                                                 <input name="oringp" type="text" class="form-control" id="oringp"
                                                     value="<?php echo isset($_GET['key']) ? $row['oringp'] : ''; ?>"
                                                     disabled>
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="co2ventielpruefungp">Co2ventielpruefungp</label>
+                                                <label for="co2ventielpruefungp">Co2 Ventiel Prüfpreis</label>
                                                 <input name="co2ventielpruefungp" type="text" class="form-control"
                                                     id="co2ventielpruefungp"
                                                     value="<?php echo isset($_GET['key']) ? $row['co2ventielpruefungp'] : ''; ?>"
                                                     disabled>
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="pruefung500voltp">Pruefung500voltp</label>
+                                                <label for="pruefung500voltp">500 Volt Prüfpreis</label>
                                                 <input name="pruefung500voltp" type="text" class="form-control"
                                                     id="pruefung500voltp"
                                                     value="<?php echo isset($_GET['key']) ? $row['pruefung500voltp'] : ''; ?>"
@@ -368,41 +379,69 @@
                                                     id="fotofeuerloescher">
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="geprueftam">Geprueftam</label>
+                                                <label for="geprueftam">Geprüft am</label>
                                                 <input name="geprueftam" type="text"
                                                     class="form-control datepicker-input" id="geprueftam" value="<?php
                                                     if (isset($_GET['key'])) {
                                                         $dt = new DateTime($row['geprueftam']);
-                                                        echo $dt->format('m/d/Y');
+                                                        echo $dt->format('m/Y');
                                                     } ?>">
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="naechstepruefung">Naechstepruefung</label>
+                                                <label for="naechstepruefung">Nächste Wartung</label>
                                                 <input name="naechstepruefung" type="text"
                                                     class="form-control datepicker-input" id="naechstepruefung" value="<?php if (isset($_GET['key'])) {
                                                         $ds = new DateTime($row['naechstepruefung']);
-                                                        echo $ds->format('m/d/Y');
+                                                        echo $ds->format('m/Y');
                                                     } ?>">
                                             </div>
                                             <div class="form-group col-md-3">
-                                                <label for="beschreibungstandort1">Kurz Beschreibung </label>
-                                                <input name="beschreibungstandort1" type="text" class="form-control"
-                                                    id="beschreibungstandort1"
-                                                    value="<?php echo isset($_GET['key']) ? $row['beschreibungstandort1'] : ''; ?>">
+                                                <label for="beschreibungstandort">Kurz Beschreibung </label>
+                                                <input name="beschreibungstandort" type="text" class="form-control"
+                                                    id="beschreibungstandort"
+                                                    value="<?php echo isset($_GET['key']) ? $row['beschreibungstandort'] : ''; ?>">
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
-                                                <label for="beschreibungstandort">Beschreibungstandort</label>
-                                                <textarea name="beschreibungstandort"
-                                                    class="form-control"><?php echo isset($_GET['key']) ? $row['beschreibungstandort'] : ''; ?></textarea>
+                                                <label for="beschreibungstandort1">Beschreibungstandort</label>
+                                                <textarea name="beschreibungstandort1"
+                                                    class="form-control"><?php echo isset($_GET['key']) ? $row['beschreibungstandort1'] : ''; ?></textarea>
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label for="gps">gps</label>
+                                                <label for="gps">GPS Standort des Feuerlöschers</label>
                                                 <textarea name="gps"
                                                     class="form-control"><?php echo isset($_GET['key']) ? $row['gps'] : ''; ?></textarea>
                                             </div>
                                         </div>
+
+                                        <?php if (!empty($row['foto1']) || !empty($row['foto2']) || !empty($row['foto3'])): ?>
+                                            <p class="card-title">Schadensfotos</p>
+                                            <hr>
+                                            <div class="row">
+                                                <?php if (!empty($row['foto1'])): ?>
+                                                    <div class="col-md-4">
+                                                        <img class="card-img-top" style="height: 200px; width: auto;"
+                                                            src="<?= htmlspecialchars($row['foto1']) ?>" alt="Damage Image 1">
+                                                    </div>
+                                                <?php endif; ?>
+
+                                                <?php if (!empty($row['foto2'])): ?>
+                                                    <div class="col-md-4">
+                                                        <img class="card-img-top" style="height: 200px; width: auto;" src="<?= htmlspecialchars($row['foto2']) ?>"
+                                                            alt="Damage Image 2">
+                                                    </div>
+                                                <?php endif; ?>
+
+                                                <?php if (!empty($row['foto3'])): ?>
+                                                    <div class="col-md-4">
+                                                        <img class="card-img-top" style="height: 200px; width: auto;" src="<?= htmlspecialchars($row['foto3']) ?>"
+                                                            alt="Damage Image 3">
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
+                                        <?php endif; ?>
+                                        <br>
 
                                         <?php if (isset($_GET['key'])) { ?>
                                             <hr>
@@ -412,7 +451,7 @@
                                                 <div id="map_view"></div>
                                             <?php } else { ?>
                                                 <div class="alert alert-warning" role="alert">
-                                                    ❗ GPS data not available for this extinguisher.
+                                                    ❗ GPS noch nicht eingetragen.
                                                 </div>
                                             <?php } ?>
                                         <?php } ?>
@@ -454,7 +493,7 @@
             }).addTo(map);
 
             var marker = L.marker([latitude, longitude]).addTo(map)
-                .bindPopup('Extinguisher Location')
+                .bindPopup('Standort')
                 .openPopup();
         <?php } ?>
     </script>

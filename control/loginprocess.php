@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_img'] = $row['img'];
             $_SESSION['role_id'] = $row['role_id'];
 			// var_dump($row['role_id']);exit;
-            header("location: ../". ($row['role_id']==1? "customers" : "extinguishers").".php?");
+            header("location: ../". ($row['role_id']==1? "customers" : "locations").".php?");
         } else {
 			header("location: ../index.php?s=1");
 		}

@@ -1,6 +1,6 @@
 <?php include 'init.php'; ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <?php include 'head.php'; ?>
 
@@ -114,15 +114,15 @@
                                 <table id="extinguisherTable" class="table table-hover ">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
-                                            <th>Loeschmittel</th>
-                                            <th>Datumangelegt</th>
-                                            <th>Anzahl</th>
+                                            <th></th>
+                                            <th>NFC Seriennummer</th>
                                             <th>Hersteller</th>
                                             <th>Typ</th>
+                                            <th>Löschmittel</th>
                                             <th>Inhalt</th>
                                             <th>BJ</th>
-                                            <th>Befund</th>
+                                            <th>Nächste Wartung</th>
+                                            <th>Standort</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -154,15 +154,15 @@
             },
             "searching": false, // disable default search box
             "columns": [
-                { "data": "no" },
-                { "data": "loeschmittel" },
-                { "data": "datumangelegt" },
-                { "data": "anzahl" },
+                { "data": "image" },
+                { "data": "nfcadresse" },
                 { "data": "hersteller" },
                 { "data": "typ" },
+                { "data": "loeschmittel" },
                 { "data": "inhalt" },
                 { "data": "bj" },
-                { "data": "befund" },
+                { "data": "naechstepruefung" },
+                { "data": "beschreibungstandort" },
                 { "data": "action" }
             ]
         });
