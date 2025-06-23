@@ -12,7 +12,7 @@
             <?php include 'header.php'; ?>
             <?php include 'sidebar.php';
             $key = isset($_GET['key']) ? $_GET['key'] : '';
-            $sql = "SELECT `name`,`img`, `email`, `role`, `role_id` FROM `users` u  WHERE u.id=$key";
+            $sql = "SELECT `name`,`img`, `email`, `role_id` FROM `users` u  WHERE u.id=$key";
             //echo $sql;
             $conn = $GLOBALS['con'];
             $result = mysqli_query($conn, $sql);
