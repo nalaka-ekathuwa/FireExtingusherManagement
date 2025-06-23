@@ -38,8 +38,8 @@ if ($action == 'add') {
       move_uploaded_file($img_name_tmp, $path); // To move the image to user_images folder
     }
 
-    $sql = "INSERT INTO `users`(`name`, `email`, `password`, `img`, `role`,`role_id`)
-        VALUES ('$name','$email','$hashed_password','$path_db',' ','$role')";
+    $sql = "INSERT INTO `users`(`name`, `email`, `password`, `img`, `role_id`)
+        VALUES ('$name','$email','$hashed_password','$path_db','$role')";
     $result = mysqli_query($conn, $sql);
 
     header("location: ../users.php?msg=" . ($result ? "2" : "1"));

@@ -92,6 +92,11 @@
                             <a href="locations.php">Verwalten</a>
                         </li>
                     </ul>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="view_locations.php">Karte</a>
+                        </li>
+                    </ul>
                 </li>
             <?php }
             if ($session_urole == 5) { ?>
