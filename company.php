@@ -16,60 +16,35 @@
                 $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
 
                 switch ($msg) {
-                    case '11':
-                        $alertType = 'alert-warning';
-                        $icon = 'anticon-check-o';
-                        $message = 'Duplicate email';
-                        break;
-                    case '10':
-                        $alertType = 'alert-danger';
-                        $icon = 'anticon-close-o';
-                        $message = 'Passwort war nicht changed';
-                        break;
-                    case '9':
-                        $alertType = 'alert-success';
-                        $icon = 'anticon-check-o';
-                        $message = 'Passwort changed';
-                        break;
-                    case '8':
-                        $alertType = 'alert-danger';
-                        $icon = 'anticon-close-o';
-                        $message = 'Passwort war nicht rest';
-                        break;
-                    case '7':
-                        $alertType = 'alert-success';
-                        $icon = 'anticon-check-o';
-                        $message = 'Passwort war rest';
-                        break;
                     case '5':
                         $alertType = 'alert-success';
                         $icon = 'anticon-check-o';
-                        $message = 'Benutzer wurde gelöscht';
+                        $message = 'Firma wurde gelöscht';
                         break;
                     case '6':
                         $alertType = 'alert-danger';
                         $icon = 'anticon-close-o';
-                        $message = 'Benutzer wurde nicht gelöscht';
+                        $message = 'Firma wurde nicht gelöscht';
                         break;
                     case '2':
                         $alertType = 'alert-success';
                         $icon = 'anticon-check-o';
-                        $message = 'Benutzer wurde erstellt';
+                        $message = 'Firma wurde erstellt';
                         break;
                     case '1':
                         $alertType = 'alert-danger';
                         $icon = 'anticon-close-o';
-                        $message = 'Benutzer wurde nicht erstellt';
+                        $message = 'Firma wurde nicht erstellt';
                         break;
                     case '4':
                         $alertType = 'alert-success';
                         $icon = 'anticon-check-o';
-                        $message = 'Benutzer wurde aktualisiert';
+                        $message = 'Firma wurde aktualisiert';
                         break;
                     case '3':
                         $alertType = 'alert-danger';
                         $icon = 'anticon-close-o';
-                        $message = 'Benutzer wurde nicht aktualisiert';
+                        $message = 'Firma wurde nicht aktualisiert';
                         break;
                     // default:
                     //     $alertType = 'alert-secondary';
@@ -97,12 +72,12 @@
                 <!-- Content Wrapper START -->
                 <div class="main-content">
                     <div class="page-header">
-                        <h2 class="header-title">Benutzerliste</h2>
+                        <h2 class="header-title">Firmenliste</h2>
                         <div class="header-sub-title">
                             <nav class="breadcrumb breadcrumb-dash">
                                 <a href="#" class="breadcrumb-item"><i
                                         class="anticon anticon-home m-r-5"></i>Startseite</a>
-                                <span class="breadcrumb-item active">Benutzerliste</span>
+                                <span class="breadcrumb-item active">Firmenliste</span>
                             </nav>
                         </div>
                     </div>
@@ -115,8 +90,9 @@
 
                                 </div>
                                 <div class="col-lg-4 text-right">
-                                    <a href="add_user.php" class="btn btn-primary"><i
-                                            class="anticon anticon-plus-square m-r-5"></i>Benutzer hinzufügen</a>
+                                    <a href="manage_company.php" class="btn btn-primary">
+                                        <i class="anticon anticon-plus-square m-r-5"></i>Firma hinzufügen
+                                    </a>
                                 </div>
                             </div>
 
@@ -124,58 +100,61 @@
                                 <table class="table table-hover e-commerce-table">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
-                                            <th>Name</th>
-                                            <th>E-Mail</th>
-                                            <th>Angemeldet als</th>
-                                            <th>Status</th>
-                                            <th></th>
+                                            <th>Kn.-Nr</th>
+                                            <!-- <th>IDWartungspersonal</th>-->
+                                            <th>Firm Name</th>
+                                            <th>Contact Person</th> 
+                                            <th>Strasse</th>
+                                            <th>Nr</th>
+                                            <th>Plz</th>
+                                            <!-- <th>Ort</th> -->
+                                            <!-- <th>Ortauswahl</th> -->
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                         //get Instrument Rating detials
-                                        $sql = "SELECT u.`id`, `name`,`img`, `email`, `role`,a.anmeldenals FROM `users` u JOIN `anmeldenals` a ON u.role_id=a.idanmeldenals";
+                                        $sql = "SELECT * FROM `firma`";
                                         //echo $sql;
                                         $conn = $GLOBALS['con'];
                                         $result = mysqli_query($conn, $sql);
-                                        $number = 1;
+                                        $no = 1;
                                         while ($row = mysqli_fetch_assoc($result)) {
-                                            $image = !empty($row['img']) ? $row['img'] : 'assets/images/users/default.jpg';
+                                            //    $badge = ($row['safe_off_availability'] =='10')?'info':'danger';
+                                            //    $availability = ($row['safe_off_availability'] =='10')?'Available':'Not Available';
                                             ?>
                                             <tr>
-                                                <td><?php echo $number++; ?></td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar avatar-image avatar-sm m-r-10">
-                                                            <img src="<?php echo $image; ?>" alt="">
-                                                        </div>
-                                                        <h6 class="m-b-0"><?php echo $row['name']; ?></h6>
-                                                    </div>
-                                                </td>
-                                                <td><?php echo $row['email']; ?></td>
-                                                <td><?php echo $row['anmeldenals']; ?></td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="badge badge-success badge-dot m-r-10"></div>
-                                                        <div>Aktiv</div>
-                                                    </div>
-                                                </td>
+                                                <!-- <td><?php echo $no++; ?></td> -->
+                                                <td><?php echo $row['idfirma']; ?></td>
+                                                <td><?php echo $row['firmenname']; ?></td>
+                                                 <td><?php echo $row['ansprechperson']; ?></td>
+                                                <!-- <td><?php echo $row['anrede'] . '. ' . $row['vorname'] . ' ' . $row['nachname']; ?>
+                                                </td> -->
+                                                <td><?php echo $row['straße']; ?></td>
+                                                <td><?php echo $row['nr']; ?></td>
+                                                <td><?php echo $row['plz']; ?></td>
+                                                <td><?php if (!empty($row['naechstepruefung'])) {
+                                                        $dt = new DateTime($row['naechstepruefung']);
+                                                        echo $dt->format('m/Y');
+                                                    } ?></td>
                                                 <td class="text-right">
-                                                    <a data-toggle="tooltip" data-placement="top"
-                                                        title="Benutzer bearbeiten"
-                                                        href="manage_user.php?key=<?php echo $row['id']; ?>"
+                                                    <a data-toggle="tooltip" data-placement="top" title="Firma bearbeiten"
+                                                        href="manage_company.php?key=<?php echo $row['idfirma']; ?>"
                                                         class="btn btn-icon btn-hover btn-sm btn-rounded pull-right"><i
                                                             class="anticon anticon-edit"></i></a>
-                                                    <a data-toggle="tooltip" data-placement="top"
-                                                        title="Passwort zurücksetzen"
-                                                        onclick="return confirm('Sind Sie sicher, dass Sie dieses Element löschen möchten?');"
-                                                        href="control/users_process.php?key=<?php echo $row['id']; ?>&action=reset"
-                                                        class="btn btn-icon btn-hover btn-sm btn-rounded"><i
-                                                            class="anticon anticon-reload"></i></a>
-                                                    <a data-toggle="tooltip" data-placement="top" title="Benutzer löschen"
-                                                        onclick="return confirm('Sind Sie sicher, dass Sie dieses Element löschen möchten?');"
-                                                        href="control/users_process.php?key=<?php echo $row['id']; ?>&action=delete"
+                                                    <!-- <a data-toggle="tooltip" data-placement="top" title="Firma bearbeiten"
+                                                        href="manage_company.php?key=<?php echo $row['idfirma']; ?>"
+                                                        class="btn btn-icon btn-hover btn-sm btn-rounded pull-right"><i
+                                                            class="anticon anticon-user"></i></a> -->
+                                                    <a data-toggle="tooltip" data-placement="top" title="Firma bearbeiten"
+                                                        href="company_staff.php?key=<?php echo $row['idfirma']; ?>"
+                                                        class="btn btn-icon btn-hover btn-sm btn-rounded pull-right"><i
+                                                            class="anticon anticon-team"></i></a>
+
+                                                    <a data-toggle="tooltip" data-placement="top" title="Firma löschen"
+                                                        onclick="return confirm('Bist du sicher, dass du dieses Element löschen möchtest?');"
+                                                        href="control/company_process.php?key=<?php echo $row['idfirma']; ?>&action=delete"
                                                         class="btn btn-icon btn-hover btn-sm btn-rounded"><i
                                                             class="anticon anticon-delete"></i></a>
                                                 </td>
@@ -195,6 +174,7 @@
 
             </div>
             <!-- Page Container END -->
+
         </div>
     </div>
     <?php include 'foot.php'; ?>

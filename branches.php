@@ -142,7 +142,7 @@
                                                 </td> -->
                                                 <td class="text-right">
                                                     <a data-toggle="tooltip" data-placement="top" title="Kunden bearbeiten"
-                                                        href="manage_company.php?key=<?php echo $row['idkunde']; ?>"
+                                                        href="#?key=<?php echo $row['idkunde']; ?>"
                                                         class="btn btn-icon btn-hover btn-sm btn-rounded pull-right"><i
                                                             class="anticon anticon-edit"></i></a>
 

@@ -12,7 +12,7 @@
             <?php include 'header.php'; ?>
             <?php include 'sidebar.php';
             $key = isset($_GET['key']) ? $_GET['key'] : '';
-            $sql = "SELECT `name`,`img`, `email`, `role`, `role_id` FROM `users` u  WHERE u.id=$key";
+            $sql = "SELECT `name`,`img`, `email`, `idfirma`, `role_id` FROM `users` u  WHERE u.id=$key";
             //echo $sql;
             $conn = $GLOBALS['con'];
             $result = mysqli_query($conn, $sql);
@@ -60,11 +60,6 @@
                                                 <label for="inputEmail4">E-Mail</label>
                                                 <input name="email" type="email" class="form-control" id="inputEmail4"
                                                     placeholder="Email" value="<?php echo $row['email']; ?>" required>
-                                                <!-- <div class="form-group">
-                                                    <label for="nic">ID Number</label>
-                                                    <input name="nic" type="text" class="form-control" id="nic"
-                                                        placeholder="Identification Number" value="<?php // echo $row['nic']; ?>" required>
-                                                </div> -->
 
                                                 <label for="inputState">Benutze anmelden als</label>
                                                 <select name="role" id="inputState" class="form-control" disabled>
@@ -81,10 +76,23 @@
                                                             <?php echo $row1['anmeldenals']; ?>
                                                         </option> <?php } ?>
                                                 </select>
+                                                <label for="inputState">Benutzerfirma</label>
+                                                <select name="idfirma" id="inputState" class="form-control" disabled>
+                                                    <option>Keine Firma ausgewählt...</option>
+                                                    <?php
+                                                    //get User Roles
+                                                    $sql2 = "SELECT * FROM `firma`";
+                                                    //echo $sql;
+                                                    $conn = $GLOBALS['con'];
+                                                    $result2 = mysqli_query($conn, $sql2);
+                                                    while ($row2 = mysqli_fetch_assoc($result2)) {
+                                                        ?>
+                                                        <option value="<?php echo $row2['idfirma']; ?>" <?php echo ($row['idfirma'] == $row2['idfirma']) ? 'selected' : ''; ?>>
+                                                            <?php echo $row2['firmenname']; ?>
+                                                        </option> <?php } ?>
+                                                </select>
                                                 <input type="hidden" name="key" value="<?php echo $key; ?>">
-                                                <!-- <br>
-                                                <label for="password">Change Password</label>
-                                                <input name="password" type="password" class="form-control" id="password" placeholder="password"  > -->
+
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Aktualisieren</button> &nbsp;

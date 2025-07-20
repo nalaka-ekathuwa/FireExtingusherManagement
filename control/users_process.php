@@ -10,17 +10,17 @@ $session_urole = $_SESSION['role_id'];
 
 if ($action == 'add') {
 
-  // echo '<pre>';
-  // var_dump($_POST);
-  // echo '<pre>';exit;
+
   $name = $conn->real_escape_string($_POST['name']);
   $email = $conn->real_escape_string($_POST['email']);
   $hashed_password = password_hash('123456', PASSWORD_DEFAULT);
   $role = $conn->real_escape_string($_POST['role']);
+  $idfirma = $conn->real_escape_string($_POST['idfirma']);
   $created = date('Y-m-d h:i:sa');
-
+  empty($idfirma)?$idfirma=0: $idfirma;
   // Add email duplicate function
   $check = check_email($email);
+  $path_db = null;
 
   if ($check>0) {
     //duplicate email
@@ -38,8 +38,8 @@ if ($action == 'add') {
       move_uploaded_file($img_name_tmp, $path); // To move the image to user_images folder
     }
 
-    $sql = "INSERT INTO `users`(`name`, `email`, `password`, `img`, `role`,`role_id`)
-        VALUES ('$name','$email','$hashed_password','$path_db',' ','$role')";
+    $sql = "INSERT INTO `users`(`name`, `email`, `password`, `img`, `idfirma`,`role_id`)
+        VALUES ('$name','$email','$hashed_password','$path_db','$idfirma','$role')";
     $result = mysqli_query($conn, $sql);
 
     header("location: ../users.php?msg=" . ($result ? "2" : "1"));
@@ -139,7 +139,6 @@ if ($action == 'change') {
   if (password_verify($old, $old_hash)) {
 
     $sql = "UPDATE `users` SET `password`='$hashed_new' WHERE `id` = $key";
-    // echo $sql; exit;
     $result = mysqli_query($conn, $sql);
     header("location: ../manage_password.php?key=" . $key . "&msg=9");
   } else {

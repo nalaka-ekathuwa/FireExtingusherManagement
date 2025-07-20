@@ -48,24 +48,32 @@
                                                 <input name="email" type="email" class="form-control" id="inputEmail4"
                                                     placeholder="E-Mail" required>
 
-                                                <!-- <div class="form-group">
-                                                    <label for="nic">ID Number</label>
-                                                    <input name="nic" type="text" class="form-control" id="nic"
-                                                        placeholder="Identification Number" required>
-                                                </div> -->
                                                 <label for="inputState">Benutzer anmelden als</label>
                                                 <select name="role" id="inputState" class="form-control" required>
                                                     <option value="" selected disabled>Auswählen...</option>
                                                     <?php
                                                     //get User Roles
                                                     $sql1 = "SELECT * FROM `anmeldenals`";
-                                                    //echo $sql;
                                                     $conn = $GLOBALS['con'];
                                                     $result1 = mysqli_query($conn, $sql1);
                                                     while ($row1 = mysqli_fetch_assoc($result1)) {
                                                         ?>
                                                         <option value="<?php echo $row1['idanmeldenals']; ?>">
                                                             <?php echo $row1['anmeldenals']; ?>
+                                                        </option> <?php } ?>
+                                                </select>
+                                                <label for="inputState">Benutzerfirma</label>
+                                                <select name="idfirma" id="inputState" class="form-control">
+                                                    <option value="" selected >Keine Firma ausgewählt...</option>
+                                                    <?php
+                                                    //get User Roles
+                                                    $sql2 = "SELECT * FROM `firma`";
+                                                    $conn = $GLOBALS['con'];
+                                                    $result2 = mysqli_query($conn, $sql2);
+                                                    while ($row2 = mysqli_fetch_assoc($result2)) {
+                                                        ?>
+                                                        <option value="<?php echo $row2['idfirma']; ?>">
+                                                            <?php echo $row2['firmenname']; ?>
                                                         </option> <?php } ?>
                                                 </select>
                                             </div>
@@ -84,10 +92,8 @@
                 <!-- Footer START -->
                 <?php include 'footer.php'; ?>
                 <!-- Footer END -->
-
             </div>
             <!-- Page Container END -->
-
         </div>
     </div>
 
