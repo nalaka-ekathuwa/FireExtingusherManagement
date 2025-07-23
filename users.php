@@ -132,8 +132,10 @@
                                     <tbody>
                                         <?php
                                         //get Instrument Rating detials
+
                                         $sql = "SELECT u.`id`, `name`,`img`, `email`,a.anmeldenals FROM `users` u 
                                         JOIN `anmeldenals` a ON u.role_id=a.idanmeldenals WHERE `idfirma`= '$sesssion_firma'";
+
                                         //echo $sql;
                                         $conn = $GLOBALS['con'];
                                         $result = mysqli_query($conn, $sql);
