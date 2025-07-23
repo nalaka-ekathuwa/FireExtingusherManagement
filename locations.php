@@ -63,9 +63,7 @@
                          </div>
                        </div>';
             }
-
             // Call the function to display the alert
-            
             ?>
 
             <!-- Page Container START -->
@@ -83,7 +81,6 @@
                             </nav>
                         </div>
                     </div>
-
                     <div class="card">
                         <div class="card-body">
                             <div class="row m-b-30">
@@ -115,8 +112,9 @@
                                     <tbody>
                                         <?php
                                         //get Instrument Rating detials
-                                        $sql = "SELECT k.idkunde,k.nachname ,k.anrede ,k.vorname ,e.werksende ,k.geprueftam ,k.naechstepruefung,
-                                        e.interneseriennummer,e.idkundenbestand,e.loeschmittel,e.hersteller,e.typ,e.inhalt,e.bj,e.beschreibungstandort FROM `user_logins` u JOIN kundenadressen k ON u.company_id=k.idkunde JOIN `kundenbestand` e ON e.idkunde=u.company_id WHERE u.user_id = '$sesssion_uid' ";
+                                        $sql = "SELECT k.idkunde,k.nachname ,k.anrede ,k.vorname ,e.werksende ,k.geprueftam ,k.naechstepruefung,e.interneseriennummer,
+                                        e.idkundenbestand,e.loeschmittel,e.hersteller,e.typ,e.inhalt,e.bj,e.beschreibungstandort FROM `user_logins` u JOIN kundenadressen k 
+                                        ON u.company_id=k.idkunde JOIN `kundenbestand` e ON e.idkunde=u.company_id WHERE u.user_id = '$sesssion_uid' AND k.idfirma='$sesssion_firma' ";
                                         // echo $sql;
                                         $conn = $GLOBALS['con'];
                                         $result = mysqli_query($conn, $sql);

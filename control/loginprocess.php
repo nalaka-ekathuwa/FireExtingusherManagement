@@ -15,56 +15,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->execute();
     $result = $stmt->get_result();
 
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-    //  var_dump($hashed_password);exit;
-
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
+
+        $today = date('Y-m-d');
+        $current_time = date('H:i:s');
+
+        if ($today > $row['last_date']) {
+            // Expired login
+            header("location: ../index.php?s=3"); // custom error code for expired date
+            exit;
+        }
+
+        if ($current_time < $row['from_time'] || $current_time > $row['end_time']) {
+            // Outside allowed login time
+            header("location: ../index.php?s=4"); // custom error code for invalid time
+            exit;
+        }
+
         if (password_verify($password, $row['password'])) {
             $_SESSION['user_id'] = $row['id'];
             $_SESSION['user_name'] = $row['name'];
             $_SESSION['user_img'] = $row['img'];
             $_SESSION['role_id'] = $row['role_id'];
             $_SESSION['idfirma'] = $row['idfirma'];
-            // var_dump($row['role_id']);exit;
+
             $page = '';
             switch ($row['role_id']) {
                 case '1':
-                    //Company admin
-                    $page = 'customers.php';
-                    break;
+                    $page = 'customers.php'; break;
                 case '3':
-                    //Fire safety Officer
-                    $page = 'view_locations.php';
-                    break;
+                    $page = 'view_locations.php'; break;
                 case '6':
-                    //Driver
-                    $page = 'customers.php';
-                    break;
                 case '7':
-                    //Maintain tech
-                    $page = 'customers.php';
-                    break;
-                case '9':
-                    //Super admin
-                    $page = 'company.php';
-                    break;
                 case '10':
-                    //Employee
-                    $page = 'customers.php';
-                    break;
+                    $page = 'customers.php'; break;
+                case '9':
+                    $page = 'company.php'; break;
                 case '11':
-                    //Observer
-                    $page = 'view_locations.php';
-                    break;
+                    $page = 'damage_map.php'; break;
                 default:
-                //code block
+                    $page = 'dashboard.php';
             }
             header("location: ../" . $page);
         } else {
-            header("location: ../index.php?s=1");
+            header("location: ../index.php?s=1"); // wrong password
         }
     } else {
-        header("location: ../index.php?s=2");
+        header("location: ../index.php?s=2"); // user not found
     }
 }

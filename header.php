@@ -5,15 +5,12 @@ error_reporting(E_ALL);
 
 if (empty($_SESSION["user_id"])) {
     header('Location:index.php');
-    $session_urole = $_SESSION['role_id'];
-    $session_uname = $_SESSION['user_name'];
-    $session_uimg = $_SESSION['user_img'];
-    $sesssion_uid = $_SESSION['user_id'];
 } else {
     $session_urole = $_SESSION['role_id'];
     $session_uname = $_SESSION['user_name'];
     $session_uimg = $_SESSION['user_img'];
     $sesssion_uid = $_SESSION['user_id'];
+    $sesssion_firma = $_SESSION['idfirma'];
 }
 
 ?>
@@ -132,7 +129,7 @@ if (empty($_SESSION["user_id"])) {
                             </div>
                         </div>
                     </div>
-                    <a href="manage_user.php?key=<?php echo $sesssion_uid; ?>;"
+                    <a href="manage_user.php?key=<?php echo $sesssion_uid; ?>"
                         class="dropdown-item d-block p-h-15 p-v-10">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
@@ -143,7 +140,7 @@ if (empty($_SESSION["user_id"])) {
                         </div>
                     </a>
 
-                    <a href="manage_password.php?key=<?php echo $sesssion_uid; ?>;" class="dropdown-item d-block p-h-15 p-v-10">
+                    <a href="manage_password.php?key=<?php echo $sesssion_uid; ?>" class="dropdown-item d-block p-h-15 p-v-10">
                         <div class="d-flex align-items-center justify-content-between">
                             <div>
                                 <i class="anticon opacity-04 font-size-16 anticon-lock"></i>

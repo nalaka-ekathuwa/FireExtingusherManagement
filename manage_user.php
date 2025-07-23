@@ -12,8 +12,7 @@
             <?php include 'header.php'; ?>
             <?php include 'sidebar.php';
             $key = isset($_GET['key']) ? $_GET['key'] : '';
-            $sql = "SELECT `name`,`img`, `email`, `idfirma`, `role_id` FROM `users` u  WHERE u.id=$key";
-            //echo $sql;
+            $sql = "SELECT `name`,`img`, `email`, `idfirma`, `role_id`, `last_date`, `from_time`, `end_time` FROM `users` u  WHERE u.id=$key";
             $conn = $GLOBALS['con'];
             $result = mysqli_query($conn, $sql);
             $row = mysqli_fetch_assoc($result);
@@ -95,6 +94,27 @@
 
                                             </div>
                                         </div>
+                                        <?php if($sesssion_uid != $key){ ?>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="last_date">Last date</label>
+                                                <input name="last_date" type="date" class="form-control" id="last_date"
+                                                    placeholder="last_date" min="<?php echo date("Y-m-d"); ?>" value="<?php echo !empty($row['last_date'])?$row['last_date']:''; ?>">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="from_time">Start Time</label>
+                                                <input name="from_time" type="time" class="form-control" id="from_time"
+                                                    placeholder="from_time" value="<?php echo !empty($row['from_time'])?$row['from_time']:''; ?>">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="end_time">End Time</label>
+                                                <input name="end_time" type="time" class="form-control" id="end_time"
+                                                    placeholder="end_time" value="<?php echo !empty($row['end_time'])?$row['end_time']:''; ?>">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <?php } ?>
                                         <button type="submit" class="btn btn-primary">Aktualisieren</button> &nbsp;
                                     </form>
                                 </div>

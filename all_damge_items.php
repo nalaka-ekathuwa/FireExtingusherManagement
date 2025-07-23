@@ -93,8 +93,8 @@
                                         //get Instrument Rating detials
                                         $sql = "SELECT t.idkunde,t.idkundenbestand, fotofeuerloescher,Foto1,Foto2,Foto3, loeschmittel, datumangelegt, 
                                         hersteller, typ, inhalt, bj, nfcadresse,BeschreibungStandort1,beschaedigung FROM kundenbestand t JOIN kundenadressen k
-                                        ON t.idkunde=k.idkunde WHERE k.idfirma='$sesssion_firma' AND Foto1 IS NOT NULL 
-                                        OR Foto2 IS NOT NULL OR Foto3 IS NOT NULL OR beschreibungstandort1  <> '' OR beschaedigung <> ''";
+                                        ON t.idkunde=k.idkunde WHERE Foto1 IS NOT NULL OR Foto2 IS NOT NULL OR Foto3 IS NOT NULL OR beschreibungstandort1  <> '' 
+                                        OR beschaedigung <> '' OR entsorgt =1 ";
                                         //echo $sql;
                                         $conn = $GLOBALS['con'];
                                         $result = mysqli_query($conn, $sql);
@@ -142,15 +142,9 @@
                                                 </td>
                                                 <td class="text-right">
                                                     <a data-toggle="tooltip" data-placement="top" title="Kunden bearbeiten"
-                                                        href="manage_extinguisher.php?key=<?php echo $row['idkundenbestand']; ?>"
+                                                        href="view_damage_item.php?key=<?php echo $row['idkundenbestand']; ?>"
                                                         class="btn btn-icon btn-hover btn-sm btn-rounded pull-right"><i
-                                                            class="anticon anticon-edit"></i></a>
-
-                                                    <a data-toggle="tooltip" data-placement="top" title="Schaden zurücksetzen"
-                                                        onclick="return confirm('Sind Sie sicher, dass Sie das tun möchten?');"
-                                                        href="control/extinguishers_process.php?key=<?php echo $row['idkundenbestand']; ?>&action=clear"
-                                                        class="btn btn-icon btn-hover btn-sm btn-rounded"><i
-                                                            class="anticon anticon-poweroff"></i></a>
+                                                            class="anticon anticon-eye"></i></a> 
                                                 </td>
                                             </tr>
                                         <?php } ?>

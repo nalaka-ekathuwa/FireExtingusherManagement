@@ -86,11 +86,8 @@
                          </div>
                        </div>';
             }
-
-            // Call the function to display the alert
-            
+            // Call the function to display the alert      
             ?>
-
             <!-- Page Container START -->
             <div class="page-container">
 
@@ -115,7 +112,7 @@
 
                                 </div>
                                 <div class="col-lg-4 text-right">
-                                    <a href="add_user.php" class="btn btn-primary"><i
+                                    <a href="user_add.php" class="btn btn-primary"><i
                                             class="anticon anticon-plus-square m-r-5"></i>Benutzer hinzufügen</a>
                                 </div>
                             </div>
@@ -129,13 +126,14 @@
                                             <th>E-Mail</th>
                                             <th>Angemeldet als</th>
                                             <th>Status</th>
-                                            <th></th>
+                                            <th><?php echo $sesssion_firma; ?></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                         //get Instrument Rating detials
-                                        $sql = "SELECT u.`id`, `name`,`img`, `email`, `role`,a.anmeldenals FROM `users` u JOIN `anmeldenals` a ON u.role_id=a.idanmeldenals";
+                                        $sql = "SELECT u.`id`, `name`,`img`, `email`,a.anmeldenals FROM `users` u 
+                                        JOIN `anmeldenals` a ON u.role_id=a.idanmeldenals WHERE `idfirma`= '$sesssion_firma'";
                                         //echo $sql;
                                         $conn = $GLOBALS['con'];
                                         $result = mysqli_query($conn, $sql);

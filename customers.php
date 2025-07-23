@@ -115,7 +115,8 @@
                                     <tbody>
                                         <?php
                                         //get Instrument Rating detials
-                                        $sql = "SELECT idkunde,kundennummer,strasse,anrede,vorname,nachname,nr,plz,ort,ortauswahl,naechstepruefung FROM `kundenadressen`";
+                                        $sql = "SELECT idkunde,kundennummer,strasse,anrede,vorname,nachname,nr,plz,ort,ortauswahl,
+                                        naechstepruefung FROM `kundenadressen` WHERE idfirma='$sesssion_firma' ";
                                         //echo $sql;
                                         $conn = $GLOBALS['con'];
                                         $result = mysqli_query($conn, $sql);
@@ -132,18 +133,11 @@
                                                 <td><?php echo $row['strasse']; ?></td>
                                                 <td><?php echo $row['nr']; ?></td>
                                                 <td><?php echo $row['plz']; ?></td>
-                                                <!--<td><?php echo $row['ort']; ?></td>-->
                                                 <td><?php echo $row['ortauswahl']; ?></td>
                                                 <td><?php if (!empty($row['naechstepruefung'])) {
                                                         $dt = new DateTime($row['naechstepruefung']);
                                                         echo $dt->format('m/Y');
                                                     } ?></td>
-                                                <!-- <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="badge badge-<?php // echo $badge; ?> badge-dot m-r-10"></div>
-                                                        <div><?php // echo $availability; ?></div>
-                                                    </div>
-                                                </td> -->
                                                 <td class="text-right">
                                                     <a data-toggle="tooltip" data-placement="top" title="Kunden bearbeiten"
                                                         href="manage_customer.php?key=<?php echo $row['idkunde']; ?>"

@@ -80,6 +80,29 @@
                         </li>
                     </ul>
                 </li>
+                <?php }if ($session_urole == 11) { ?>
+                <!-- For Fire Safety Officer -->
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle" href="javascript:void(0);">
+                        <span class="icon-holder">
+                            <i class="anticon anticon-environment"></i>
+                        </span>
+                        <span class="title">Beobachter</span>
+                        <span class="arrow">
+                            <i class="arrow-icon"></i>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="damage_map.php">Schadenskarte</a>
+                        </li>
+                    </ul>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="all_damge_items.php">Dinge beschädigen</a>
+                        </li>
+                    </ul>
+                </li>
                 <?php }
             if ($session_urole == 9) { ?>
                 <!-- For Super admin -->
@@ -184,7 +207,7 @@
                             <a href="users.php">Verwalten</a>
                         </li>
                         <li>
-                            <a href="add_user.php">Hinzufügen</a>
+                            <a href="user_add.php">Hinzufügen</a>
                         </li>
                     </ul>
                 </li>
