@@ -24,8 +24,8 @@
             $action = 'update';
             $sql = "SELECT k.idkunde,k.nachname ,k.anrede ,k.vorname ,e.werksende ,  e.gps, e.feuerloescher,e.rwa, e.wandhydrant, e.brandschutztuer, e.rauchmelder,e.notleuchten,             
             e.interneseriennummer,e.idkundenbestand,e.loeschmittel,e.hersteller,e.typ,e.inhalt,e.bj,e.beschreibungstandort 
-            FROM user_logins u JOIN kundenadressen k ON u.company_id=k.idkunde JOIN kundenbestand e 
-            ON e.idkunde=u.company_id WHERE u.user_id = '$sesssion_uid' AND k.idfirma='$sesssion_firma' ";
+            FROM user_logins u JOIN kundenadressen k ON u.company_id=k.idkunde JOIN kundenbestand e ON e.idkunde=u.company_id 
+            WHERE Foto1 IS NOT NULL  OR Foto2 IS NOT NULL OR Foto3 IS NOT NULL OR beschreibungstandort1  <> '' OR beschaedigung <> '' OR entsorgt =1 ";
             // echo $sql; $sesssion_uid
             $conn = $GLOBALS['con'];
             $result = mysqli_query($conn, $sql);

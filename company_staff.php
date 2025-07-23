@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="de">
 
-<?php include 'head.php'; ?>
+<?php include 'head.php';?>
 
 <body>
     <div class="app">
@@ -86,20 +86,23 @@
                          </div>
                        </div>';
             }
-            // Call the function to display the alert      
+
+            // Call the function to display the alert
+            
             ?>
+
             <!-- Page Container START -->
             <div class="page-container">
 
                 <!-- Content Wrapper START -->
                 <div class="main-content">
                     <div class="page-header">
-                        <h2 class="header-title">Benutzerliste</h2>
+                        <h2 class="header-title">Mitarbeiter des Unternehmens</h2>
                         <div class="header-sub-title">
                             <nav class="breadcrumb breadcrumb-dash">
                                 <a href="#" class="breadcrumb-item"><i
                                         class="anticon anticon-home m-r-5"></i>Startseite</a>
-                                <span class="breadcrumb-item active">Benutzerliste</span>
+                                <span class="breadcrumb-item active">Firmenbenutzer</span>
                             </nav>
                         </div>
                     </div>
@@ -107,12 +110,11 @@
                         <div class="card-body">
                             <div class="row m-b-30">
                                 <div class="col-lg-8">
-
-                                    <?php isset($_GET['msg']) ? displayAlert() : ''; ?>
-
+                                     <?php isset($_GET['msg']) ? displayAlert() : ''; ?>
+                                    <!-- <h3><span class="badge badge-info lh-1">Firmenadministratorbenutzer</span></h3> -->
                                 </div>
                                 <div class="col-lg-4 text-right">
-                                    <a href="user_add.php" class="btn btn-primary"><i
+                                    <a href="add_user.php" class="btn btn-primary"><i
                                             class="anticon anticon-plus-square m-r-5"></i>Benutzer hinzufügen</a>
                                 </div>
                             </div>
@@ -126,17 +128,14 @@
                                             <th>E-Mail</th>
                                             <th>Angemeldet als</th>
                                             <th>Status</th>
-                                            <th><?php echo $sesssion_firma; ?></th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                         //get Instrument Rating detials
-
-                                        $sql = "SELECT u.`id`, `name`,`img`, `email`,a.anmeldenals FROM `users` u 
-                                        JOIN `anmeldenals` a ON u.role_id=a.idanmeldenals WHERE `idfirma`= '$sesssion_firma'";
-
-                                        //echo $sql;
+                                        $sql = "SELECT u.`id`, `name`,`img`, `email`,a.anmeldenals FROM `users` u JOIN
+                                         `anmeldenals` a ON u.role_id=a.idanmeldenals ";
                                         $conn = $GLOBALS['con'];
                                         $result = mysqli_query($conn, $sql);
                                         $number = 1;

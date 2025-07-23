@@ -41,7 +41,7 @@
                     $has_gps = false;
                 }
             } else {
-                $action = 'add';
+                $action = '';
                 $key = '';
             }
             ?>
@@ -232,6 +232,22 @@
                                                 <label for="gps">GPS Koordinaten</label>
                                                 <textarea name="gps"
                                                     class="form-control"><?php echo isset($_GET['key']) ? $row['gps'] : ''; ?></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="alert alert-danger" role="alert">
+                                                    ❗Bitte schalten Sie dies ein, um Schäden am Gerät zu melden
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div style="padding-top:5px" class="form-group d-flex align-items-center">
+                                                    <div class="switch m-r-10">
+                                                        <input type="checkbox" name="entsorgt" id="switch-1" <?php echo (isset($_GET['key']) && $row['entsorgt']=='1')?'checked':''; ?>>
+                                                        <label for="switch-1"></label>
+                                                    </div>
+                                                    <label>Damage</label>
+                                                </div>
                                             </div>
                                         </div>
 

@@ -36,25 +36,7 @@
                         </li>
                     </ul>
                 </li>
-                <!-- <li class="nav-item dropdown">
-                    <a class="dropdown-toggle" href="javascript:void(0);">
-                        <span class="icon-holder">
-                            <i class="anticon anticon-team"></i>
-                        </span>
-                        <span class="title">Benutzer</span>
-                        <span class="arrow">
-                            <i class="arrow-icon"></i>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="users.php">Verwalten</a>
-                        </li>
-                        <li>
-                            <a href="add_user.php">Hinzufügen</a>
-                        </li>
-                    </ul>
-                </li> -->
+               
                 <li class="nav-item dropdown">
                     <a class="dropdown-toggle" href="javascript:void(0);">
                         <span class="icon-holder">
@@ -76,7 +58,7 @@
                 </li>
             <?php }
             if ($session_urole == 3) { ?>
-                <!-- For Safety Officer -->
+                <!-- For Fire Safety Officer -->
                 <li class="nav-item dropdown">
                     <a class="dropdown-toggle" href="javascript:void(0);">
                         <span class="icon-holder">
@@ -90,6 +72,77 @@
                     <ul class="dropdown-menu">
                         <li>
                             <a href="locations.php">Verwalten</a>
+                        </li>
+                    </ul>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="view_locations.php">Karte ansehen</a>
+                        </li>
+                    </ul>
+                </li>
+                <?php }if ($session_urole == 11) { ?>
+                <!-- For Fire Safety Officer -->
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle" href="javascript:void(0);">
+                        <span class="icon-holder">
+                            <i class="anticon anticon-environment"></i>
+                        </span>
+                        <span class="title">Beobachter</span>
+                        <span class="arrow">
+                            <i class="arrow-icon"></i>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="damage_map.php">Schadenskarte</a>
+                        </li>
+                    </ul>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="all_damge_items.php">Dinge beschädigen</a>
+                        </li>
+                    </ul>
+                </li>
+                <?php }
+            if ($session_urole == 9) { ?>
+                <!-- For Super admin -->
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle" href="javascript:void(0);">
+                        <span class="icon-holder">
+                            <i class="anticon anticon-bank"></i>
+                        </span>
+                        <span class="title">Firma</span>
+                        <span class="arrow">
+                            <i class="arrow-icon"></i>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="company.php">Firmenliste</a>
+                        </li>
+                    </ul>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="manage_company.php">Firma schaffen</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle" href="javascript:void(0);">
+                        <span class="icon-holder">
+                            <i class="anticon anticon-team"></i>
+                        </span>
+                        <span class="title">Benutzer</span>
+                        <span class="arrow">
+                            <i class="arrow-icon"></i>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="company_staff.php">Verwalten</a>
+                        </li>
+                        <li>
+                            <a href="add_user.php">Hinzufügen</a>
                         </li>
                     </ul>
                     <ul class="dropdown-menu">
@@ -159,7 +212,7 @@
                             <a href="users.php">Verwalten</a>
                         </li>
                         <li>
-                            <a href="add_user.php">Hinzufügen</a>
+                            <a href="user_add.php">Hinzufügen</a>
                         </li>
                     </ul>
                 </li>

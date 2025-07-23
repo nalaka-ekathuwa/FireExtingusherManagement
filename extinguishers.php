@@ -86,15 +86,8 @@
                         <div class="card-body">
                             <div class="row m-b-30">
                                 <div class="col-lg-8">
-
                                     <?php isset($_GET['msg']) ? displayAlert() : ''; ?>
-
                                 </div>
-                                <!-- <div class="col-lg-4 text-right">
-                                    <a href="manage_extinguisher.php" class="btn btn-primary">
-                                        <i class="anticon anticon-plus-square m-r-5"></i>Feuerlöscher hinzufügen
-                                    </a>
-                                </div> -->
                             </div>
 
                             <div class="form-row">

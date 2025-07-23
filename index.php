@@ -30,30 +30,39 @@
                                             style="width:150px;">
                                         <h2 class="m-b-0">Anmelden</h2>
                                     </div>
-                                    <?php
-                                    if (isset($_GET['s'])) {
-                                        $s = $_GET['s'];
-
-                                        if ($s == 1) { ?>
-                                            <br>
+                                    
+                                    <?php 
+                                    $s = $_GET['s'] ?? '';
+                                     if (!empty($s)): ?>
+                                        <br>
+                                        <?php
+                                        switch ($s) {
+                                            case 1:
+                                                $message = 'Falsche Anmeldeinformationen!';
+                                                break;
+                                            case 2:
+                                                $message = 'Kein Benutzer mit dieser E-Mail gefunden!';
+                                                break;
+                                            case 3:
+                                                $message = 'Anmeldung abgelaufen! Bitte kontaktieren Sie den Administrator.';
+                                                break;
+                                            case 4:
+                                                $message = 'Login nur innerhalb des erlaubten Zeitraums möglich!';
+                                                break;
+                                            default:
+                                                $message = '';
+                                        }
+                                        ?>
+                                        <?php if (!empty($message)): ?>
                                             <div class="alert alert-danger alert-dismissible fade show">
-                                                Falsche Anmeldeinformationen!
+                                                <?php echo $message; ?>
                                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <br>
-                                        <?php } else if ($s == 2) { ?>
-                                                <br>
-                                                <div class="alert alert-danger alert-dismissible fade show">
-                                                    Kein Benutzer mit dieser E-Mail gefunden!
-                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <br>
-                                        <?php }
-                                    } ?>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
                                     <form action="control/loginprocess.php" method="post">
                                         <div class="form-group">
                                             <label class="font-weight-semibold" for="userName">Benutzername:</label>
@@ -69,8 +78,8 @@
                                                 vergessen?</a> -->
                                             <div class="input-affix m-b-10">
                                                 <i class="prefix-icon anticon anticon-lock"></i>
-                                                <input name="password" type="password" class="form-control" id="password"
-                                                    placeholder="Passwort">
+                                                <input name="password" type="password" class="form-control"
+                                                    id="password" placeholder="Passwort">
                                             </div>
                                         </div>
                                         <div class="form-group">

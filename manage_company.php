@@ -14,7 +14,7 @@
             if (isset($_GET['key'])) {
                 $key = $_GET['key'];
                 $action = 'edit';
-                $sql = "SELECT * FROM `kundenadressen` c WHERE c.IDKunde =$key";
+                $sql = "SELECT * FROM `firma` f WHERE f.idfirma =$key";
                 //echo $sql;
                 $conn = $GLOBALS['con'];
                 $result = mysqli_query($conn, $sql);
@@ -33,12 +33,12 @@
                 <!-- Content Wrapper START -->
                 <div class="main-content">
                     <div class="page-header">
-                        <h2 class="header-title">Kundenliste</h2>
+                        <h2 class="header-title">Firmenliste</h2>
                         <div class="header-sub-title">
                             <nav class="breadcrumb breadcrumb-dash">
                                 <a href="#" class="breadcrumb-item"><i
                                         class="anticon anticon-home m-r-5"></i>Startseite</a>
-                                <span class="breadcrumb-item active"><?php echo ucfirst($action); ?> Kunde</span>
+                                <span class="breadcrumb-item active"><?php echo ucfirst($action); ?> Firma</span>
                             </nav>
                         </div>
                     </div>
@@ -46,15 +46,15 @@
                         <div class="card-body">
                             <div class="row m-b-30">
                                 <div class="col-lg-12">
-                                    <form action="control/branches_process.php?action=<?php echo $action; ?>"
-                                        method="post">
+                                    <form action="control/company_process.php?action=<?php echo $action; ?>"
+                                        method="post" enctype= 'multipart/form-data' >
                                         <div class="form-row">
-                                            <div class="form-group col-md-5">
+                                            <div class="form-group col-md-4">
                                                 <label for="Anrede">Anrede</label>
                                                 <input name="anrede" type="text" class="form-control" id="anrede"
                                                     value="<?php echo isset($_GET['key']) ? $row['anrede'] : ''; ?>">
                                             </div>
-                                            <div class="form-group col-md-7">
+                                            <div class="form-group col-md-4">
                                                 <label for="nachname">Nachname</label>
                                                 <input name="nachname" type="text" class="form-control" id="nachname"
                                                     value="<?php echo isset($_GET['key']) ? $row['nachname'] : ''; ?>"
@@ -62,119 +62,145 @@
                                                 <?php if (isset($_GET['key'])) { ?><input type="hidden" name="key"
                                                         value="<?php echo $key; ?>"> <?php } ?>
                                             </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-5">
-                                                <label for="vorname">Vorname</label>
+                                            <div class="form-group col-md-4">
+                                                 <label for="vorname">Vorname</label>
                                                 <input name="vorname" type="text" class="form-control" id="vorname"
                                                     value="<?php echo isset($_GET['key']) ? $row['vorname'] : ''; ?>">
+                                           </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-4">
+                                                <label for="idanmelden">Idanmelden</label>
+                                                <input name="idanmelden" type="number" class="form-control" id="idanmelden"
+                                                    value="<?php echo isset($_GET['key']) ? $row['idanmelden'] : ''; ?>">
                                             </div>
-                                            <div class="form-group col-md-7">
-                                                <label for="kundennummer">Kundennummer</label>
-                                                <input name="kundennummer" type="number" class="form-control"
-                                                    id="kundennummer" placeholder="Kundennummer"
-                                                    value="<?php echo isset($_GET['key']) ? $row['kundennummer'] : ''; ?>"
+                                            <div class="form-group col-md-4">
+                                                <label for="firmenname">Firmenname</label>
+                                                <input name="firmenname" type="text" class="form-control"
+                                                    id="firmenname" placeholder="firmenname"
+                                                    value="<?php echo isset($_GET['key']) ? $row['firmenname'] : ''; ?>"
+                                                    required>
+                                           </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="straße">Strasse</label>
+                                                <input name="straße" type="text" class="form-control" id="straße"
+                                                    value="<?php echo isset($_GET['key']) ? $row['straße'] : ''; ?>"
                                                     required>
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-5">
-                                                <label for="strasse">Strasse</label>
-                                                <input name="strasse" type="text" class="form-control" id="strasse"
-                                                    value="<?php echo isset($_GET['key']) ? $row['strasse'] : ''; ?>"
-                                                    required>
-                                            </div>
-                                            <div class="form-group col-md-7">
-                                                <label for="nr">Nr </label>
-                                                <input name="nr" type="number" class="form-control" id="nr"
-                                                    placeholder="Nr"
+                                            <div class="form-group col-md-4">
+                                                <label for="nr">NR</label>
+                                                <input name="nr" type="text" class="form-control" id="nr"
                                                     value="<?php echo isset($_GET['key']) ? $row['nr'] : ''; ?>">
                                             </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-5">
+                                            <div class="form-group col-md-4">
                                                 <label for="plz">Plz</label>
-                                                <input name="plz" type="number" class="form-control" id="plz"
-                                                    value="<?php echo isset($_GET['key']) ? $row['plz'] : ''; ?>">
+                                                <input name="plz" type="number" min="0" max="10" step="0.01" class="form-control" id="plz"
+                                                    value="<?php echo isset($_GET['key']) ? $row['plz'] : ''; ?>"
+                                                    required>
                                             </div>
-                                            <div class="form-group col-md-7">
+                                            <div class="form-group col-md-4">
                                                 <label for="ort">Ort</label>
                                                 <input name="ort" type="text" class="form-control" id="ort"
-                                                    placeholder="Ort"
                                                     value="<?php echo isset($_GET['key']) ? $row['ort'] : ''; ?>">
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-5">
-                                                <label for="ortauswahl">Ortauswahl</label>
-                                                <input name="ortauswahl" type="text" class="form-control"
-                                                    id="ortauswahl"
-                                                    value="<?php echo isset($_GET['key']) ? $row['ortauswahl'] : ''; ?>">
+                                            <div class="form-group col-md-4">
+                                                <label for="niederlassung">Niederlassung</label>
+                                                <input name="niederlassung" type="text" class="form-control" id="niederlassung"
+                                                    value="<?php echo isset($_GET['key']) ? $row['niederlassung'] : ''; ?>">
                                             </div>
-                                            <div class="form-group col-md-7">
-                                                <label for="kontaktperson">Kontaktperson</label>
-                                                <input name="kontaktperson" type="text" class="form-control"
-                                                    id="kontaktperson" placeholder="Kontaktperson"
-                                                    value="<?php echo isset($_GET['key']) ? $row['kontaktperson'] : ''; ?>">
+                                            <div class="form-group col-md-4">
+                                                <label for="firmatelefon">Firmatelefon</label>
+                                                <input name="firmatelefon" type="tel" class="form-control" id="firmatelefon"
+                                                    value="<?php echo isset($_GET['key']) ? $row['firmatelefon'] : ''; ?>"
+                                                    required>
                                             </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-5">
-                                                <label for="handyfirma">Handy Firma</label>
-                                                <input name="handyfirma" type="tel" class="form-control" id="handyfirma"
-                                                    value="<?php echo isset($_GET['key']) ? $row['handyfirma'] : ''; ?>">
-                                            </div>
-                                            <div class="form-group col-md-7">
-                                                <label for="handyprivat">Handy Privat</label>
-                                                <input name="handyprivat" type="tel" class="form-control"
-                                                    id="handyprivat"
-                                                    value="<?php echo isset($_GET['key']) ? $row['handyprivat'] : ''; ?>">
+                                            <div class="form-group col-md-4">
+                                                <label for="firmamobil">Firmamobil</label>
+                                                <input name="firmamobil" type="tel" class="form-control" id="firmamobil"
+                                                    value="<?php echo isset($_GET['key']) ? $row['firmamobil'] : ''; ?>">
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-5">
-                                                <label for="telefonfirma">Telefon Firma</label>
-                                                <input name="telefonfirma" type="tel" class="form-control"
-                                                    id="telefonfirma"
-                                                    value="<?php echo isset($_GET['key']) ? $row['telefonfirma'] : ''; ?>">
+                                            <div class="form-group col-md-4">
+                                                <label for="firmafax">Firmafax</label>
+                                                <input name="firmafax" type="tel" class="form-control" id="firmafax"
+                                                    value="<?php echo isset($_GET['key']) ? $row['firmafax'] : ''; ?>"
+                                                    required>
                                             </div>
-                                            <div class="form-group col-md-7">
-                                                <label for="telefonprivat">Telefon Privat</label>
-                                                <input name="telefonprivat" type="tel" class="form-control"
-                                                    id="telefonprivat"
-                                                    value="<?php echo isset($_GET['key']) ? $row['telefonprivat'] : ''; ?>">
+                                            <div class="form-group col-md-4">
+                                                <label for="benutzername">Benutzername </label>
+                                                <input name="benutzername" type="text" class="form-control" id="benutzername"
+                                                    placeholder="benutzername"
+                                                    value="<?php echo isset($_GET['key']) ? $row['benutzername'] : ''; ?>">
                                             </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-5">
-                                                <label for="fax">Fax</label>
-                                                <input name="fax" type="tel" class="form-control" id="fax"
-                                                    value="<?php echo isset($_GET['key']) ? $row['fax'] : ''; ?>">
-                                            </div>
-                                            <div class="form-group col-md-7">
-                                                <label for="email">E-Mail</label>
-                                                <input name="email" type="email" class="form-control" id="email"
-                                                    placeholder="E-Mail"
-                                                    value="<?php echo isset($_GET['key']) ? $row['email'] : ''; ?>">
+                                            <div class="form-group col-md-4">
+                                                <label for="ansprechperson">Ansprechperson</label>
+                                                <input name="ansprechperson" type="text" class="form-control" id="ansprechperson"
+                                                    value="<?php echo isset($_GET['key']) ? $row['ansprechperson'] : ''; ?>">
                                             </div>
                                         </div>
                                         <div class="form-row">
-                                            <div class="form-group col-md-5">
-                                                <label for="geprueftam">Geprüft am</label>
-                                                <input name="geprueftam" type="date" class="form-control" id="geprueftam"
-                                                    value="<?php $dt = new DateTime($row['geprueftam']);
-                                                    echo isset($_GET['key']) ? $dt->format('Y-m-d') : ''; ?>">
+                                            <div class="form-group col-md-4">
+                                                <label for="privattelefon">Privattelefon</label>
+                                                <input name="privattelefon" type="tel" class="form-control" id="privattelefon"
+                                                    placeholder="privattelefon"
+                                                    value="<?php echo isset($_GET['key']) ? $row['privattelefon'] : ''; ?>">
                                             </div>
-                                            <div class="form-group col-md-7">
-                                                <label for="naechstepruefung">Nächste Wartung</label>
-                                                <input name="naechstepruefung" type="date" class="form-control"
-                                                    id="naechstepruefung" placeholder="naechstepruefung"
-                                                    value="<?php $ds = new DateTime($row['naechstepruefung']);
-                                                    echo isset($_GET['key']) ? $ds->format('Y-m-d') : ''; ?>">
+                                            <div class="form-group col-md-4">
+                                                <label for="privathandy">Privathandy</label>
+                                                <input name="privathandy" type="tel" class="form-control"
+                                                    id="privathandy"
+                                                    value="<?php echo isset($_GET['key']) ? $row['privathandy'] : ''; ?>">
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="anmerkung">Anmerkung</label>
+                                                <input name="anmerkung" type="text" class="form-control"
+                                                    id="anmerkung" placeholder="anmerkung"
+                                                    value="<?php echo isset($_GET['key']) ? $row['anmerkung'] : ''; ?>">
                                             </div>
                                         </div>
-
-
+                                        <div class="form-row">
+                                            <div class="form-group col-md-4">
+                                                <label for="information">Information</label>
+                                                <input name="information" type="text" class="form-control" id="information"
+                                                    value="<?php echo isset($_GET['key']) ? $row['information'] : ''; ?>">
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="bankname">Bank Name</label>
+                                                <input name="bankname" type="text" class="form-control"
+                                                    id="bankname"
+                                                    value="<?php echo isset($_GET['key']) ? $row['bankname'] : ''; ?>">
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="iban">IBAN</label>
+                                                <input name="iban" type="text" class="form-control"
+                                                    id="iban"
+                                                    value="<?php echo isset($_GET['key']) ? $row['iban'] : ''; ?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-4">
+                                                <label for="steuernummer">Steuernummer</label>
+                                                <input name="steuernummer" type="text" class="form-control"
+                                                    id="steuernummer"
+                                                    value="<?php echo isset($_GET['key']) ? $row['steuernummer'] : ''; ?>">
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="nachricht">Nachricht</label>
+                                                <input name="nachricht" type="text" class="form-control" id="nachricht"
+                                                    value="<?php echo isset($_GET['key']) ? $row['nachricht'] : ''; ?>">
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label for="firmenlogo">Firmenlogo</label>
+                                                <input name="firmenlogo" type="file" class="form-control" id="firmenlogo"
+                                                    placeholder="firmenlogo"
+                                                    value="<?php echo isset($_GET['key']) ? $row['firmenlogo'] : ''; ?>">
+                                            </div>
+                                        </div>
                                         <button type="submit"
                                             class="btn btn-primary"><?php echo ($action == 'add') ? 'Create' : 'Update'; ?></button>
                                         &nbsp;

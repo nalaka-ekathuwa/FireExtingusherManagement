@@ -123,7 +123,9 @@ if ($action == 'update') {
   $beschreibungstandort = $conn->real_escape_string($_POST['beschreibungstandort']);
   $beschreibungstandort1 = $conn->real_escape_string($_POST['beschreibungstandort1']);
   $beschaedigung = $conn->real_escape_string($_POST['beschaedigung']);
-  // $hasImage = ($_FILES['foto1']['name'] != "");
+  $entsorgt = isset($_POST['entsorgt']) ? 1 : 0;
+  //If user forgot to turn on damage in the system
+  if(($_FILES['foto1']['name'] != "") || ($_FILES['foto2']['name'] != "") || ($_FILES['foto3']['name'] != "") || !empty($_POST['beschreibungstandort']) || !empty($_POST['beschreibungstandort1']))  $entsorgt =1;
   $path_db = null;
 
   $uploadedFotos = [];
@@ -147,7 +149,7 @@ if ($action == 'update') {
 
   // Start with common SQL fields
   $kundenbestand_fields = "`beschreibungstandort1`='$beschreibungstandort1',`beschaedigung`='$beschaedigung',
-  `beschreibungstandort`='$beschreibungstandort', `interneseriennummer`='$interneseriennummer'";
+  `entsorgt`=$entsorgt,`beschreibungstandort`='$beschreibungstandort', `interneseriennummer`='$interneseriennummer'";
 
   // Append any uploaded image fields
   foreach ($uploadedFotos as $fotoKey => $path) {
@@ -155,6 +157,7 @@ if ($action == 'update') {
   }
 
   $sql = "UPDATE `kundenbestand` SET $kundenbestand_fields WHERE `idkundenbestand` = '$key'";
+  // var_dump($sql);exit;
   $result = mysqli_query($conn, $sql);
   header("location: ../locations.php?msg=" . ($result ? "4" : "3"));
 

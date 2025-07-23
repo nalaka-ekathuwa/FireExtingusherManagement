@@ -19,32 +19,32 @@
                     case '5':
                         $alertType = 'alert-success';
                         $icon = 'anticon-check-o';
-                        $message = 'Kunde wurde gelöscht';
+                        $message = 'Firma wurde gelöscht';
                         break;
                     case '6':
                         $alertType = 'alert-danger';
                         $icon = 'anticon-close-o';
-                        $message = 'Kunde wurde nicht gelöscht';
+                        $message = 'Firma wurde nicht gelöscht';
                         break;
                     case '2':
                         $alertType = 'alert-success';
                         $icon = 'anticon-check-o';
-                        $message = 'Kunde wurde erstellt';
+                        $message = 'Firma wurde erstellt';
                         break;
                     case '1':
                         $alertType = 'alert-danger';
                         $icon = 'anticon-close-o';
-                        $message = 'Kunde wurde nicht erstellt';
+                        $message = 'Firma wurde nicht erstellt';
                         break;
                     case '4':
                         $alertType = 'alert-success';
                         $icon = 'anticon-check-o';
-                        $message = 'Kunde wurde aktualisiert';
+                        $message = 'Firma wurde aktualisiert';
                         break;
                     case '3':
                         $alertType = 'alert-danger';
                         $icon = 'anticon-close-o';
-                        $message = 'Kunde wurde nicht aktualisiert';
+                        $message = 'Firma wurde nicht aktualisiert';
                         break;
                     // default:
                     //     $alertType = 'alert-secondary';
@@ -72,12 +72,12 @@
                 <!-- Content Wrapper START -->
                 <div class="main-content">
                     <div class="page-header">
-                        <h2 class="header-title">Kundenliste</h2>
+                        <h2 class="header-title">Firmenliste</h2>
                         <div class="header-sub-title">
                             <nav class="breadcrumb breadcrumb-dash">
                                 <a href="#" class="breadcrumb-item"><i
                                         class="anticon anticon-home m-r-5"></i>Startseite</a>
-                                <span class="breadcrumb-item active">Kundenliste</span>
+                                <span class="breadcrumb-item active">Firmenliste</span>
                             </nav>
                         </div>
                     </div>
@@ -90,8 +90,8 @@
 
                                 </div>
                                 <div class="col-lg-4 text-right">
-                                    <a href="manage_customer.php" class="btn btn-primary">
-                                        <i class="anticon anticon-plus-square m-r-5"></i>Kunde hinzufügen
+                                    <a href="manage_company.php" class="btn btn-primary">
+                                        <i class="anticon anticon-plus-square m-r-5"></i>Firma hinzufügen
                                     </a>
                                 </div>
                             </div>
@@ -102,21 +102,20 @@
                                         <tr>
                                             <th>Kn.-Nr</th>
                                             <!-- <th>IDWartungspersonal</th>-->
-                                            <th>Name</th> 
+                                            <th>Firm Name</th>
+                                            <th>Contact Person</th> 
                                             <th>Strasse</th>
                                             <th>Nr</th>
                                             <th>Plz</th>
-                                            <th>Ort</th>
-                                            <!--<th>Ortauswahl</th>-->
-                                            <th>Nächste Wartung</th>
-                                            <th></th>
+                                            <!-- <th>Ort</th> -->
+                                            <!-- <th>Ortauswahl</th> -->
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                         //get Instrument Rating detials
-                                        $sql = "SELECT idkunde,kundennummer,strasse,anrede,vorname,nachname,nr,plz,ort,ortauswahl,
-                                        naechstepruefung FROM `kundenadressen` WHERE idfirma='$sesssion_firma' ";
+                                        $sql = "SELECT * FROM `firma`";
                                         //echo $sql;
                                         $conn = $GLOBALS['con'];
                                         $result = mysqli_query($conn, $sql);
@@ -127,26 +126,35 @@
                                             ?>
                                             <tr>
                                                 <!-- <td><?php echo $no++; ?></td> -->
-                                                <td><?php echo $row['kundennummer']; ?></td>
-                                                <td><?php echo $row['anrede'] . '. ' . $row['vorname'] . ' ' . $row['nachname']; ?>
-                                                </td>
-                                                <td><?php echo $row['strasse']; ?></td>
+                                                <td><?php echo $row['idfirma']; ?></td>
+                                                <td><?php echo $row['firmenname']; ?></td>
+                                                 <td><?php echo $row['ansprechperson']; ?></td>
+                                                <!-- <td><?php echo $row['anrede'] . '. ' . $row['vorname'] . ' ' . $row['nachname']; ?>
+                                                </td> -->
+                                                <td><?php echo $row['straße']; ?></td>
                                                 <td><?php echo $row['nr']; ?></td>
                                                 <td><?php echo $row['plz']; ?></td>
-                                                <td><?php echo $row['ortauswahl']; ?></td>
                                                 <td><?php if (!empty($row['naechstepruefung'])) {
                                                         $dt = new DateTime($row['naechstepruefung']);
                                                         echo $dt->format('m/Y');
                                                     } ?></td>
                                                 <td class="text-right">
-                                                    <a data-toggle="tooltip" data-placement="top" title="Kunden bearbeiten"
-                                                        href="manage_customer.php?key=<?php echo $row['idkunde']; ?>"
+                                                    <a data-toggle="tooltip" data-placement="top" title="Firma bearbeiten"
+                                                        href="manage_company.php?key=<?php echo $row['idfirma']; ?>"
                                                         class="btn btn-icon btn-hover btn-sm btn-rounded pull-right"><i
                                                             class="anticon anticon-edit"></i></a>
+                                                    <!-- <a data-toggle="tooltip" data-placement="top" title="Firma bearbeiten"
+                                                        href="manage_company.php?key=<?php echo $row['idfirma']; ?>"
+                                                        class="btn btn-icon btn-hover btn-sm btn-rounded pull-right"><i
+                                                            class="anticon anticon-user"></i></a> -->
+                                                    <a data-toggle="tooltip" data-placement="top" title="Firma bearbeiten"
+                                                        href="company_staff.php?key=<?php echo $row['idfirma']; ?>"
+                                                        class="btn btn-icon btn-hover btn-sm btn-rounded pull-right"><i
+                                                            class="anticon anticon-team"></i></a>
 
-                                                    <a data-toggle="tooltip" data-placement="top" title="Kunden löschen"
+                                                    <a data-toggle="tooltip" data-placement="top" title="Firma löschen"
                                                         onclick="return confirm('Bist du sicher, dass du dieses Element löschen möchtest?');"
-                                                        href="control/customer_process.php?key=<?php echo $row['idkunde']; ?>&action=delete"
+                                                        href="control/company_process.php?key=<?php echo $row['idfirma']; ?>&action=delete"
                                                         class="btn btn-icon btn-hover btn-sm btn-rounded"><i
                                                             class="anticon anticon-delete"></i></a>
                                                 </td>

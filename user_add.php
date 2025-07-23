@@ -53,7 +53,7 @@
                                                     <option value="" selected disabled>Auswählen...</option>
                                                     <?php
                                                     //get User Roles
-                                                    $sql1 = "SELECT * FROM `anmeldenals`";
+                                                    $sql1 = "SELECT * FROM `anmeldenals` WHERE anmeldenals NOT IN ('super') ";
                                                     $conn = $GLOBALS['con'];
                                                     $result1 = mysqli_query($conn, $sql1);
                                                     while ($row1 = mysqli_fetch_assoc($result1)) {
@@ -62,20 +62,7 @@
                                                             <?php echo $row1['anmeldenals']; ?>
                                                         </option> <?php } ?>
                                                 </select>
-                                                <label for="inputState">Benutzerfirma</label>
-                                                <select name="idfirma" id="inputState" class="form-control">
-                                                    <option value="" selected >Keine Firma ausgewählt...</option>
-                                                    <?php
-                                                    //get User Roles
-                                                    $sql2 = "SELECT * FROM `firma`";
-                                                    $conn = $GLOBALS['con'];
-                                                    $result2 = mysqli_query($conn, $sql2);
-                                                    while ($row2 = mysqli_fetch_assoc($result2)) {
-                                                        ?>
-                                                        <option value="<?php echo $row2['idfirma']; ?>">
-                                                            <?php echo $row2['firmenname']; ?>
-                                                        </option> <?php } ?>
-                                                </select>
+                                                <input type="hidden" name="idfirma" value="<?php echo $sesssion_firma; ?>">
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Erstellen</button> &nbsp;

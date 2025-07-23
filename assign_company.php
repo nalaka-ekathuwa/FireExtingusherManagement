@@ -13,46 +13,46 @@
             <?php include 'sidebar.php'; ?>
             
             <?php 
-                                    function displayAlert(){
-                                    $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
-                                        
-                                    switch ($msg) {
-                                        case '5':
-                                            $alertType = 'alert-success';
-                                            $icon = 'anticon-check-o';
-                                            $message = 'Benutzer wurde entfernt';
-                                            break;
-                                        case '6':
-                                            $alertType = 'alert-danger';
-                                            $icon = 'anticon-close-o';
-                                            $message = 'Benutzer wurde nicht entfernt';
-                                            break;
-                                        case '2':
-                                            $alertType = 'alert-success';
-                                            $icon = 'anticon-check-o';
-                                            $message = 'Benutzer wurde zugewiesen';
-                                            break;
-                                        case '1':
-                                            $alertType = 'alert-danger';
-                                            $icon = 'anticon-close-o';
-                                            $message = 'Benutzer wurde nicht zugewiesen';                                        
-                                            ;
-                                            break;
-                                       // default:
-                                       //     $alertType = 'alert-secondary';
-                                        //     $icon = 'anticon-info-o';
-                                        //     $message = 'Something went wrong!';
-                                    }
-                                
-                                    echo '<div class="alert ' . $alertType . '">
-                                             <div class="d-flex align-items-center justify-content-start">
-                                                 <span class="alert-icon">
-                                                     <i class="anticon ' . $icon . '"></i>
-                                                </span>
-                                                 <span>' . $message . '</span>
-                                             </div>
-                                           </div>';
-                                    }  ?>
+                function displayAlert(){
+                $msg = isset($_GET['msg']) ? $_GET['msg'] : '';
+                    
+                switch ($msg) {
+                    case '5':
+                        $alertType = 'alert-success';
+                        $icon = 'anticon-check-o';
+                        $message = 'Benutzer wurde entfernt';
+                        break;
+                    case '6':
+                        $alertType = 'alert-danger';
+                        $icon = 'anticon-close-o';
+                        $message = 'Benutzer wurde nicht entfernt';
+                        break;
+                    case '2':
+                        $alertType = 'alert-success';
+                        $icon = 'anticon-check-o';
+                        $message = 'Benutzer wurde zugewiesen';
+                        break;
+                    case '1':
+                        $alertType = 'alert-danger';
+                        $icon = 'anticon-close-o';
+                        $message = 'Benutzer wurde nicht zugewiesen';                                        
+                        ;
+                        break;
+                    // default:
+                    //     $alertType = 'alert-secondary';
+                    //     $icon = 'anticon-info-o';
+                    //     $message = 'Something went wrong!';
+                }
+            
+                echo '<div class="alert ' . $alertType . '">
+                            <div class="d-flex align-items-center justify-content-start">
+                                <span class="alert-icon">
+                                    <i class="anticon ' . $icon . '"></i>
+                            </span>
+                                <span>' . $message . '</span>
+                            </div>
+                        </div>';
+                }  ?>
             <!-- Page Container START -->
             <div class="page-container">
 
@@ -138,7 +138,8 @@
                                     <tbody>
                                         <?php
                                         //get Instrument Rating detials
-                                        $sql = "SELECT l.id, u.name,u.role_id,u.img,k.idkunde,k.anrede,k.nachname,k.vorname,k.ortauswahl,k.kundennummer FROM `user_logins` l JOIN users u ON l.user_id=u.id JOIN kundenadressen k ON k.IDKunde=l.company_id";
+                                        $sql = "SELECT l.id, u.name,u.role_id,u.img,k.idkunde,k.anrede,k.nachname,k.vorname,k.ortauswahl,k.kundennummer 
+                                        FROM `user_logins` l JOIN users u ON l.user_id=u.id JOIN kundenadressen k ON k.IDKunde=l.company_id WHERE k.idfirma='$sesssion_firma'";
                                         //echo $sql;
                                         $conn = $GLOBALS['con'];
                                         $result = mysqli_query($conn, $sql);
