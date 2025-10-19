@@ -48,6 +48,7 @@
                                 <div class="col-lg-12">
                                     <form action="control/customer_process.php?action=<?php echo $action; ?>"
                                         method="post">
+                                        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                                         <div class="form-row">
                                             <div class="form-group col-md-5">
                                                 <label for="Anrede">Anrede</label>

@@ -48,7 +48,8 @@
                             <div class="row m-b-30">
                                 <div class="col-lg-12">
                                     <form action="control/routine_check_process.php?action=<?php echo $action; ?>" method="post" enctype= multipart/form-data >
-                                        <div class="form-row">
+                                    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">    
+                                    <div class="form-row">
                                             <div class="form-group col-md-5">
                                                 <label for="brand">brand</label>
                                                 <input name="brand" type="text" class="form-control" id="brand" value="<?php echo isset($_GET['key'])?$row['brand']:''; ?>" required >

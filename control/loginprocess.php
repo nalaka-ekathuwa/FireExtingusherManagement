@@ -1,7 +1,7 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 require_once "../config.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -39,21 +39,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_img'] = $row['img'];
             $_SESSION['role_id'] = $row['role_id'];
             $_SESSION['idfirma'] = $row['idfirma'];
+            //CSRF token
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 
             $page = '';
             switch ($row['role_id']) {
                 case '1':
-                    $page = 'customers.php'; break;
+                    $page = 'customers.php';
+                    break;
                 case '3':
-                    $page = 'view_locations.php'; break;
+                    $page = 'view_locations.php';
+                    break;
                 case '6':
                 case '7':
                 case '10':
-                    $page = 'customers.php'; break;
+                    $page = 'customers.php';
+                    break;
                 case '9':
-                    $page = 'company.php'; break;
+                    $page = 'company.php';
+                    break;
                 case '11':
-                    $page = 'damage_map.php'; break;
+                    $page = 'damage_map.php';
+                    break;
                 default:
                     $page = 'dashboard.php';
             }

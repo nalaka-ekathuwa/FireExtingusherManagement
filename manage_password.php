@@ -40,7 +40,10 @@
                         <div class="card-body">
                             <div class="row m-b-30">
                                 <div class="col-lg-12">
-                                    <form id="form-validation" action="control/users_process.php?action=change" method="post">
+                                    <form id="form-validation" action="control/users_process.php?action=change"
+                                        method="post">
+                                        <input type="hidden" name="csrf_token"
+                                            value="<?php echo $_SESSION['csrf_token']; ?>">
                                         <div class="form-row">
                                             <div class="form-group col-md-5">
                                                 <br>
@@ -53,17 +56,18 @@
                                             <div class="form-group col-md-7">
                                                 <label for="old">Altes Password</label>
                                                 <input name="old" type="password" class="form-control" id="old"
-                                                    placeholder="Altes Password" > <br>
+                                                    placeholder="Altes Password"> <br>
                                                 <label for="inputPassword">Neues Password</label>
-                                                
+
                                                 <input name="inputPassword" type="password" class="form-control"
-                                                    id="inputPassword" placeholder="Neues Password" ><br>
+                                                    id="inputPassword" placeholder="Neues Password"><br>
 
                                                 <input type="hidden" name="key" value="<?php echo $key; ?>">
-                                                <input type="hidden" name="old_hash" value="<?php echo $row['password'] ; ?>">
+                                                <input type="hidden" name="old_hash"
+                                                    value="<?php echo $row['password']; ?>">
                                                 <label for="confirm">Wiederhole Password</label>
                                                 <input name="confirm" type="password" class="form-control" id="confirm"
-                                                    placeholder="Wiederhole Password" >
+                                                    placeholder="Wiederhole Password">
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Aktualisieren</button> &nbsp;
