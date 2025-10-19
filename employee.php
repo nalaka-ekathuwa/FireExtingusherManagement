@@ -41,6 +41,7 @@
                                 <div class="col-lg-12">
                                     <form action="control/users_process.php?action=edit" method="post"
                                     enctype='multipart/form-data' >
+                                    <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                                         <div class="form-row">
                                             <div class="form-group col-md-5">
                                                 <label for="image">Image</label>

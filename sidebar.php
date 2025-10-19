@@ -2,15 +2,6 @@
 <div class="side-nav">
     <div class="side-nav-inner">
         <ul class="side-nav-menu scrollable">
-            <!-- <li class="nav-item dropdown">
-                <a class="dropdown-toggle" href="dashboard.php">
-                    <span class="icon-holder">
-                        <i class="anticon anticon-dashboard"></i>
-                    </span>
-                    <span class="title">Instrumententafel</span>
-                </a>
-            </li> -->
-
             <?php if ($session_urole == 2 || $session_urole == 4) { ?>
 
                 <li class="nav-item dropdown">

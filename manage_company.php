@@ -48,6 +48,7 @@
                                 <div class="col-lg-12">
                                     <form action="control/company_process.php?action=<?php echo $action; ?>"
                                         method="post" enctype= 'multipart/form-data' >
+                                        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                                         <div class="form-row">
                                             <div class="form-group col-md-4">
                                                 <label for="Anrede">Anrede</label>
@@ -96,7 +97,7 @@
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label for="plz">Plz</label>
-                                                <input name="plz" type="number" min="0" max="10" step="0.01" class="form-control" id="plz"
+                                                <input name="plz" type="number" class="form-control" id="plz"
                                                     value="<?php echo isset($_GET['key']) ? $row['plz'] : ''; ?>"
                                                     required>
                                             </div>

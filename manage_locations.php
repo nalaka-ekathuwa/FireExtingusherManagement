@@ -131,6 +131,7 @@
                                         method="post" enctype=multipart/form-data>
                                         <p class="card-title">Einzelheiten zum Feuerlöscher</p>
                                         <br>
+                                        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                                         <div class="form-row">
                                             <div class="form-group col-md-3">
                                                 <label for="interneseriennummer">Interneseriennummer</label>
